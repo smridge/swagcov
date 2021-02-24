@@ -4,7 +4,7 @@ See coverage report for openapi docs for Rails Routes.
 ## Installation
 Add this line to your application's Gemfile:
 ```ruby
-gem "swagcov", github: "smridge/swagcov", branch: "main"
+gem "swagcov"
 ```
 
 Execute:
