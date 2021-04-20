@@ -41,7 +41,7 @@ module Swagcov
 
       final_output
 
-      (@total - @covered).zero?
+      exit @total - @covered
     end
 
     def dotfile
