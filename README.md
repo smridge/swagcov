@@ -72,6 +72,14 @@ gem "swagcov", path: "../swagcov"
 bundle
 ```
 
+## Publish (internal)
+> Note: Publishing a new version of this gem is only meant for maintainers.
+- Ensure you have access to publish on [rubygems](https://rubygems.org/gems/swagcov).
+- Update [CHANGELOG](https://github.com/smridge/swagcov/blob/main/CHANGELOG.md).
+- Update [`VERSION`](https://github.com/smridge/swagcov/blob/main/lib/swagcov/version.rb).
+- Run: `rake release`
+  - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
+
 ## TODO
 - Add specs
 - Test against different rails versions
