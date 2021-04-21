@@ -18,6 +18,7 @@ group :development, :test do
   gem "pry"
   gem "pry-byebug"
   gem "rspec-rails"
+  gem "rswag-specs"
 end
 
 group :development do
