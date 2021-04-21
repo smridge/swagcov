@@ -7,5 +7,7 @@ if defined?(Rails)
   require "swagcov/coverage"
 end
 
+require "swagcov/core_ext/string"
+
 module Swagcov
 end
