@@ -22,6 +22,11 @@ module Swagcov
 
         path = route.path.spec.to_s.sub(/\(\.:format\)$/, "")
 
+        # Exclude routes that are part of the rails gem that you would not write documentation for
+        # https://github.com/rails/rails/tree/main/activestorage/app/controllers/active_storage
+        # https://github.com/rails/rails/tree/main/actionmailbox/app/controllers/action_mailbox
+        next if path.include?("/active_storage/") || path.include?("/action_mailbox/")
+
         if ignore_path?(path)
           @ignored += 1
           @routes_ignored << { verb: route.verb, path: path, status: "ignored" }
