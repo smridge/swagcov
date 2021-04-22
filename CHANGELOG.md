@@ -1,6 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
+
+## 0.2.2 (2021-04-22)
 - Fix: Exclude Rails Internal Routes and Mounted Applications ([#2](https://github.com/smridge/swagcov/pull/2))
 
 ## 0.2.1 (2021-04-21)
