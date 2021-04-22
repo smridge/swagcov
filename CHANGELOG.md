@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
+- Fix: Exclude Rails Internal Routes and Mounted Applications ([#2](https://github.com/smridge/swagcov/pull/2))
 
 ## 0.2.1 (2021-04-21)
 - Fix exceptions caused by missing dependency for strings. ([#1](https://github.com/smridge/swagcov/pull/1))
