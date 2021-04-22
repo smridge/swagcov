@@ -13,6 +13,13 @@ module Swagcov
 
     def report
       Rails.application.routes.routes.each do |route|
+        # https://github.com/rails/rails/blob/48f3c3e201b57a4832314b2c957a3b303e89bfea/actionpack/lib/action_dispatch/routing/inspector.rb#L105-L107
+        # Skips route paths like ["/rails/info/properties", "/rails/info", "/rails/mailers"]
+        next if route.internal
+
+        # Skips routes like "/sidekiq"
+        next unless route.verb.present?
+
         path = route.path.spec.to_s.sub(/\(\.:format\)$/, "")
 
         if ignore_path?(path)
