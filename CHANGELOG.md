@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
+- Fix: Exclude ActiveStorage and ActionMailer routes ([#3](https://github.com/smridge/swagcov/pull/3))
 
 ## 0.2.2 (2021-04-22)
 - Fix: Exclude Rails Internal Routes and Mounted Applications ([#2](https://github.com/smridge/swagcov/pull/2))
