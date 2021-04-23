@@ -1,6 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
+
+## 0.2.3 (2021-04-23)
 - Fix: Exclude ActiveStorage and ActionMailer routes ([#3](https://github.com/smridge/swagcov/pull/3))
 
 ## 0.2.2 (2021-04-22)
