@@ -12,7 +12,11 @@ Execute:
 bundle
 ```
 
-Create a `.swagcov.yml` in root of your Rails application.
+Install `.swagcov.yml` config file from the root of your Rails Application:
+```shell
+bundle exec rake swagcov:install
+```
+
 - Add the paths of your `openapi` yml files (**required**):
   ```yml
   docs:
