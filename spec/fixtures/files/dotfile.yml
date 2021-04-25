@@ -1,0 +1,5 @@
+routes:
+  paths:
+    ignore:
+    - ^/v1
+    - /specific/path
