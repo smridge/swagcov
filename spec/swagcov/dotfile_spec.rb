@@ -10,8 +10,24 @@ RSpec.describe Swagcov::Dotfile do
   end
 
   it "loads yaml config from dotfile" do
-    expect(YAML).to receive(:load_file).with(fixture_dotfile)
+    expect(YAML).to receive(:load_file).with(fixture_dotfile).and_call_original
     described_class.new
+  end
+
+  context "with empty dotfile" do
+    let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/empty_dotfile.yml") }
+
+    it "raises error if file is empty" do
+      expect { described_class.new }.to raise_error(Swagcov::BadConfigurationError)
+    end
+  end
+
+  context "when misconfigured" do
+    let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/missing_docs_dotfile.yml") }
+
+    it "raises error if doc paths are not specified in the dotfile" do
+      expect { described_class.new }.to raise_error(Swagcov::BadConfigurationError)
+    end
   end
 
   describe "#ignore_path?" do
@@ -66,5 +82,11 @@ RSpec.describe Swagcov::Dotfile do
         expect(dotfile.ignore_path?("/v3/specific")).to be(true)
       end
     end
+  end
+
+  describe "#doc_paths" do
+    subject(:doc_paths) { described_class.new.doc_paths }
+
+    it { is_expected.to contain_exactly("a/path", "b/path") }
   end
 end
