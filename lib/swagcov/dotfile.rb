@@ -7,7 +7,7 @@ module Swagcov
     end
 
     def ignore_path? path
-      ignored_regex&.match?(path)
+      ignored_regex&.match?(path) || (only_regex && !only_regex.match?(path))
     end
 
     private
@@ -16,6 +16,10 @@ module Swagcov
 
     def ignored_regex
       @ignored_regex ||= path_config_regex(dotfile.dig("routes", "paths", "ignore"))
+    end
+
+    def only_regex
+      @only_regex ||= path_config_regex(dotfile.dig("routes", "paths", "only"))
     end
 
     def path_config_regex path_config

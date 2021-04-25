@@ -30,12 +30,40 @@ RSpec.describe Swagcov::Dotfile do
 
       context "when specified as string" do
         it "returns true if path equals ignored string" do
-          expect(dotfile.ignore_path?("/specific/path")).to be(true)
+          expect(dotfile.ignore_path?("/ignore/specific/path")).to be(true)
         end
 
         it "returns false if path doesn't equal ignored string" do
-          expect(dotfile.ignore_path?("/specific/path/longer")).to be(false)
+          expect(dotfile.ignore_path?("/v2/ignore/specific/path/longer")).to be(false)
         end
+      end
+    end
+
+    describe "dotfile:routes:paths:only" do
+      context "when specified as regexp" do
+        it "returns false if path matches regexp" do
+          expect(dotfile.ignore_path?("/v2/something")).to be(false)
+        end
+
+        it "returns true if path doesn't match only" do
+          expect(dotfile.ignore_path?("/v4/some")).to be(true)
+        end
+      end
+
+      context "when specified as string" do
+        it "returns false if path equals string" do
+          expect(dotfile.ignore_path?("/only/specific/path")).to be(false)
+        end
+
+        it "returns true if path doesn't equal string" do
+          expect(dotfile.ignore_path?("/only/specific/path/longer")).to be(true)
+        end
+      end
+    end
+
+    describe "precedence" do
+      it "ignores first and applies only rules after" do
+        expect(dotfile.ignore_path?("/v3/specific")).to be(true)
       end
     end
   end

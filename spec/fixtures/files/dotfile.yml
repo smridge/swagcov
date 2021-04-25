@@ -2,4 +2,9 @@ routes:
   paths:
     ignore:
     - ^/v1
-    - /specific/path
+    - /v3/specific
+    - /ignore/specific/path
+    only:
+    - ^/v2
+    - ^/v3
+    - /only/specific/path
