@@ -30,6 +30,14 @@ RSpec.describe Swagcov::Dotfile do
     end
   end
 
+  context "when dotfile is missing" do
+    let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/missing_file.yml") }
+
+    it "raises error if doc paths are not specified in the dotfile" do
+      expect { described_class.new }.to raise_error(Swagcov::BadConfigurationError)
+    end
+  end
+
   describe "#ignore_path?" do
     subject(:dotfile) { described_class.new }
 
