@@ -34,6 +34,8 @@ module Swagcov
           next
         end
 
+        next if dotfile.only_path_mismatch?(path)
+
         @total += 1
         regex = Regexp.new("#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}(\\.[^/]+)?$")
         matching_keys = docs_paths.keys.select { |k| regex.match?(k) }

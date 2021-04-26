@@ -14,7 +14,11 @@ module Swagcov
     end
 
     def ignore_path? path
-      ignored_regex&.match?(path) || (only_regex && !only_regex.match?(path))
+      ignored_regex&.match?(path)
+    end
+
+    def only_path_mismatch? path
+      only_regex && !only_regex.match?(path)
     end
 
     def doc_paths
