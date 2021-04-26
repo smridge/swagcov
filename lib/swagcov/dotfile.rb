@@ -39,7 +39,7 @@ module Swagcov
     end
 
     def valid?
-      dotfile && doc_paths.present?
+      dotfile && doc_paths
     end
   end
 end
