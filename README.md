@@ -77,13 +77,17 @@ bundle
 - Ensure you have access to publish on [rubygems](https://rubygems.org/gems/swagcov).
 - Update [CHANGELOG](https://github.com/smridge/swagcov/blob/main/CHANGELOG.md).
 - Update [`VERSION`](https://github.com/smridge/swagcov/blob/main/lib/swagcov/version.rb).
+- Commit changes to `main` branch locally.
 - Run: `rake release`
   - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
 
 ## TODO
 - Add specs
 - Test against different rails versions
+- Create Sandbox Apps for Rails 5 & 6
 - Add autogeneration of ignore paths
+- Add `CONTRIBUTING.md`
+- Add GitHub Actions for specs/linting
 
 ## Credit
 To [@lonelyelk](https://github.com/lonelyelk) for initial development!
