@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails"
+require "active_support/core_ext"
 require "swagcov"
 
 RSpec.configure do |config|

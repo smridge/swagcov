@@ -4,6 +4,7 @@ require "swagcov/version"
 
 if defined?(Rails)
   require "swagcov/railtie"
+  require "swagcov/dotfile"
   require "swagcov/coverage"
 end
 

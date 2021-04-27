@@ -1,6 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
+- If a route path does not start with "^" match the entire path
+- Raise specific Swagcov::BadConfigurationError error if bad or missing configuration
 
 ## 0.2.3 (2021-04-23)
 - Fix: Exclude ActiveStorage and ActionMailer routes ([#3](https://github.com/smridge/swagcov/pull/3))

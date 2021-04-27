@@ -9,6 +9,7 @@ module Swagcov
       @routes_not_covered = []
       @routes_covered = []
       @routes_ignored = []
+      @dotfile = Swagcov::Dotfile.new
     end
 
     def report
@@ -27,13 +28,13 @@ module Swagcov
         # https://github.com/rails/rails/tree/main/actionmailbox/app/controllers/action_mailbox
         next if path.include?("/active_storage/") || path.include?("/action_mailbox/")
 
-        if ignore_path?(path)
+        if dotfile.ignore_path?(path)
           @ignored += 1
           @routes_ignored << { verb: route.verb, path: path, status: "ignored" }
           next
         end
 
-        next if only_path_mismatch?(path)
+        next if dotfile.only_path_mismatch?(path)
 
         @total += 1
         regex = Regexp.new("#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}(\\.[^/]+)?$")
@@ -56,41 +57,15 @@ module Swagcov
       exit @total - @covered
     end
 
-    def dotfile
-      @dotfile ||= YAML.load_file(Rails.root.join(".swagcov.yml"))
-    end
-
     def docs_paths
-      @docs_paths ||= Dir.glob(dotfile["docs"]["paths"]).reduce({}) do |acc, docspath|
+      @docs_paths ||= Dir.glob(dotfile.doc_paths).reduce({}) do |acc, docspath|
         acc.merge(YAML.load_file(docspath)["paths"])
       end
     end
 
     private
 
-    def ignore_path? path
-      ignored_regex&.match?(path)
-    end
-
-    def ignored_regex
-      @ignored_regex ||= path_config_regex(dotfile.dig("routes", "paths", "ignore"))
-    end
-
-    def only_path_mismatch? path
-      only_regex && !only_regex.match?(path)
-    end
-
-    def only_regex
-      @only_regex ||= path_config_regex(dotfile.dig("routes", "paths", "only"))
-    end
-
-    def path_config_regex path_config
-      return unless path_config
-
-      config = path_config.map { |path| path.first == "^" ? path : "#{path}$" }
-
-      /#{config.join('|')}/
-    end
+    attr_reader :dotfile
 
     def routes_output routes, status_color
       routes.each do |route|

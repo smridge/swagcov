@@ -1,0 +1,15 @@
+docs:
+  paths:
+  - a/path
+  - b/path
+
+routes:
+  paths:
+    ignore:
+    - ^/v1
+    - /v3/specific
+    - /ignore/specific/path
+    only:
+    - ^/v2
+    - ^/v3
+    - /only/specific/path
