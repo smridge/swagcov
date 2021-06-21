@@ -1,5 +1,6 @@
 require:
   - rubocop-performance
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
@@ -15,6 +16,12 @@ Metrics/ClassLength:
 
 Metrics/MethodLength:
   Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
 
 Style/Documentation:
   Enabled: false
