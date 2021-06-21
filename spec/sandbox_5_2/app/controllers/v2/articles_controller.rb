@@ -2,7 +2,7 @@
 
 module V2
   class ArticlesController < ApplicationController
-    # GET /articles
+    # GET /v2/articles
     def index
       render json: {
         data: [
@@ -24,7 +24,7 @@ module V2
       }
     end
 
-    # POST /articles
+    # POST /v2/articles
     def create
       render json: {
         data: {
@@ -37,7 +37,7 @@ module V2
       }, status: :created
     end
 
-    # GET /articles/:id
+    # GET /v2/articles/:id
     def show
       render json: {
         data: {
@@ -50,7 +50,7 @@ module V2
       }
     end
 
-    # PATCH /articles/:id
+    # PATCH /v2/articles/:id
     def update
       render json: {
         data: {
@@ -63,7 +63,7 @@ module V2
       }
     end
 
-    # DELETE /articles/:id
+    # DELETE /v2/articles/:id
     def destroy
       head :no_content
     end
