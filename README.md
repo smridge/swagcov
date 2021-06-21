@@ -34,7 +34,6 @@ Create a `.swagcov.yml` in root of your Rails application.
     paths:
       ignore:
         - /v1/foobar/:token
-        - /sidekiq
   ```
 
 - Example `.swagcov.yml` Config File:
@@ -49,7 +48,6 @@ Create a `.swagcov.yml` in root of your Rails application.
         - ^/v1
       ignore:
         - /v1/foobar/:token
-        - /sidekiq
   ```
 
 Execute:
