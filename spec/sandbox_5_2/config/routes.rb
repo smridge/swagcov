@@ -2,6 +2,7 @@
 
 Rails.application.routes.draw do
   resources :articles
+  resources :users
 
   namespace :v1 do
     resources :articles

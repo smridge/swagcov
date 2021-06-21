@@ -49,6 +49,22 @@ RSpec.configure do |config|
                 }
               }
             }
+          },
+          user: {
+            additionalProperties: false,
+            type: :object,
+            properties: {
+              type: { type: :string },
+              id: { type: :string },
+              attributes: {
+                additionalProperties: false,
+                type: :object,
+                properties: {
+                  name: { type: :string },
+                  email: { type: :string }
+                }
+              }
+            }
           }
         }
       }
