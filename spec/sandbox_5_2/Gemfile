@@ -19,7 +19,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rswag-specs"
-  gem "swagcov"
+  gem "swagcov", path: "../.."
 end
 
 group :development do
