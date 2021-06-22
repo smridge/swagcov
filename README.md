@@ -70,9 +70,15 @@ gem "swagcov", path: "../swagcov"
 bundle
 ```
 
+Run Tests
+```
+bundle exec rspec spec --exclude-pattern spec/sandbox_5_2/**/*_spec.rb
+```
+
 ### Test via Sandbox Application
 For Rails 5
 - `cd spec/sandbox_5_2/`
+- Run tests: `bundle exec rspec spec`
 - Run `bundle exec rake swagcov`
   - This will run against any changes made to your branch.
 
