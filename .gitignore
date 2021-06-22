@@ -1,5 +1,5 @@
 /pkg/
-Gemfile.lock
+/Gemfile.lock
 credentials.yml.enc
 master.key
 /spec/**/log/*.log

@@ -70,6 +70,18 @@ gem "swagcov", path: "../swagcov"
 bundle
 ```
 
+Run Tests
+```
+bundle exec rspec spec --exclude-pattern spec/sandbox_5_2/**/*_spec.rb
+```
+
+### Test via Sandbox Application
+For Rails 5
+- `cd spec/sandbox_5_2/`
+- Run tests: `bundle exec rspec spec`
+- Run `bundle exec rake swagcov`
+  - This will run against any changes made to your branch.
+
 ## Publish (internal)
 > Note: Publishing a new version of this gem is only meant for maintainers.
 - Ensure you have access to publish on [rubygems](https://rubygems.org/gems/swagcov).
@@ -82,7 +94,7 @@ bundle
 ## TODO
 - Add specs
 - Test against different rails versions
-- Create Sandbox Apps for Rails 5 & 6
+- Create Sandbox App for Rails 6
 - Add autogeneration of ignore paths
 - Add `CONTRIBUTING.md`
 - Add GitHub Actions for specs/linting
