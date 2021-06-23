@@ -1,0 +1,8 @@
+docs:
+  paths:
+  - spec/fixtures/openapi/v1.yml
+
+routes:
+  paths:
+    ignore:
+    - /articles/:id

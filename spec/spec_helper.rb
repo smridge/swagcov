@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "rails"
+require "pry-byebug"
 require "active_support/core_ext"
 require "swagcov"
 

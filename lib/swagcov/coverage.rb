@@ -2,6 +2,8 @@
 
 module Swagcov
   class Coverage
+    attr_reader :total, :covered, :ignored, :routes_not_covered, :routes_covered, :routes_ignored
+
     def initialize
       @total = 0
       @covered = 0
@@ -13,20 +15,25 @@ module Swagcov
     end
 
     def report
-      Rails.application.routes.routes.each do |route|
-        # https://github.com/rails/rails/blob/48f3c3e201b57a4832314b2c957a3b303e89bfea/actionpack/lib/action_dispatch/routing/inspector.rb#L105-L107
-        # Skips route paths like ["/rails/info/properties", "/rails/info", "/rails/mailers"]
-        next if route.internal
+      collect_coverage
+      routes_output(@routes_covered, "green")
+      routes_output(@routes_ignored, "yellow")
+      routes_output(@routes_not_covered, "red")
 
-        # Skips routes like "/sidekiq"
-        next unless route.verb.present?
+      final_output
 
+      exit @total - @covered
+    end
+
+    private
+
+    attr_reader :dotfile
+
+    def collect_coverage
+      ::Rails.application.routes.routes.each do |route|
         path = route.path.spec.to_s.sub(/\(\.:format\)$/, "")
 
-        # Exclude routes that are part of the rails gem that you would not write documentation for
-        # https://github.com/rails/rails/tree/main/activestorage/app/controllers/active_storage
-        # https://github.com/rails/rails/tree/main/actionmailbox/app/controllers/action_mailbox
-        next if path.include?("/active_storage/") || path.include?("/action_mailbox/")
+        next if third_party_route?(route, path)
 
         if dotfile.ignore_path?(path)
           @ignored += 1
@@ -47,14 +54,6 @@ module Swagcov
           @routes_not_covered << { verb: route.verb, path: path, status: "none" }
         end
       end
-
-      routes_output(@routes_covered, "green")
-      routes_output(@routes_ignored, "yellow")
-      routes_output(@routes_not_covered, "red")
-
-      final_output
-
-      exit @total - @covered
     end
 
     def docs_paths
@@ -63,15 +62,25 @@ module Swagcov
       end
     end
 
-    private
+    def third_party_route? route, path
+      # https://github.com/rails/rails/blob/48f3c3e201b57a4832314b2c957a3b303e89bfea/actionpack/lib/action_dispatch/routing/inspector.rb#L105-L107
+      # Skips route paths like ["/rails/info/properties", "/rails/info", "/rails/mailers"]
+      route.internal ||
 
-    attr_reader :dotfile
+        # Skips routes like "/sidekiq"
+        route.verb.blank? ||
+
+        # Exclude routes that are part of the rails gem that you would not write documentation for
+        # https://github.com/rails/rails/tree/main/activestorage/app/controllers/active_storage
+        # https://github.com/rails/rails/tree/main/actionmailbox/app/controllers/action_mailbox
+        path.include?("/active_storage/") || path.include?("/action_mailbox/")
+    end
 
     def routes_output routes, status_color
       routes.each do |route|
         $stdout.puts(
           format(
-            "%<verb>10s    %<path>-90s    %<status>s",
+            "%<verb>10s %<path>-90s %<status>s",
             { verb: route[:verb], path: route[:path], status: route[:status].send(status_color) }
           )
         )
