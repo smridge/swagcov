@@ -55,6 +55,44 @@ Execute:
 bundle exec rake swagcov
 ```
 
+## Example configurations and output from running `bundle exec rake swagcov` from the root of your Rails Application:
+- All Routes (minimal configuration):
+  ```yml
+  docs:
+    paths:
+      - swagger.yaml
+  ```
+  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/all-endpoints.png" width="400">
+
+
+- With `only` endpoint configuration:
+  ```yml
+  docs:
+    paths:
+      - swagger.yaml
+
+  routes:
+    paths:
+      only:
+        - ^/v2
+  ```
+  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/only-endpoints.png" width="400">
+
+- With `ignore` and `only` endpoint configurations:
+  ```yml
+  docs:
+    paths:
+      - swagger/v1/swagger.yaml
+
+  routes:
+    paths:
+      only:
+        - ^/v2
+      ignore:
+        - /v2/users
+  ```
+  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/ignore-and-only-endpoints.png" width="400">
+
 ## Development
 ```shell
 git clone git@github.com:smridge/swagcov.git
