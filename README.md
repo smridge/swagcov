@@ -1,5 +1,10 @@
 # Swagcov
-See coverage report for openapi docs for Rails Routes.
+[![Gem Version](https://img.shields.io/gem/v/swagcov)](https://rubygems.org/gems/swagcov)
+![Gem Downloads](https://img.shields.io/gem/dt/swagcov)
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
+[![GitHub License](https://img.shields.io/github/license/smridge/swagcov.svg)](https://github.com/smridge/swagcov/blob/main/LICENSE)
+
+See OpenAPI documentation coverage report for Rails Routes.
 
 ## Installation
 Add this line to your application's Gemfile:
