@@ -62,7 +62,7 @@ bundle exec rake swagcov
     paths:
       - swagger.yaml
   ```
-  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/all-endpoints.png" width="400">
+  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/all-endpoints.png">
 
 
 - With `only` endpoint configuration:
@@ -76,7 +76,7 @@ bundle exec rake swagcov
       only:
         - ^/v2
   ```
-  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/only-endpoints.png" width="400">
+  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/only-endpoints.png">
 
 - With `ignore` and `only` endpoint configurations:
   ```yml
@@ -91,7 +91,7 @@ bundle exec rake swagcov
       ignore:
         - /v2/users
   ```
-  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/ignore-and-only-endpoints.png" width="400">
+  <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/ignore-and-only-endpoints.png">
 
 ## Development
 ```shell
