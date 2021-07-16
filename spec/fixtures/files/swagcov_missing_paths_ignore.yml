@@ -1,0 +1,7 @@
+docs:
+  paths:
+  - spec/fixtures/openapi/missing_paths.yml
+routes:
+  paths:
+    ignore:
+    - /articles

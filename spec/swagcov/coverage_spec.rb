@@ -32,6 +32,133 @@ RSpec.describe Swagcov::Coverage do
     end
   end
 
+  describe "#report" do
+    # suppress output in specs
+    before { allow($stdout).to receive(:puts) }
+
+    context "when internal route only" do
+      before { allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov.yml")) }
+
+      let(:fake_routes) do
+        [
+          instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)
+        ]
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "exits normally" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).to eq(0)
+      end
+    end
+
+    context "when route without verb (mounted applications)" do
+      before { allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov.yml")) }
+
+      let(:fake_routes) do
+        [
+          instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)
+        ]
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "exits normally" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).to eq(0)
+      end
+    end
+
+    context "with full documentation coverage and minimal configuration" do
+      before { allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov.yml")) }
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "exits normally" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).to eq(0)
+      end
+    end
+
+    context "without full documentation coverage and minimal configuration" do
+      before do
+        allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov_missing_paths.yml"))
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "signals error condition" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).not_to eq(0)
+      end
+    end
+
+    context "with full documentation coverage and ignore routes configured" do
+      before do
+        allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov_with_ignore.yml"))
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "exits normally" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).to eq(0)
+      end
+    end
+
+    context "without full documentation coverage and ignore routes configured" do
+      before do
+        allow(rails_root).to receive(:join).and_return(
+          Pathname.new("spec/fixtures/files/swagcov_missing_paths_ignore.yml")
+        )
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "signals error condition" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).not_to eq(0)
+      end
+    end
+
+    context "with full documentation coverage and only routes configured" do
+      before do
+        allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov_with_only.yml"))
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "exits normally" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).to eq(0)
+      end
+    end
+
+    context "without full documentation coverage and only routes configured" do
+      before do
+        allow(rails_root).to receive(:join).and_return(
+          Pathname.new("spec/fixtures/files/swagcov_missing_paths_only.yml")
+        )
+      end
+
+      it { expect { init.report }.to raise_exception(SystemExit) }
+
+      it "signals error condition" do
+        init.report
+      rescue SystemExit => e
+        expect(e.status).not_to eq(0)
+      end
+    end
+  end
+
   describe "#collect_coverage" do
     context "when internal route" do
       before do
