@@ -48,6 +48,9 @@ RSpec.describe Swagcov::Coverage do
       it { expect(init.total).to eq(0) }
       it { expect(init.covered).to eq(0) }
       it { expect(init.ignored).to eq(0) }
+      it { expect(init.routes_not_covered).to eq([]) }
+      it { expect(init.routes_ignored).to eq([]) }
+      it { expect(init.routes_covered).to eq([]) }
     end
 
     context "when route without verb (mounted applications)" do
@@ -65,6 +68,9 @@ RSpec.describe Swagcov::Coverage do
       it { expect(init.total).to eq(0) }
       it { expect(init.covered).to eq(0) }
       it { expect(init.ignored).to eq(0) }
+      it { expect(init.routes_not_covered).to eq([]) }
+      it { expect(init.routes_ignored).to eq([]) }
+      it { expect(init.routes_covered).to eq([]) }
     end
 
     context "with minimal configuration (no only or ignores)" do
@@ -76,6 +82,21 @@ RSpec.describe Swagcov::Coverage do
       it { expect(init.total).to eq(6) }
       it { expect(init.covered).to eq(6) }
       it { expect(init.ignored).to eq(0) }
+      it { expect(init.routes_not_covered).to eq([]) }
+      it { expect(init.routes_ignored).to eq([]) }
+
+      it "has array of covered routes" do
+        expect(init.routes_covered).to eq(
+          [
+            { verb: "GET", path: "/articles", status: "200" },
+            { verb: "POST", path: "/articles", status: "201" },
+            { verb: "GET", path: "/articles/:id", status: "200" },
+            { verb: "PATCH", path: "/articles/:id", status: "200" },
+            { verb: "PUT", path: "/articles/:id", status: "200" },
+            { verb: "DELETE", path: "/articles/:id", status: "204" }
+          ]
+        )
+      end
     end
 
     context "with ignore routes configured" do
@@ -87,6 +108,27 @@ RSpec.describe Swagcov::Coverage do
       it { expect(init.total).to eq(2) }
       it { expect(init.covered).to eq(2) }
       it { expect(init.ignored).to eq(4) }
+      it { expect(init.routes_not_covered).to eq([]) }
+
+      it "has array of ignored routes" do
+        expect(init.routes_ignored).to eq(
+          [
+            { verb: "GET", path: "/articles/:id", status: "ignored" },
+            { verb: "PATCH", path: "/articles/:id", status: "ignored" },
+            { verb: "PUT", path: "/articles/:id", status: "ignored" },
+            { verb: "DELETE", path: "/articles/:id", status: "ignored" }
+          ]
+        )
+      end
+
+      it "has array of covered routes" do
+        expect(init.routes_covered).to eq(
+          [
+            { verb: "GET", path: "/articles", status: "200" },
+            { verb: "POST", path: "/articles", status: "201" }
+          ]
+        )
+      end
     end
 
     context "with only routes configured" do
