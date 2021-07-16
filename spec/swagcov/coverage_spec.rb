@@ -46,12 +46,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "exits normally" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).to eq(0)
-      end
+      it { expect { init.report }.to exit_with_code(0) }
     end
 
     context "when route without verb (mounted applications)" do
@@ -64,24 +59,14 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "exits normally" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).to eq(0)
-      end
+      it { expect { init.report }.to exit_with_code(0) }
     end
 
     context "with full documentation coverage and minimal configuration" do
       before { allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/files/swagcov.yml")) }
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "exits normally" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).to eq(0)
-      end
+      it { expect { init.report }.to exit_with_code(0) }
     end
 
     context "without full documentation coverage and minimal configuration" do
@@ -90,12 +75,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "signals error condition" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).not_to eq(0)
-      end
+      it { expect { init.report }.not_to exit_with_code(0) }
     end
 
     context "with full documentation coverage and ignore routes configured" do
@@ -104,12 +84,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "exits normally" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).to eq(0)
-      end
+      it { expect { init.report }.to exit_with_code(0) }
     end
 
     context "without full documentation coverage and ignore routes configured" do
@@ -120,12 +95,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "signals error condition" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).not_to eq(0)
-      end
+      it { expect { init.report }.not_to exit_with_code(0) }
     end
 
     context "with full documentation coverage and only routes configured" do
@@ -134,12 +104,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "exits normally" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).to eq(0)
-      end
+      it { expect { init.report }.to exit_with_code(0) }
     end
 
     context "without full documentation coverage and only routes configured" do
@@ -150,12 +115,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it { expect { init.report }.to raise_exception(SystemExit) }
-
-      it "signals error condition" do
-        init.report
-      rescue SystemExit => e
-        expect(e.status).not_to eq(0)
-      end
+      it { expect { init.report }.not_to exit_with_code(0) }
     end
   end
 
