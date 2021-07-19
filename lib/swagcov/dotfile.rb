@@ -5,12 +5,13 @@ module Swagcov
   end
 
   class Dotfile
-    def initialize
-      pathname = Rails.root.join(".swagcov.yml")
-      raise BadConfigurationError, "Missing .swagcov.yml" unless pathname.exist?
+    DEFAULT_CONFIG_FILE_NAME = ".swagcov.yml"
+
+    def initialize pathname: Rails.root.join(DEFAULT_CONFIG_FILE_NAME)
+      raise BadConfigurationError, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})" unless pathname.exist?
 
       @dotfile = YAML.load_file(pathname)
-      raise BadConfigurationError, "Invalid .swagcov.yml" unless valid?
+      raise BadConfigurationError, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
     end
 
     def ignore_path? path

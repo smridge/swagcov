@@ -1,26 +1,20 @@
 # frozen_string_literal: true
 
 RSpec.describe Swagcov::Dotfile do
-  subject(:dotfile) { described_class.new }
+  subject(:dotfile) { described_class.new(pathname: fixture_dotfile) }
 
-  let(:rails_root) { instance_double(Pathname) }
   let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/dotfile.yml") }
-
-  before do
-    allow(Rails).to receive(:root).and_return(rails_root)
-    allow(rails_root).to receive(:join).and_return(fixture_dotfile)
-  end
 
   it "loads yaml config from dotfile" do
     expect(YAML).to receive(:load_file).with(fixture_dotfile).and_call_original
-    described_class.new
+    dotfile
   end
 
   context "with empty dotfile" do
     let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/empty_dotfile.yml") }
 
     it "raises error if file is empty" do
-      expect { described_class.new }.to raise_error(Swagcov::BadConfigurationError)
+      expect { dotfile }.to raise_error(Swagcov::BadConfigurationError)
     end
   end
 
@@ -28,7 +22,7 @@ RSpec.describe Swagcov::Dotfile do
     let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/missing_docs_dotfile.yml") }
 
     it "raises error if doc paths are not specified in the dotfile" do
-      expect { described_class.new }.to raise_error(Swagcov::BadConfigurationError)
+      expect { dotfile }.to raise_error(Swagcov::BadConfigurationError)
     end
   end
 
@@ -36,7 +30,7 @@ RSpec.describe Swagcov::Dotfile do
     let(:fixture_dotfile) { Pathname.new("spec/fixtures/files/missing_file.yml") }
 
     it "raises error if doc paths are not specified in the dotfile" do
-      expect { described_class.new }.to raise_error(Swagcov::BadConfigurationError)
+      expect { dotfile }.to raise_error(Swagcov::BadConfigurationError)
     end
   end
 
@@ -85,7 +79,7 @@ RSpec.describe Swagcov::Dotfile do
   end
 
   describe "#doc_paths" do
-    subject(:doc_paths) { described_class.new.doc_paths }
+    subject(:doc_paths) { dotfile.doc_paths }
 
     it { is_expected.to contain_exactly("a/path", "b/path") }
   end
