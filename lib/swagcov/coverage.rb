@@ -4,14 +4,15 @@ module Swagcov
   class Coverage
     attr_reader :total, :covered, :ignored, :routes_not_covered, :routes_covered, :routes_ignored
 
-    def initialize
+    def initialize dotfile: Swagcov::Dotfile.new, routes: ::Rails.application.routes.routes
       @total = 0
       @covered = 0
       @ignored = 0
       @routes_not_covered = []
       @routes_covered = []
       @routes_ignored = []
-      @dotfile = Swagcov::Dotfile.new
+      @dotfile = dotfile
+      @routes = routes
     end
 
     def report
@@ -30,7 +31,7 @@ module Swagcov
     attr_reader :dotfile
 
     def collect_coverage
-      ::Rails.application.routes.routes.each do |route|
+      @routes.each do |route|
         path = route.path.spec.to_s.sub(/\(\.:format\)$/, "")
 
         next if third_party_route?(route, path)
