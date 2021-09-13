@@ -24,6 +24,7 @@ RSpec.describe Swagcov::Coverage do
 
   describe "#report" do
     let(:pathname) { Pathname.new("spec/fixtures/files/swagcov.yml") }
+
     # suppress output in specs
     before { allow($stdout).to receive(:puts) }
 
@@ -199,6 +200,28 @@ RSpec.describe Swagcov::Coverage do
           ]
         )
       end
+    end
+
+    context "when path name partially exists in swagger file" do
+      let(:pathname) { Pathname.new("spec/fixtures/files/swagcov_reference_v1.yml") }
+
+      let(:routes) do
+        [
+          instance_double(
+            ActionDispatch::Journey::Route,
+            path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
+            verb: "GET",
+            internal: nil
+          )
+        ]
+      end
+
+      it { expect(init.total).to eq(1) }
+      it { expect(init.covered).to eq(0) }
+      it { expect(init.ignored).to eq(0) }
+      it { expect(init.routes_not_covered).to eq([{ verb: "GET", path: "/articles", status: "none" }]) }
+      it { expect(init.routes_ignored).to eq([]) }
+      it { expect(init.routes_covered).to eq([]) }
     end
   end
 end

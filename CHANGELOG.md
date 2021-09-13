@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
+- Fix: Matching routes against swagger paths. Previously, partial paths could result in a match ([#12](https://github.com/smridge/swagcov/pull/12))
 
 ## 0.2.4 (2021-04-30)
 - Fix: If a route path does not start with "^" match the entire path ([#5](https://github.com/smridge/swagcov/pull/5))
