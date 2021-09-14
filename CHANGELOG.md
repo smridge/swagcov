@@ -1,8 +1,9 @@
 # CHANGELOG
 ## main (unreleased)
 - Work in Progress
-- Fix: Matching routes against swagger paths. Previously, partial paths could result in a match ([#12](https://github.com/smridge/swagcov/pull/12))
 
+## 0.2.5 (2021-09-14)
+- Fix: Matching routes against swagger paths. Previously, partial paths could result in a match ([#12](https://github.com/smridge/swagcov/pull/12))
 ## 0.2.4 (2021-04-30)
 - Fix: If a route path does not start with "^" match the entire path ([#5](https://github.com/smridge/swagcov/pull/5))
 - Improvement: Raise specific `Swagcov::BadConfigurationError` error if bad or missing configuration ([#5](https://github.com/smridge/swagcov/pull/5))
