@@ -45,7 +45,7 @@ module Swagcov
         next if dotfile.only_path_mismatch?(path)
 
         @total += 1
-        regex = Regexp.new("#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}(\\.[^/]+)?$")
+        regex = Regexp.new("^#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}(\\.[^/]+)?$")
         matching_keys = docs_paths.keys.select { |k| regex.match?(k) }
 
         if (doc = docs_paths.dig(matching_keys.first, route.verb.downcase))
