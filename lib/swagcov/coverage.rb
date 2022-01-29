@@ -46,7 +46,7 @@ module Swagcov
 
         @total += 1
         regex = Regexp.new("^#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}(\\.[^/]+)?$")
-        matching_keys = docs_paths.keys.select { |k| regex.match?(k) }
+        matching_keys = docs_paths.keys.grep(regex)
 
         if (doc = docs_paths.dig(matching_keys.first, route.verb.downcase))
           @covered += 1
