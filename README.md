@@ -6,6 +6,10 @@
 
 See OpenAPI documentation coverage report for Rails Routes.
 
+## Usages
+- See overview of different endpoints covered, missing and what you choose to ignore.
+- Add pass/fail to your build pipeline when missing Documentation Coverage.
+
 ## Installation
 Add this line to your application's Gemfile:
 ```ruby
@@ -41,7 +45,7 @@ Create a `.swagcov.yml` in root of your Rails application.
         - /v1/foobar/:token
   ```
 
-- Example `.swagcov.yml` Config File:
+- Full Example `.swagcov.yml` Config File:
   ```yml
   docs:
     paths:
@@ -60,7 +64,7 @@ Execute:
 bundle exec rake swagcov
 ```
 
-## Example configurations and output from running `bundle exec rake swagcov` from the root of your Rails Application:
+### Example configurations and output from running `bundle exec rake swagcov` from the root of your Rails Application:
 - All Routes (minimal configuration):
   ```yml
   docs:
@@ -119,7 +123,7 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_5_2/**/*_spec.rb
 ```
 
 ### Test via Sandbox Application
-For Rails 5
+For Rails 5.2
 - `cd spec/sandbox_5_2/`
 - Run tests: `bundle exec rspec spec`
 - Run `bundle exec rake swagcov`
@@ -144,3 +148,8 @@ For Rails 5
 
 ## Credit
 To [@lonelyelk](https://github.com/lonelyelk) for initial development!
+
+## Contributors
+<a href="https://github.com/smridge/swagcov/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=smridge/swagcov" />
+</a>
