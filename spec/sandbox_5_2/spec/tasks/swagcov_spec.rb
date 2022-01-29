@@ -12,36 +12,36 @@ describe "rake swagcov", type: :task do
       rescue SystemExit => e # ignore to test output
         e.inspect
       end.to output(<<~MESSAGE).to_stdout
-         GET /articles                                                                                  #{200.to_s.green}
-        POST /articles                                                                                  #{201.to_s.green}
-         GET /articles/:id                                                                              #{200.to_s.green}
-       PATCH /articles/:id                                                                              #{200.to_s.green}
-         PUT /articles/:id                                                                              #{200.to_s.green}
-      DELETE /articles/:id                                                                              #{204.to_s.green}
-         GET /users                                                                                     #{200.to_s.green}
-        POST /users                                                                                     #{201.to_s.green}
-         GET /users/:id                                                                                 #{200.to_s.green}
-       PATCH /users/:id                                                                                 #{200.to_s.green}
-         PUT /users/:id                                                                                 #{200.to_s.green}
-      DELETE /users/:id                                                                                 #{204.to_s.green}
-         GET /v1/articles                                                                               #{200.to_s.green}
-        POST /v1/articles                                                                               #{201.to_s.green}
-         GET /v1/articles/:id                                                                           #{200.to_s.green}
-       PATCH /v1/articles/:id                                                                           #{200.to_s.green}
-         PUT /v1/articles/:id                                                                           #{200.to_s.green}
-      DELETE /v1/articles/:id                                                                           #{204.to_s.green}
-         GET /v2/articles                                                                               #{200.to_s.green}
-        POST /v2/articles                                                                               #{201.to_s.green}
-         GET /v2/articles/:id                                                                           #{200.to_s.green}
-       PATCH /v2/articles/:id                                                                           #{200.to_s.green}
-         PUT /v2/articles/:id                                                                           #{200.to_s.green}
-      DELETE /v2/articles/:id                                                                           #{204.to_s.green}
+               GET /articles                                                                                  #{200.to_s.green}
+              POST /articles                                                                                  #{201.to_s.green}
+               GET /articles/:id                                                                              #{200.to_s.green}
+             PATCH /articles/:id                                                                              #{200.to_s.green}
+               PUT /articles/:id                                                                              #{200.to_s.green}
+            DELETE /articles/:id                                                                              #{204.to_s.green}
+               GET /users                                                                                     #{200.to_s.green}
+              POST /users                                                                                     #{201.to_s.green}
+               GET /users/:id                                                                                 #{200.to_s.green}
+             PATCH /users/:id                                                                                 #{200.to_s.green}
+               PUT /users/:id                                                                                 #{200.to_s.green}
+            DELETE /users/:id                                                                                 #{204.to_s.green}
+               GET /v1/articles                                                                               #{200.to_s.green}
+              POST /v1/articles                                                                               #{201.to_s.green}
+               GET /v1/articles/:id                                                                           #{200.to_s.green}
+             PATCH /v1/articles/:id                                                                           #{200.to_s.green}
+               PUT /v1/articles/:id                                                                           #{200.to_s.green}
+            DELETE /v1/articles/:id                                                                           #{204.to_s.green}
+               GET /v2/articles                                                                               #{200.to_s.green}
+              POST /v2/articles                                                                               #{201.to_s.green}
+               GET /v2/articles/:id                                                                           #{200.to_s.green}
+             PATCH /v2/articles/:id                                                                           #{200.to_s.green}
+               PUT /v2/articles/:id                                                                           #{200.to_s.green}
+            DELETE /v2/articles/:id                                                                           #{204.to_s.green}
 
-  OpenAPI documentation coverage 100.00% (24/24)
-  #{0.to_s.yellow} endpoints ignored
-  #{24.to_s.blue} endpoints checked
-  #{24.to_s.green} endpoints covered
-  #{0.to_s.red} endpoints missing documentation
+        OpenAPI documentation coverage 100.00% (24/24)
+        #{0.to_s.yellow} endpoints ignored
+        #{24.to_s.blue} endpoints checked
+        #{24.to_s.green} endpoints covered
+        #{0.to_s.red} endpoints missing documentation
       MESSAGE
     end
 
@@ -65,22 +65,22 @@ describe "rake swagcov", type: :task do
       rescue SystemExit => e # ignore to test output
         e.inspect
       end.to output(<<~MESSAGE).to_stdout
-         GET /v1/articles                                                                               #{200.to_s.green}
-        POST /v1/articles                                                                               #{201.to_s.green}
-         GET /v2/articles/:id                                                                           #{'ignored'.yellow}
-       PATCH /v2/articles/:id                                                                           #{'ignored'.yellow}
-         PUT /v2/articles/:id                                                                           #{'ignored'.yellow}
-      DELETE /v2/articles/:id                                                                           #{'ignored'.yellow}
-         GET /v1/articles/:id                                                                           #{'none'.red}
-       PATCH /v1/articles/:id                                                                           #{'none'.red}
-         PUT /v1/articles/:id                                                                           #{'none'.red}
-      DELETE /v1/articles/:id                                                                           #{'none'.red}
+               GET /v1/articles                                                                               #{200.to_s.green}
+              POST /v1/articles                                                                               #{201.to_s.green}
+               GET /v2/articles/:id                                                                           #{'ignored'.yellow}
+             PATCH /v2/articles/:id                                                                           #{'ignored'.yellow}
+               PUT /v2/articles/:id                                                                           #{'ignored'.yellow}
+            DELETE /v2/articles/:id                                                                           #{'ignored'.yellow}
+               GET /v1/articles/:id                                                                           #{'none'.red}
+             PATCH /v1/articles/:id                                                                           #{'none'.red}
+               PUT /v1/articles/:id                                                                           #{'none'.red}
+            DELETE /v1/articles/:id                                                                           #{'none'.red}
 
-  OpenAPI documentation coverage 33.33% (2/6)
-  #{4.to_s.yellow} endpoints ignored
-  #{6.to_s.blue} endpoints checked
-  #{2.to_s.green} endpoints covered
-  #{4.to_s.red} endpoints missing documentation
+        OpenAPI documentation coverage 33.33% (2/6)
+        #{4.to_s.yellow} endpoints ignored
+        #{6.to_s.blue} endpoints checked
+        #{2.to_s.green} endpoints covered
+        #{4.to_s.red} endpoints missing documentation
       MESSAGE
     end
 

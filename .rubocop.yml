@@ -4,6 +4,8 @@ require:
 
 AllCops:
   NewCops: enable
+  Exclude:
+    - '**/db/schema.rb'
 
 Metrics/AbcSize:
   Enabled: false
@@ -19,6 +21,9 @@ Metrics/MethodLength:
 
 RSpec/ExampleLength:
   Enabled: false
+
+RSpec/EmptyExampleGroup:
+  Enabled: false # due to using rswag in sandbox applications
 
 RSpec/MessageSpies:
   EnforcedStyle: receive
