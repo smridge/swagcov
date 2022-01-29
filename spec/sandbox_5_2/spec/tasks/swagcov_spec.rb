@@ -55,11 +55,8 @@ describe "rake swagcov", type: :task do
   end
 
   context "with full configuration and partial documentation coverage" do
-    let(:rails_root) { instance_double(Pathname) }
-
     before do
-      allow(Rails).to receive(:root).and_return(rails_root)
-      allow(rails_root).to receive(:join).and_return(Pathname.new("spec/fixtures/dotfiles/only_and_ignore_config.yml"))
+      stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "spec/fixtures/dotfiles/only_and_ignore_config.yml")
     end
 
     it "outputs coverage" do
@@ -92,7 +89,7 @@ describe "rake swagcov", type: :task do
       before { allow($stdout).to receive(:puts) }
 
       it { expect { task.execute }.to raise_exception(SystemExit) }
-      it { expect { task.execute }.to exit_with_code(4) }
+      it { expect { task.execute }.not_to exit_with_code(0) }
     end
   end
 end

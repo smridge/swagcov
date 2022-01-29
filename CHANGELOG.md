@@ -1,6 +1,6 @@
 # CHANGELOG
 ## main (unreleased)
-- Work in Progress
+- Code Coverage: Add specs for Rails 5.2 ([#14](https://github.com/smridge/swagcov/pull/14))
 
 ## 0.2.5 (2021-09-14)
 - Fix: Matching routes against swagger paths. Previously, partial paths could result in a match ([#12](https://github.com/smridge/swagcov/pull/12))
