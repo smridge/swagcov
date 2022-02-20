@@ -8,9 +8,6 @@ jobs:
   test:
     name: Rails 5.2 / Ruby 2.6
     runs-on: ubuntu-latest
-    # strategy:
-    #   matrix:
-    #     ruby: ['2.5', '2.6', '2.7', '3.0', '3.1']
     services:
       postgres:
         image: postgres:11-alpine
@@ -24,17 +21,12 @@ jobs:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
 
-    # defaults:
-    #   run:
-    #     working-directory: spec/sandbox_5_2
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          # ruby-version: ${{ matrix.ruby }}
           bundler: "Gemfile.lock"
           bundler-cache: true
           cache-version: 1
