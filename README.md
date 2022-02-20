@@ -119,12 +119,14 @@ bundle
 
 Run Tests
 ```
-bundle exec rspec spec --exclude-pattern spec/sandbox_5_2/**/*_spec.rb
+bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 ```
 
 ### Test via Sandbox Application
-For Rails 5.2
-- `cd spec/sandbox_5_2/`
+- Go to any sandbox application within the `spec` directory
+  - For example, `cd spec/sandbox_5_2/`
+- Install the ruby version specified in `.ruby-version` file
+- Install gems: `bundle install`
 - Run tests: `bundle exec rspec spec`
 - Run `bundle exec rake swagcov`
   - This will run against any changes made to your branch.
@@ -139,9 +141,7 @@ For Rails 5.2
   - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
 
 ## TODO
-- Add specs
-- Test against different rails versions
-- Create Sandbox App for Rails 6
+- Test against rails 6.1, 6.2 and 7
 - Add autogeneration of ignore paths
 - Add `CONTRIBUTING.md`
 - Add GitHub Actions for specs/linting
