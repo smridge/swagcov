@@ -1,5 +1,6 @@
 # CHANGELOG
 ## main (unreleased)
+- Code Coverage: Add Sandbox Application and specs for Rails 6.0 ([#17](https://github.com/smridge/swagcov/pull/17))
 - Code Coverage: Add specs for Rails 5.2 ([#14](https://github.com/smridge/swagcov/pull/14))
 - Code Coverage: Add GitHub CodeQL ([#13](https://github.com/smridge/swagcov/pull/13))
 - Security: Require Multi-Factor Authentication for RubyGems privileged operations
