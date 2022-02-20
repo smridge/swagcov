@@ -1,0 +1,47 @@
+# This workflow runs end to end tests from a real Rails 6.0 application located in the spec/sandbox_6_0 directory.
+# TODO: Get Ruby Matrix to work
+
+name: "E2E Specs"
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Rails 6.0 / Ruby 2.7
+    runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     ruby: ['2.5', '2.6', '2.7', '3.0', '3.1']
+    services:
+      postgres:
+        image: postgres:11-alpine
+        ports:
+          - "5432:5432"
+        env:
+          POSTGRES_DB: rails_test
+          POSTGRES_USER: rails
+          POSTGRES_PASSWORD: password
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
+
+    # defaults:
+    #   run:
+    #     working-directory: spec/sandbox_6_0
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          # ruby-version: ${{ matrix.ruby }}
+          bundler: "Gemfile.lock"
+          bundler-cache: true
+          cache-version: 1
+          working-directory: spec/sandbox_6_0
+      - name: Set up database schema
+        run: bundle exec rails db:schema:load
+        working-directory: spec/sandbox_6_0
+      - name: Run tests
+        run: bundle exec rspec spec
+        working-directory: spec/sandbox_6_0

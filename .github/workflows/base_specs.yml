@@ -1,0 +1,38 @@
+# This workflow runs units tests for the gem.
+# TODO: Get Rails Matrix to work
+
+name: Base Specs
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Ruby ${{ matrix.ruby-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ['2.5', '2.6', '2.7', '3.0', '3.1']
+        # gemfile:
+        #   - rails_5_0
+        #   - rails_5_1
+        #   - rails_5_2
+        #   - rails_6
+        #   - rails_6_1
+        #   - rails_7
+
+    # env:
+    #   BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
+    #   BUNDLE_PATH_RELATIVE_TO_CWD: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          rubygems: 'latest' # resolve warnings for older ruby versions
+          bundler-cache: true
+          cache-version: 1
+      - name: Run tests
+        run: bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
