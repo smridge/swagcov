@@ -4,6 +4,7 @@
   - Add Sandbox Application and specs for Rails 5.1 ([#20](https://github.com/smridge/swagcov/pull/20))
   - Add specs for Rails 5.2 ([#14](https://github.com/smridge/swagcov/pull/14))
   - Add Sandbox Application and specs for Rails 6.0 ([#17](https://github.com/smridge/swagcov/pull/17))
+  - Add Sandbox Application and specs for Rails 6.1 ([#22](https://github.com/smridge/swagcov/pull/22))
   - Add GitHub CodeQL ([#13](https://github.com/smridge/swagcov/pull/13))
 ### Security
   - Require Multi-Factor Authentication for RubyGems privileged operations ([#16](https://github.com/smridge/swagcov/pull/16))
