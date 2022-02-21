@@ -59,8 +59,14 @@ module Swagcov
 
     def docs_paths
       @docs_paths ||= Dir.glob(dotfile.doc_paths).reduce({}) do |acc, docspath|
-        acc.merge(YAML.load_file(docspath)["paths"])
+        acc.merge(load_yaml(docspath))
       end
+    end
+
+    def load_yaml docspath
+      YAML.load_file(docspath)["paths"]
+    rescue Psych::SyntaxError
+      raise BadConfigurationError, "Malinformed openapi file (#{docspath})"
     end
 
     def third_party_route? route, path
