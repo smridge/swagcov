@@ -3,7 +3,7 @@ info:
   title: API V1
   version: v1
 paths:
-  "/articles":
+  "/v1/articles":
     get:
       summary: list articles
       tags:
@@ -45,7 +45,7 @@ paths:
                   type: string
                 body:
                   type: string
-  "/articles/{id}":
+  "/v1/articles/{id}":
     parameters:
     - name: id
       in: path

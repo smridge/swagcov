@@ -1,6 +1,6 @@
 docs:
   paths:
-  - spec/fixtures/openapi/v1.yml
+  - spec/fixtures/openapi/no_versions.yml
 
 routes:
   paths:
