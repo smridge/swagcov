@@ -1,5 +1,9 @@
 # CHANGELOG
 ## main (unreleased)
+
+### Enhancement
+  - Raise specific `Swagcov::BadConfigurationError` when malinformed config yaml file.
+
 ### Code Coverage
   - Add Sandbox Application and specs for Rails 5.1 ([#20](https://github.com/smridge/swagcov/pull/20))
   - Add specs for Rails 5.2 ([#14](https://github.com/smridge/swagcov/pull/14))

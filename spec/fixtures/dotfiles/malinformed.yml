@@ -1,0 +1,4 @@
+docs:
+  get a yaml linter!
+  paths:
+    - swagger/openapi.yaml

@@ -18,6 +18,14 @@ RSpec.describe Swagcov::Dotfile do
     end
   end
 
+  context "when malinformed dotfile" do
+    let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/malinformed.yml") }
+
+    it "raises error if the yaml can not be loaded" do
+      expect { dotfile }.to raise_error(Swagcov::BadConfigurationError)
+    end
+  end
+
   context "when misconfigured" do
     let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/missing_docs_dotfile.yml") }
 

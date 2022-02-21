@@ -7,10 +7,9 @@ module Swagcov
   class Dotfile
     DEFAULT_CONFIG_FILE_NAME = ".swagcov.yml"
 
-    def initialize pathname: Rails.root.join(DEFAULT_CONFIG_FILE_NAME)
-      raise BadConfigurationError, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})" unless pathname.exist?
+    def initialize pathname: ::Rails.root.join(DEFAULT_CONFIG_FILE_NAME)
+      @dotfile = load_yaml(pathname)
 
-      @dotfile = YAML.load_file(pathname)
       raise BadConfigurationError, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
     end
 
@@ -29,6 +28,14 @@ module Swagcov
     private
 
     attr_reader :dotfile
+
+    def load_yaml pathname
+      raise BadConfigurationError, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})" unless pathname.exist?
+
+      YAML.load_file(pathname)
+    rescue Psych::SyntaxError
+      raise BadConfigurationError, "Malinformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
+    end
 
     def ignored_regex
       @ignored_regex ||= path_config_regex(dotfile.dig("routes", "paths", "ignore"))
