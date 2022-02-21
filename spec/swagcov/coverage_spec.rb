@@ -27,12 +27,12 @@ RSpec.describe Swagcov::Coverage do
 
     let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
 
-    before do
-      allow($stdout).to receive(:puts) # suppress output in specs
-      result
-    end
+    # suppress output in specs
+    before { allow($stdout).to receive(:puts) }
 
     context "when internal route only" do
+      before { result }
+
       let(:routes) do
         [
           instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)
@@ -49,6 +49,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when route without verb (mounted applications)" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
       let(:routes) do
         [
@@ -66,6 +68,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and minimal configuration (no only or ignores)" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
 
       it { expect(init.total).to eq(6) }
@@ -91,6 +95,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "without full documentation coverage and minimal configuration" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths.yml") }
 
       it { expect(init.total).to eq(6) }
@@ -122,6 +128,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and ignore routes configured" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_ignore.yml") }
 
       it { expect(init.total).to eq(2) }
@@ -153,6 +161,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "without full documentation coverage and ignore routes configured" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_ignore.yml") }
 
       it { expect(init.total).to eq(4) }
@@ -184,6 +194,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and only routes configured" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_only.yml") }
 
       it { expect(init.total).to eq(4) }
@@ -207,6 +219,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "without full documentation coverage and only routes configured" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_only.yml") }
 
       it { expect(init.total).to eq(4) }
@@ -230,6 +244,8 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when path name partially exists in swagger file" do
+      before { result }
+
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/v1.yml") }
 
       let(:routes) do
@@ -250,6 +266,12 @@ RSpec.describe Swagcov::Coverage do
       it { expect(init.routes_ignored).to eq([]) }
       it { expect(init.routes_covered).to eq([]) }
       it { expect(result).not_to eq(0) }
+    end
+
+    context "when maliformed openapi yaml" do
+      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/malinformed_openapi.yml") }
+
+      it { expect { result }.to raise_error(Swagcov::BadConfigurationError) }
     end
   end
 end
