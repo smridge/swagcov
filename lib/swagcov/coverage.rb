@@ -23,7 +23,7 @@ module Swagcov
 
       final_output
 
-      exit @total - @covered
+      @total - @covered
     end
 
     private
