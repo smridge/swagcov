@@ -140,6 +140,8 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 - Run: `rake release`
   - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
 
+- After all is good, `bundle update` all sandbox applications to reflect new swagcov version and open PR to ensure builds pass.
+
 ## TODO
 - Create Rails 7 / Ruby 3.1 Sandbox
 - Add autogeneration of ignore paths
