@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    swagcov (0.2.5)
+    swagcov (0.3.0)
       rails (>= 5)
 
 GEM
