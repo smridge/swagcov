@@ -31,8 +31,10 @@ module Swagcov
     attr_reader :dotfile
 
     def collect_coverage
+      openapi_files = ::Swagcov::OpenapiFiles.new(filepaths: dotfile.doc_paths)
+
       @routes.each do |route|
-        path = route.path.spec.to_s.sub(/\(\.:format\)$/, "")
+        path = route.path.spec.to_s.chomp("(.:format)")
 
         next if third_party_route?(route, path)
 
@@ -45,28 +47,14 @@ module Swagcov
         next if dotfile.only_path_mismatch?(path)
 
         @total += 1
-        regex = Regexp.new("^#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}(\\.[^/]+)?$")
-        matching_keys = docs_paths.keys.grep(regex)
 
-        if (doc = docs_paths.dig(matching_keys.first, route.verb.downcase))
+        if (response_keys = openapi_files.find_response_keys(path: path, route_verb: route.verb))
           @covered += 1
-          @routes_covered << { verb: route.verb, path: path, status: doc["responses"].keys.map(&:to_s).sort.join("  ") }
+          @routes_covered << { verb: route.verb, path: path, status: response_keys.join("  ") }
         else
           @routes_not_covered << { verb: route.verb, path: path, status: "none" }
         end
       end
-    end
-
-    def docs_paths
-      @docs_paths ||= Dir.glob(dotfile.doc_paths).reduce({}) do |acc, docspath|
-        acc.merge(load_yaml(docspath))
-      end
-    end
-
-    def load_yaml docspath
-      YAML.load_file(docspath)["paths"]
-    rescue Psych::SyntaxError
-      raise BadConfigurationError, "Malinformed openapi file (#{docspath})"
     end
 
     def third_party_route? route, path
