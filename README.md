@@ -136,11 +136,11 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 - Ensure you have access to publish on [rubygems](https://rubygems.org/gems/swagcov).
 - Update [CHANGELOG](https://github.com/smridge/swagcov/blob/main/CHANGELOG.md).
 - Update [`VERSION`](https://github.com/smridge/swagcov/blob/main/lib/swagcov/version.rb).
-- Commit changes to `main` branch locally.
+- Run `bundle update` for each sandbox application to reflect new swagcov version in each `Gemfile.lock`
+- Open a Pull Request to ensure all specs pass, then merge to `main`.
+- Checkout the latest `main` on your machine.
 - Run: `rake release`
   - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
-
-- After all is good, `bundle update` all sandbox applications to reflect new swagcov version and open PR to ensure builds pass.
 
 ## TODO
 - Create Rails 7 / Ruby 3.1 Sandbox
