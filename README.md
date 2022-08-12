@@ -26,7 +26,7 @@ Create a `.swagcov.yml` in root of your Rails application.
   ```yml
   docs:
     paths:
-      - swagger/v1/swagger.yaml
+      - swagger.yaml
   ```
 
 - Add `only` routes (**optional**) :
@@ -49,7 +49,7 @@ Create a `.swagcov.yml` in root of your Rails application.
   ```yml
   docs:
     paths:
-      - swagger/v1/swagger.yaml
+      - swagger.yaml
 
   routes:
     paths:
@@ -91,7 +91,7 @@ bundle exec rake swagcov
   ```yml
   docs:
     paths:
-      - swagger/v1/swagger.yaml
+      - swagger.yaml
 
   routes:
     paths:
