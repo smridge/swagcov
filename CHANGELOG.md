@@ -2,6 +2,9 @@
 ## main (unreleased)
 WIP
 
+## 0.4.0 (2022-08-11)
+  - Improve OpenAPI file processing ([#26](https://github.com/smridge/swagcov/pull/26))
+
 ## 0.3.0 (2022-02-21)
 ### Enhancement
   - Raise specific `Swagcov::BadConfigurationError` for malinformed yaml files ([#23](https://github.com/smridge/swagcov/pull/23))
