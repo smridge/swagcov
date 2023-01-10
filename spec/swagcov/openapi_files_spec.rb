@@ -41,7 +41,7 @@ RSpec.describe Swagcov::OpenapiFiles do
     end
 
     context "without matching route to path" do
-      it { expect(openapi_files.find_response_keys(path: "/not_in_yaml/:id", route_verb: "GET")).to eq(nil) }
+      it { expect(openapi_files.find_response_keys(path: "/not_in_yaml/:id", route_verb: "GET")).to be_nil }
     end
   end
 end
