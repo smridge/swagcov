@@ -146,7 +146,6 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 - Create Rails 7 / Ruby 3.1 Sandbox
 - Add autogeneration of ignore paths
 - Add `CONTRIBUTING.md`
-- Add GitHub Action for linting
 
 ## Credit
 To [@lonelyelk](https://github.com/lonelyelk) for initial development!

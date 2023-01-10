@@ -1,0 +1,20 @@
+name: Rubocop Linting
+on: [push, pull_request]
+
+jobs:
+  rubocop-lint:
+    name: Rubocop
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5
+          rubygems: 3.2.3
+          bundler-cache: true
+          cache-version: 1
+      - name: Run Rubocop
+        run: bundle exec rubocop
