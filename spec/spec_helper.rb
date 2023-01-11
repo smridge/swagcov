@@ -1,5 +1,13 @@
 # frozen_string_literal: true
 
+require "simplecov"
+SimpleCov.start do
+  add_filter "/spec/"
+  enable_coverage :branch
+  SimpleCov.minimum_coverage line: 98, branch: 95
+  SimpleCov.refuse_coverage_drop :line, :branch
+end
+
 require "rails"
 require "pry-byebug"
 require "active_support/core_ext"
