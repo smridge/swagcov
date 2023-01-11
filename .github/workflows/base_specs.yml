@@ -1,7 +1,7 @@
 # This workflow runs units tests
 
 name: Base Specs
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:

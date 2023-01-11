@@ -2,7 +2,7 @@
 # TODO: Get Ruby Matrix to work
 
 name: "E2E Specs"
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:

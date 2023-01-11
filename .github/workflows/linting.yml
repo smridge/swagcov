@@ -1,5 +1,5 @@
 name: Rubocop Linting
-on: [push, pull_request]
+on: [push]
 
 jobs:
   rubocop-lint:
