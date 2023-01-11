@@ -22,10 +22,11 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
+          rubygems: 3.2.3 # resolve warning
           bundler: "Gemfile.lock"
           bundler-cache: true
           cache-version: 1
