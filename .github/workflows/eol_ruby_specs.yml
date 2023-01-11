@@ -10,7 +10,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: ['2.5']
+        ruby-version: ['2.5', '2.6']
         gemfile:
           - gemfiles/rails_5_0
           - gemfiles/rails_5_1
