@@ -1,5 +1,4 @@
 # This workflow runs end to end tests from a real Rails 6.1 application located in the spec/sandbox_6_1 directory.
-# TODO: Get Ruby Matrix to work
 
 name: "E2E Specs"
 on: [push]
