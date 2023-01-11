@@ -5,3 +5,4 @@ master.key
 /spec/**/log/*.log
 /spec/**/storage/
 /spec/**/tmp/
+coverage
