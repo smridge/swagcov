@@ -11,6 +11,9 @@ gem "bootsnap", ">= 1.1.0", require: false
 gem "pg", ">= 0.18", "< 2.0"
 gem "puma"
 
+# resolve loading error
+gem "multi_json"
+
 group :development, :test do
   gem "database_cleaner"
   gem "pry"
