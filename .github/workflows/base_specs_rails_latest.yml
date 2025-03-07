@@ -1,6 +1,6 @@
 # This workflow runs units tests
 
-name: Base Specs
+name: Rails Latest Base Specs
 on: [push]
 
 jobs:
@@ -10,21 +10,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby-version: ['2.7', '3.0', '3.1', '3.2', '3.3']
+        ruby-version: ['3.2', '3.3', '3.4']
         gemfile:
-          - gemfiles/rails_5_0
-          - gemfiles/rails_5_1
-          - gemfiles/rails_5_2
-          - gemfiles/rails_6_0
-          - gemfiles/rails_6_1
-          - gemfiles/rails_7_0
-          - gemfiles/rails_7_1
-          - gemfiles/rails_7_2
-        exclude:
-          - ruby-version: '2.7'
-            gemfile: gemfiles/rails_7_2 # ruby 3.1 minimum for rails 7.2
-          - ruby-version: '3.0'
-            gemfile: gemfiles/rails_7_2 # ruby 3.1 minimum for rails 7.2
+          - gemfiles/rails_8_0
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
