@@ -8,6 +8,7 @@ SimpleCov.start do
   SimpleCov.refuse_coverage_drop :line, :branch
 end
 
+require "logger"
 require "rails"
 require "pry-byebug"
 require "active_support/core_ext"

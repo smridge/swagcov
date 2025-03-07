@@ -30,5 +30,7 @@ jobs:
           rubygems: 'latest' # resolve warnings for older ruby versions
           bundler-cache: true
           cache-version: 1
+      - name: Install dependencies
+        run: bundle install
       - name: Run tests
         run: bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb

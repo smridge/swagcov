@@ -2,3 +2,10 @@
 
 source "https://rubygems.org"
 gemspec
+
+gem "pry-byebug"
+gem "rspec"
+gem "rubocop"
+gem "rubocop-performance"
+gem "rubocop-rspec"
+gem "simplecov"
