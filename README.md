@@ -143,7 +143,6 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
   - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
 
 ## TODO
-- Create Rails 7 / Ruby 3.1 Sandbox
 - Add autogeneration of ignore paths
 - Add `CONTRIBUTING.md`
 
