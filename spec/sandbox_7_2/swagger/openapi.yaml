@@ -1,0 +1,447 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/articles":
+    get:
+      summary: list articles
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/article"
+    post:
+      summary: create article
+      tags:
+      - Articles
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+  "/articles/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    patch:
+      summary: update article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    put:
+      summary: update article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    delete:
+      summary: delete article
+      tags:
+      - Articles
+      responses:
+        '204':
+          description: deleted
+  "/users":
+    get:
+      summary: list users
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/user"
+    post:
+      summary: create user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/user"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+  "/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/user"
+    patch:
+      summary: update user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/user"
+    put:
+      summary: update user
+      tags:
+      - Users
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/user"
+    delete:
+      summary: delete user
+      tags:
+      - Users
+      responses:
+        '204':
+          description: deleted
+  "/v1/articles":
+    get:
+      summary: list articles
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/article"
+    post:
+      summary: create article
+      tags:
+      - Articles
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+  "/v1/articles/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    patch:
+      summary: update article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    put:
+      summary: update article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    delete:
+      summary: delete article
+      tags:
+      - Articles
+      responses:
+        '204':
+          description: deleted
+  "/v2/articles":
+    get:
+      summary: list articles
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/article"
+    post:
+      summary: create article
+      tags:
+      - Articles
+      parameters: []
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                body:
+                  type: string
+  "/v2/articles/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    patch:
+      summary: update article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    put:
+      summary: update article
+      tags:
+      - Articles
+      responses:
+        '200':
+          description: successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    "$ref": "#/components/schemas/article"
+    delete:
+      summary: delete article
+      tags:
+      - Articles
+      responses:
+        '204':
+          description: deleted
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: www.example.com
+components:
+  schemas:
+    article:
+      additionalProperties: false
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          additionalProperties: false
+          type: object
+          properties:
+            title:
+              type: string
+            body:
+              type: string
+    user:
+      additionalProperties: false
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+        attributes:
+          additionalProperties: false
+          type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
