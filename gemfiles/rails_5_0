@@ -10,3 +10,11 @@ end
 gemspec path: ".."
 
 gem "rails", "5.0.7.2"
+
+# development dependencies
+gem "pry-byebug"
+gem "rspec"
+gem "rubocop"
+gem "rubocop-performance"
+gem "rubocop-rspec"
+gem "simplecov"
