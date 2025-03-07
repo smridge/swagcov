@@ -1,4 +1,4 @@
-require:
+plugins:
   - rubocop-performance
   - rubocop-rspec
 
@@ -6,7 +6,7 @@ AllCops:
   TargetRubyVersion: 2.5
   NewCops: enable
   Exclude:
-    - '**/db/schema.rb'
+    - '**/db/*'
     - '**/bin/*'
     - vendor/bundle/**/* # https://github.com/rubocop/rubocop/issues/9832#issuecomment-882111229
 
