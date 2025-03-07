@@ -31,7 +31,7 @@ jobs:
           cache-version: 1
           working-directory: spec/sandbox_7_2
       - name: Set up database schema
-        run: bundle exec rails db:schema:load
+        run: bundle exec rails db:migrate
         working-directory: spec/sandbox_7_2
       - name: Run tests
         run: bundle exec rspec spec
