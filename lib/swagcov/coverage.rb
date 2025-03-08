@@ -75,11 +75,20 @@ module Swagcov
       routes.each do |route|
         $stdout.puts(
           format(
-            "%<verb>10s %<path>-90s %<status>s",
+            "%<verb>10s %<path>-#{min_width(:path) + 1}s %<status>s",
             { verb: route[:verb], path: route[:path], status: route[:status].send(status_color) }
           )
         )
       end
+    end
+
+    def min_width key
+      strings =
+        @routes_covered.map { |hash| hash[key] } +
+        @routes_ignored.map { |hash| hash[key] } +
+        @routes_not_covered.map { |hash| hash[key] }
+
+      strings.max_by(&:length).size
     end
 
     def final_output
