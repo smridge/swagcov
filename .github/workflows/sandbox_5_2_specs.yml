@@ -26,6 +26,7 @@ jobs:
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
+          rubygems: "latest"
           bundler: "Gemfile.lock"
           bundler-cache: true
           cache-version: 1
