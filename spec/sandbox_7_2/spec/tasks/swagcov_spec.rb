@@ -56,7 +56,10 @@ describe "rake swagcov", type: :task do
 
   context "with full configuration and partial documentation coverage" do
     before do
-      stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "spec/fixtures/dotfiles/only_and_ignore_config.yml")
+      stub_const(
+        "Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME",
+        Pathname.new("#{Rails.root}/spec/fixtures/dotfiles/only_and_ignore_config.yml")
+      )
     end
 
     it "outputs coverage" do

@@ -2,10 +2,6 @@
 
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
-# rspec config.use_active_record not working as expected
-# https://github.com/rspec/rspec-rails/issues/1876
-Object.send(:remove_const, :ActiveRecord) # rubocop:disable RSpec/RemoveConst
-
 require "rspec/rails"
 
 Dir[Rails.root.join("spec/support/**/*.rb")].sort.each { |f| require f }

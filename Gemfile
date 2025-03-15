@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 gemspec
 
+# development dependencies
 gem "pry-byebug"
 gem "rspec"
 gem "rubocop"

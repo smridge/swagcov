@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/articles" do
+RSpec.describe "/articles", type: :request do
   path "/articles" do
     get("list articles") do
       tags "Articles"
