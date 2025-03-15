@@ -120,7 +120,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.17.2-x86_64-linux)
       racc (~> 1.4)
-    pg (1.5.9)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -214,7 +213,6 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   listen (~> 3.3)
-  pg (~> 1.1)
   pry
   pry-byebug
   puma (~> 5.0)

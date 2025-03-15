@@ -9,12 +9,9 @@ end
 
 gemspec path: ".."
 
-gem "rails", "8.0.1"
+gem "rails", "8.0.2"
 
 # development dependencies
 gem "pry-byebug"
 gem "rspec"
-gem "rubocop"
-gem "rubocop-performance"
-gem "rubocop-rspec"
 gem "simplecov"

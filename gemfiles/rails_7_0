@@ -14,7 +14,4 @@ gem "rails", "7.0.4.3"
 # development dependencies
 gem "pry-byebug"
 gem "rspec"
-gem "rubocop"
-gem "rubocop-performance"
-gem "rubocop-rspec"
 gem "simplecov"
