@@ -12,7 +12,6 @@ gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
-  gem "database_cleaner"
   gem "pry"
   gem "pry-byebug"
   gem "rspec-rails"
