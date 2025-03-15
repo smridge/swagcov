@@ -2,7 +2,7 @@
 
 require "swagger_helper"
 
-RSpec.describe "/users" do
+RSpec.describe "/users", type: :request do
   path "/users" do
     get("list users") do
       tags "Users"
