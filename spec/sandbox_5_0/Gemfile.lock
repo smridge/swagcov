@@ -96,7 +96,8 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    pg (1.5.9)
+    nokogiri (1.12.5-x86_64-linux)
+      racc (~> 1.4)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -183,7 +184,6 @@ PLATFORMS
 DEPENDENCIES
   listen (~> 3.0.5)
   multi_json
-  pg (>= 0.18, < 2.0)
   pry
   pry-byebug
   puma (~> 3.0)
@@ -197,4 +197,4 @@ RUBY VERSION
    ruby 2.5.9p229
 
 BUNDLED WITH
-   2.3.20
+   2.3.27
