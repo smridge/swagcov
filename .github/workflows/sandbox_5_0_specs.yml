@@ -7,33 +7,17 @@ jobs:
   test:
     name: Rails 5.0 / Ruby 2.5
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:11-alpine
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
-          rubygems: 3.2.3 # resolve warning
-          bundler: "Gemfile.lock"
+          rubygems: 'latest'
+          bundler: 'Gemfile.lock'
           bundler-cache: true
           cache-version: 1
           working-directory: spec/sandbox_5_0
-      - name: Set up database schema
-        run: bundle exec rails db:schema:load
-        working-directory: spec/sandbox_5_0
       - name: Run tests
         run: bundle exec rspec spec
         working-directory: spec/sandbox_5_0
