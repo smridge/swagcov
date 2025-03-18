@@ -15,6 +15,7 @@ jobs:
           - spec/sandbox_5_2
           - spec/sandbox_6_0
           - spec/sandbox_6_1
+          - spec/sandbox_7_1
           - spec/sandbox_7_2
           - spec/sandbox_8_0
     steps:
