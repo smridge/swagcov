@@ -13,11 +13,6 @@ name: "CodeQL Advanced"
 
 on:
   push:
-    branches: [ "main" ]
-    paths-ignore:
-      - '**/spec/**/*'
-  pull_request:
-    branches: [ "main" ]
     paths-ignore:
       - '**/spec/**/*'
   schedule:
