@@ -1,7 +1,7 @@
 PATH
   remote: ../..
   specs:
-    swagcov (0.4.0)
+    swagcov (0.4.1)
       rails (>= 5)
 
 GEM
@@ -238,7 +238,7 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.18)
+    zeitwerk (2.7.2)
 
 PLATFORMS
   aarch64-linux
