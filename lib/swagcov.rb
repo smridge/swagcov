@@ -7,10 +7,10 @@ if defined?(Rails)
   require "swagcov/dotfile"
   require "swagcov/coverage"
   require "swagcov/openapi_files"
+  require "swagcov/install"
 end
 
 require "swagcov/core_ext/string"
-require "swagcov/install"
 
 module Swagcov
 end

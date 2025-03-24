@@ -21,7 +21,7 @@ Execute:
 bundle
 ```
 
-Install `.swagcov.yml` config file from the root of your Rails Application:
+Create a `.swagcov.yml` in the root of your Rails application. Alternatively, run:
 ```shell
 bundle exec rake swagcov:install
 ```

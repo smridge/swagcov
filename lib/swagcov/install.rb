@@ -2,25 +2,38 @@
 
 module Swagcov
   class Install
+    attr_reader :dotfile
+
+    def initialize pathname: ::Rails.root.join(::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME).to_s
+      @dotfile = pathname
+    end
+
     def generate_dotfile
-      dotfile = Rails.root.join(".swagcov.yml").to_s
+      if ::File.exist?(dotfile)
+        $stdout.puts "#{dotfile} already exists"
+        return
+      end
 
-      return if File.exist?(dotfile)
+      ::File.write(
+        dotfile,
+        <<~YAML
+          ## Required field:
+          # List your OpenAPI documentation files
+          docs:
+            paths:
+              - swagger.yaml
 
-      File.write(
-        Rails.root.join(dotfile).to_s,
-        {
-          "docs" => {
-            "paths" => ["TODO: *required* list your openapi swagger file(s) here"]
-          },
-          "routes" => {
-            "paths" => {
-              "only" => ["TODO: *optional* For example if you only want to track `^v1` endpoints"],
-              "ignore" => ["TODO: *optional* For endpoints you may not want to track", "v1/foo/already_merged"]
-            }
-          }
-        }.to_yaml
+          ## Optional fields:
+          # routes:
+          #   paths:
+          #     only:
+          #       - ^/v2 # only track v2 endpoints
+          #     ignore:
+          #       - /v2/users # do not track certain endpoints
+        YAML
       )
+
+      $stdout.puts "created #{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}"
     end
   end
 end
