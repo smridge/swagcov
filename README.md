@@ -103,6 +103,8 @@ bundle exec rake swagcov
         - ^/v2
       ignore:
         - /v2/users
+        - /v2/users/:id:
+          - GET
   ```
   <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/ignore-and-only-endpoints.png">
 

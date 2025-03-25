@@ -45,22 +45,35 @@ RSpec.describe Swagcov::Dotfile do
   describe "#ignore_path?" do
     context "when specified as regexp" do
       it "returns true if path matches regexp" do
-        expect(dotfile.ignore_path?("/v1/think/about/pbt")).to be(true)
+        expect(dotfile.ignore_path?("/v1/think/about/pbt", verb: "not-specified")).to be(true)
       end
 
       it "returns false if path doesn't match ignored" do
-        expect(dotfile.ignore_path?("/v2/some")).to be(false)
+        expect(dotfile.ignore_path?("/v2/some", verb: "unspecified")).to be(false)
       end
     end
 
     context "when specified as string" do
       it "returns true if path equals ignored string" do
-        expect(dotfile.ignore_path?("/ignore/specific/path")).to be(true)
+        expect(dotfile.ignore_path?("/ignore/specific/path", verb: "not-configured")).to be(true)
       end
 
       it "returns false if path doesn't equal ignored string" do
-        expect(dotfile.ignore_path?("/v2/ignore/specific/path/longer")).to be(false)
+        expect(dotfile.ignore_path?("/v2/ignore/specific/path/longer", verb: "anything")).to be(false)
       end
+    end
+
+    context "with verbs specified" do
+      let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/ignored_verbs.yml") }
+
+      it { expect(dotfile.ignore_path?("/articles/:id", verb: "PUT")).to be(true) }
+      it { expect(dotfile.ignore_path?("/articles/:id", verb: "delete")).to be(true) }
+      it { expect(dotfile.ignore_path?("/articles/:id", verb: "PATCH")).to be(false) }
+      it { expect(dotfile.ignore_path?("/v2/articles", verb: "POST")).to be(true) }
+      it { expect(dotfile.ignore_path?("/users/:id", verb: "PUT")).to be(true) }
+      it { expect(dotfile.ignore_path?("/users/:id", verb: "PATCH")).to be(false) }
+      it { expect(dotfile.ignore_path?("/v1/users/:id", verb: "PATCH")).to be(false) }
+      it { expect(dotfile.ignore_path?("/v1/foo/:bar", verb: "PATCH")).to be(false) }
     end
   end
 

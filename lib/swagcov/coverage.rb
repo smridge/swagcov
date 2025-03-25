@@ -38,7 +38,7 @@ module Swagcov
 
         next if third_party_route?(route, path)
 
-        if dotfile.ignore_path?(path)
+        if dotfile.ignore_path?(path, verb: route.verb)
           @ignored += 1
           @routes_ignored << { verb: route.verb, path: path, status: "ignored" }
           next
