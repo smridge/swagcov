@@ -112,7 +112,7 @@ bundle exec rake swagcov
 - Add autogeneration of ignore paths
 
 ## Contributing
-- See [CONTRIBUTING.md](CONTRIBUTING.md) for detail
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detail
 
 ### Credit
 To [@lonelyelk](https://github.com/lonelyelk) for initial development!

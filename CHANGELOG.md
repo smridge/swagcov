@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 0.5.0 (2025-03-26)
 ### Enhancement
   - Add rake task for configuration installation ([#59](https://github.com/smridge/swagcov/pull/59))
     ```shell
