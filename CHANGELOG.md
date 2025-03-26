@@ -1,5 +1,19 @@
 # CHANGELOG
 ## main (unreleased)
+### Enhancement
+  - Add rake task for configuration installation ([#59](https://github.com/smridge/swagcov/pull/59))
+    ```shell
+    bundle exec rake swagcov:install
+    ```
+  - Extend `ignore` routes configuration to exclude only specific actions ([#60](https://github.com/smridge/swagcov/pull/60))
+    ```yml
+    routes:
+      paths:
+        ignore:
+          - /v2/users # existing configuration that ignores all associated actions (verbs)
+          - /v2/users/:id: # new option to extend to specific actions
+            - GET
+    ```
 
 ## 0.4.1 (2025-03-18)
 ### Fix
