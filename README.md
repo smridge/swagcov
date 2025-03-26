@@ -108,54 +108,16 @@ bundle exec rake swagcov
   ```
   <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/ignore-and-only-endpoints.png">
 
-## Development
-```shell
-git clone git@github.com:smridge/swagcov.git
-```
-
-Add this line to your application's Gemfile:
-```ruby
- # Use the relative path from your application, to the swagcov folder
-gem "swagcov", path: "../swagcov"
-```
-
-```shell
-bundle
-```
-
-Run Tests
-```
-bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
-```
-
-### Test via Sandbox Application
-- Go to any sandbox application within the `spec` directory
-  - For example, `cd spec/sandbox_5_2/`
-- Install the ruby version specified in `.ruby-version` file
-- Install gems: `bundle install`
-- Run tests: `bundle exec rspec spec`
-- Run `bundle exec rake swagcov`
-  - This will run against any changes made to your branch.
-
-## Publish (internal)
-> Note: Publishing a new version of this gem is only meant for maintainers.
-- Ensure you have access to publish on [rubygems](https://rubygems.org/gems/swagcov).
-- Update [CHANGELOG](https://github.com/smridge/swagcov/blob/main/CHANGELOG.md).
-- Update [`VERSION`](https://github.com/smridge/swagcov/blob/main/lib/swagcov/version.rb).
-- Run `bundle update` for each sandbox application to reflect new swagcov version in each `Gemfile.lock`
-- Open a Pull Request to ensure all specs pass, then merge to `main`.
-- Checkout the latest `main` on your machine.
-- Run: `rake release`
-  - This command builds the gem, creates a tag and publishes to rubygems, see [bundler docs](https://bundler.io/guides/creating_gem.html#releasing-the-gem).
-
 ## TODO
 - Add autogeneration of ignore paths
-- Add `CONTRIBUTING.md`
 
-## Credit
+## Contributing
+- See [CONTRIBUTING.md](CONTRIBUTING.md) for detail
+
+### Credit
 To [@lonelyelk](https://github.com/lonelyelk) for initial development!
 
-## Contributors
+### Contributors
 <a href="https://github.com/smridge/swagcov/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=smridge/swagcov" />
 </a>
