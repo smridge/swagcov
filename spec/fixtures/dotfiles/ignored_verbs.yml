@@ -1,0 +1,14 @@
+docs:
+  paths:
+    - spec/fixtures/openapi/ignored_verbs.yml
+
+routes:
+  paths:
+    ignore:
+      - /articles/:id:
+        - PUT
+        - delete
+      - /articles
+      - ^/v2
+      - /users/:id:
+        - PUT

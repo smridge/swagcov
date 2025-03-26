@@ -8,3 +8,5 @@ routes:
       - ^/v1
     ignore:
       - ^/v2/articles/:id
+      - /v1/articles:
+        - GET

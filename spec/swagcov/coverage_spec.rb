@@ -193,6 +193,39 @@ RSpec.describe Swagcov::Coverage do
       it { expect(result).not_to eq(0) }
     end
 
+    context "with ignored routes configured with actions (verbs)" do
+      before { result }
+
+      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/ignored_verbs.yml") }
+
+      it { expect(init.total).to eq(2) }
+      it { expect(init.covered).to eq(2) }
+      it { expect(init.ignored).to eq(4) }
+      it { expect(init.routes_not_covered).to eq([]) }
+
+      it "has array of ignored routes" do
+        expect(init.routes_ignored).to eq(
+          [
+            { verb: "GET", path: "/articles", status: "ignored" },
+            { verb: "POST", path: "/articles", status: "ignored" },
+            { verb: "PUT", path: "/articles/:id", status: "ignored" },
+            { verb: "DELETE", path: "/articles/:id", status: "ignored" }
+          ]
+        )
+      end
+
+      it "has array of covered routes" do
+        expect(init.routes_covered).to eq(
+          [
+            { verb: "GET", path: "/articles/:id", status: "200" },
+            { verb: "PATCH", path: "/articles/:id", status: "200" }
+          ]
+        )
+      end
+
+      it { expect(result).to eq(0) }
+    end
+
     context "with full documentation coverage and only routes configured" do
       before { result }
 

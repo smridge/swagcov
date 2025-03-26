@@ -13,8 +13,14 @@ module Swagcov
       raise BadConfigurationError, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
     end
 
-    def ignore_path? path
-      ignored_regex&.match?(path)
+    def ignore_path? path, verb:
+      ignore_all_path_actions = ignored_regex&.match?(path)
+
+      ignored_verbs = ignored_config&.find { |config| config[path] }
+
+      return ignore_all_path_actions unless ignored_verbs.is_a?(::Hash)
+
+      ignored_verbs.values.flatten.map(&:downcase).any?(verb.downcase)
     end
 
     def only_path_mismatch? path
@@ -38,7 +44,11 @@ module Swagcov
     end
 
     def ignored_regex
-      @ignored_regex ||= path_config_regex(dotfile.dig("routes", "paths", "ignore"))
+      @ignored_regex ||= path_config_regex(ignored_config)
+    end
+
+    def ignored_config
+      @ignored_config ||= dotfile.dig("routes", "paths", "ignore")
     end
 
     def only_regex
@@ -48,7 +58,14 @@ module Swagcov
     def path_config_regex path_config
       return unless path_config
 
-      config = path_config.map { |path| path.first == "^" ? path : "^#{path}$" }
+      config =
+        path_config.map do |path|
+          if path.is_a?(::Hash)
+            "^#{path.keys.first}$"
+          else
+            path.first == "^" ? path : "^#{path}$"
+          end
+        end
 
       /#{config.join('|')}/
     end

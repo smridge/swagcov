@@ -4,7 +4,7 @@ require "simplecov"
 SimpleCov.start do
   add_filter "/spec/"
   enable_coverage :branch
-  SimpleCov.minimum_coverage line: 98, branch: 95
+  SimpleCov.minimum_coverage line: 98, branch: 96
   SimpleCov.refuse_coverage_drop :line, :branch
 end
 

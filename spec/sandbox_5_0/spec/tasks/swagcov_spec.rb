@@ -65,8 +65,8 @@ describe "rake swagcov", type: :task do
       rescue SystemExit => e # ignore to test output
         e.inspect
       end.to output(<<~MESSAGE).to_stdout
-               GET /v1/articles      #{200.to_s.green}
               POST /v1/articles      #{201.to_s.green}
+               GET /v1/articles      #{'ignored'.yellow}
                GET /v2/articles/:id  #{'ignored'.yellow}
              PATCH /v2/articles/:id  #{'ignored'.yellow}
                PUT /v2/articles/:id  #{'ignored'.yellow}
@@ -76,10 +76,10 @@ describe "rake swagcov", type: :task do
                PUT /v1/articles/:id  #{'none'.red}
             DELETE /v1/articles/:id  #{'none'.red}
 
-        OpenAPI documentation coverage 33.33% (2/6)
-        #{4.to_s.yellow} endpoints ignored
-        #{6.to_s.blue} endpoints checked
-        #{2.to_s.green} endpoints covered
+        OpenAPI documentation coverage 20.00% (1/5)
+        #{5.to_s.yellow} endpoints ignored
+        #{5.to_s.blue} endpoints checked
+        #{1.to_s.green} endpoints covered
         #{4.to_s.red} endpoints missing documentation
       MESSAGE
     end
