@@ -46,18 +46,7 @@ jobs:
             gemfile: gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
           - ruby-version: '3.1'
             gemfile: gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_5_0
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_5_1
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_5_2
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_6_0
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_6_1
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_7_0
+
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
