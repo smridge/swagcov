@@ -4,11 +4,30 @@
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
 [![GitHub License](https://img.shields.io/github/license/smridge/swagcov.svg)](https://github.com/smridge/swagcov/blob/main/LICENSE)
 
+![System Tests Build](https://github.com/smridge/swagcov/actions/workflows/system_tests.yml/badge.svg)
+![Unit Tests Build](https://github.com/smridge/swagcov/actions/workflows/unit_tests.yml/badge.svg)
+![Linting Build](https://github.com/smridge/swagcov/actions/workflows/linting.yml/badge.svg)
+![CodeQL Build](https://github.com/smridge/swagcov/actions/workflows/codeql-analysis.yml/badge.svg)
+
 See OpenAPI documentation coverage report for Rails Routes.
 
 ## Usages
 - See overview of different endpoints covered, missing and what you choose to ignore.
 - Add pass/fail to your build pipeline when missing Documentation Coverage.
+
+## Ruby and Rails Version Support
+| `ruby -v` | `rails 5.0` | `rails 5.1` | `rails 5.2` | `rails 6.0` | `rails 6.1` | `rails 7.0` | `rails 7.1` | `rails 7.2` | `rails 8.0` |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| `2.5` | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `2.6` | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| `2.7` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| `3.0` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| `3.1` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| `3.2` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `3.3` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| `3.4` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+See [unit_tests.yml](/.github/workflows/unit_tests.yml) and [system_tests.yml](/.github/workflows/system_tests.yml) for detail
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -107,9 +126,6 @@ bundle exec rake swagcov
           - GET
   ```
   <img src="https://raw.githubusercontent.com/smridge/swagcov/main/images/ignore-and-only-endpoints.png">
-
-## TODO
-- Add autogeneration of ignore paths
 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detail
