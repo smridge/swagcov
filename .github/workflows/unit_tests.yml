@@ -56,8 +56,7 @@ jobs:
             gemfile: gemfiles/rails_6_0
           - ruby-version: '3.4'
             gemfile: gemfiles/rails_6_1
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_7_0
+
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
