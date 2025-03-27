@@ -52,10 +52,6 @@ jobs:
             gemfile: gemfiles/rails_5_1
           - ruby-version: '3.4'
             gemfile: gemfiles/rails_5_2
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_6_0
-          - ruby-version: '3.4'
-            gemfile: gemfiles/rails_6_1
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
