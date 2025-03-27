@@ -11,6 +11,10 @@ gemspec path: ".."
 
 gem "rails", "5.1.7"
 
+gem "bigdecimal" # Fix for ruby 3.4 (cannot load such file -- bigdecimal)
+gem "mutex_m" # Fix for ruby 3.4 (cannot load such file -- mutex_m)
+gem "base64" # Fix for ruby 3.4 (cannot load such file -- base64)
+
 # development dependencies
 gem "pry-byebug"
 gem "rspec"
