@@ -2,28 +2,31 @@
 
 module Swagcov
   class Coverage
-    attr_reader :total, :covered, :ignored, :routes_not_covered, :routes_covered, :routes_ignored
+    attr_reader :data
 
-    def initialize dotfile: Swagcov::Dotfile.new, routes: ::Rails.application.routes.routes
-      @total = 0
-      @covered = 0
-      @ignored = 0
-      @routes_not_covered = []
-      @routes_covered = []
-      @routes_ignored = []
+    def initialize dotfile: ::Swagcov::Dotfile.new, routes: ::Rails.application.routes.routes
       @dotfile = dotfile
       @routes = routes
+      @data = {
+        covered: [],
+        ignored: [],
+        uncovered: [],
+        total_count: 0,
+        covered_count: 0,
+        ignored_count: 0,
+        uncovered_count: 0
+      }
     end
 
     def report
       collect_coverage
-      routes_output(@routes_covered, "green")
-      routes_output(@routes_ignored, "yellow")
-      routes_output(@routes_not_covered, "red")
+      routes_output(@data[:covered], "green")
+      routes_output(@data[:ignored], "yellow")
+      routes_output(@data[:uncovered], "red")
 
       final_output
 
-      @total - @covered
+      @data[:uncovered_count]
     end
 
     private
@@ -31,7 +34,7 @@ module Swagcov
     attr_reader :dotfile
 
     def collect_coverage
-      openapi_files = ::Swagcov::OpenapiFiles.new(filepaths: dotfile.doc_paths)
+      openapi_files = ::Swagcov::OpenapiFiles.new(filepaths: dotfile.docs_config)
 
       @routes.each do |route|
         path = route.path.spec.to_s.chomp("(.:format)")
@@ -39,20 +42,18 @@ module Swagcov
         next if third_party_route?(route, path)
 
         if dotfile.ignore_path?(path, verb: route.verb)
-          @ignored += 1
-          @routes_ignored << { verb: route.verb, path: path, status: "ignored" }
+          update_data(:ignored, route.verb, path, "ignored")
           next
         end
 
         next if dotfile.only_path_mismatch?(path)
 
-        @total += 1
+        @data[:total_count] += 1
 
         if (response_keys = openapi_files.find_response_keys(path: path, route_verb: route.verb))
-          @covered += 1
-          @routes_covered << { verb: route.verb, path: path, status: response_keys.join("  ") }
+          update_data(:covered, route.verb, path, response_keys.join("  "))
         else
-          @routes_not_covered << { verb: route.verb, path: path, status: "none" }
+          update_data(:uncovered, route.verb, path, "none")
         end
       end
     end
@@ -71,6 +72,11 @@ module Swagcov
         path.include?("/active_storage/") || path.include?("/action_mailbox/")
     end
 
+    def update_data key, verb, path, status
+      @data[:"#{key}_count"] += 1
+      @data[key] << { verb: verb, path: path, status: status }
+    end
+
     def routes_output routes, status_color
       routes.each do |route|
         $stdout.puts(
@@ -84,9 +90,9 @@ module Swagcov
 
     def min_width key
       strings =
-        @routes_covered.map { |hash| hash[key] } +
-        @routes_ignored.map { |hash| hash[key] } +
-        @routes_not_covered.map { |hash| hash[key] }
+        @data[:covered].map { |hash| hash[key] } +
+        @data[:ignored].map { |hash| hash[key] } +
+        @data[:uncovered].map { |hash| hash[key] }
 
       strings.max_by(&:length).size
     end
@@ -96,35 +102,39 @@ module Swagcov
       $stdout.puts(
         format(
           "OpenAPI documentation coverage %<percentage>.2f%% (%<covered>d/%<total>d)",
-          { percentage: 100.0 * @covered / @total, covered: @covered, total: @total }
+          {
+            percentage: 100.0 * @data[:covered_count] / @data[:total_count],
+            covered: @data[:covered_count],
+            total: @data[:total_count]
+          }
         )
       )
 
       $stdout.puts(
         format(
           "%<total>s endpoints ignored",
-          { total: @ignored.to_s.yellow }
+          { total: @data[:ignored_count].to_s.yellow }
         )
       )
 
       $stdout.puts(
         format(
           "%<total>s endpoints checked",
-          { total: @total.to_s.blue }
+          { total: @data[:total_count].to_s.blue }
         )
       )
 
       $stdout.puts(
         format(
           "%<covered>s endpoints covered",
-          { covered: @covered.to_s.green }
+          { covered: @data[:covered_count].to_s.green }
         )
       )
 
       $stdout.puts(
         format(
           "%<missing>s endpoints missing documentation",
-          { missing: (@total - @covered).to_s.red }
+          { missing: @data[:uncovered_count].to_s.red }
         )
       )
     end

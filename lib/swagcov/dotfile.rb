@@ -10,13 +10,18 @@ module Swagcov
     def initialize pathname: ::Rails.root.join(DEFAULT_CONFIG_FILE_NAME)
       @dotfile = load_yaml(pathname)
 
-      raise BadConfigurationError, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
+      raise ::Swagcov::BadConfigurationError, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
+
+      @ignored_regex = path_config_regex(ignored_config)
+      @only_regex = path_config_regex(only_config)
     end
 
     def ignore_path? path, verb:
-      ignore_all_path_actions = ignored_regex&.match?(path)
+      return false unless @ignored_config
 
-      ignored_verbs = ignored_config&.find { |config| config[path] }
+      ignore_all_path_actions = @ignored_regex.match?(path)
+
+      ignored_verbs = @ignored_config.find { |config| config[path] }
 
       return ignore_all_path_actions unless ignored_verbs.is_a?(::Hash)
 
@@ -24,11 +29,19 @@ module Swagcov
     end
 
     def only_path_mismatch? path
-      only_regex && !only_regex.match?(path)
+      @only_config && !@only_regex.match?(path)
     end
 
-    def doc_paths
-      dotfile.dig("docs", "paths")
+    def docs_config
+      @docs_config ||= dotfile.dig("docs", "paths")
+    end
+
+    def ignored_config
+      @ignored_config ||= dotfile.dig("routes", "paths", "ignore")
+    end
+
+    def only_config
+      @only_config ||= dotfile.dig("routes", "paths", "only")
     end
 
     private
@@ -36,23 +49,11 @@ module Swagcov
     attr_reader :dotfile
 
     def load_yaml pathname
-      raise BadConfigurationError, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})" unless pathname.exist?
+      raise ::Swagcov::BadConfigurationError, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})" unless pathname.exist?
 
       YAML.load_file(pathname)
     rescue Psych::SyntaxError
-      raise BadConfigurationError, "Malinformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
-    end
-
-    def ignored_regex
-      @ignored_regex ||= path_config_regex(ignored_config)
-    end
-
-    def ignored_config
-      @ignored_config ||= dotfile.dig("routes", "paths", "ignore")
-    end
-
-    def only_regex
-      @only_regex ||= path_config_regex(dotfile.dig("routes", "paths", "only"))
+      raise ::Swagcov::BadConfigurationError, "Malinformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
     end
 
     def path_config_regex path_config
@@ -71,7 +72,7 @@ module Swagcov
     end
 
     def valid?
-      dotfile && doc_paths
+      dotfile && docs_config
     end
   end
 end

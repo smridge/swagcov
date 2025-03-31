@@ -99,9 +99,21 @@ RSpec.describe Swagcov::Dotfile do
     end
   end
 
-  describe "#doc_paths" do
-    subject(:doc_paths) { dotfile.doc_paths }
+  describe "#docs_config" do
+    subject(:docs_config) { dotfile.docs_config }
 
     it { is_expected.to contain_exactly("a/path", "b/path") }
+  end
+
+  describe "#ignored_config" do
+    subject(:docs_config) { dotfile.ignored_config }
+
+    it { is_expected.to contain_exactly("^/v1", "/v3/specific", "/ignore/specific/path") }
+  end
+
+  describe "#only_config" do
+    subject(:docs_config) { dotfile.only_config }
+
+    it { is_expected.to contain_exactly("^/v2", "^/v3", "/only/specific/path") }
   end
 end

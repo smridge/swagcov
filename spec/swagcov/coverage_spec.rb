@@ -39,12 +39,13 @@ RSpec.describe Swagcov::Coverage do
         ]
       end
 
-      it { expect(init.total).to eq(0) }
-      it { expect(init.covered).to eq(0) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_not_covered).to eq([]) }
-      it { expect(init.routes_ignored).to eq([]) }
-      it { expect(init.routes_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(0) }
+      it { expect(init.data[:covered_count]).to eq(0) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(0) }
+      it { expect(init.data[:uncovered]).to eq([]) }
+      it { expect(init.data[:ignored]).to eq([]) }
+      it { expect(init.data[:covered]).to eq([]) }
       it { expect(result).to eq(0) }
     end
 
@@ -58,12 +59,13 @@ RSpec.describe Swagcov::Coverage do
         ]
       end
 
-      it { expect(init.total).to eq(0) }
-      it { expect(init.covered).to eq(0) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_not_covered).to eq([]) }
-      it { expect(init.routes_ignored).to eq([]) }
-      it { expect(init.routes_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(0) }
+      it { expect(init.data[:covered_count]).to eq(0) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(0) }
+      it { expect(init.data[:uncovered]).to eq([]) }
+      it { expect(init.data[:ignored]).to eq([]) }
+      it { expect(init.data[:covered]).to eq([]) }
       it { expect(result).to eq(0) }
     end
 
@@ -72,14 +74,15 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
 
-      it { expect(init.total).to eq(6) }
-      it { expect(init.covered).to eq(6) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_not_covered).to eq([]) }
-      it { expect(init.routes_ignored).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(6) }
+      it { expect(init.data[:covered_count]).to eq(6) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(0) }
+      it { expect(init.data[:uncovered]).to eq([]) }
+      it { expect(init.data[:ignored]).to eq([]) }
 
       it "has array of covered routes" do
-        expect(init.routes_covered).to eq(
+        expect(init.data[:covered]).to eq(
           [
             { verb: "GET", path: "/articles", status: "200" },
             { verb: "POST", path: "/articles", status: "201" },
@@ -99,13 +102,14 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths.yml") }
 
-      it { expect(init.total).to eq(6) }
-      it { expect(init.covered).to eq(2) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_ignored).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(6) }
+      it { expect(init.data[:covered_count]).to eq(2) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(4) }
+      it { expect(init.data[:ignored]).to eq([]) }
 
       it "has array of uncovered routes" do
-        expect(init.routes_not_covered).to eq(
+        expect(init.data[:uncovered]).to eq(
           [
             { verb: "GET", path: "/articles/:id", status: "none" },
             { verb: "PATCH", path: "/articles/:id", status: "none" },
@@ -116,7 +120,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it "has array of covered routes" do
-        expect(init.routes_covered).to eq(
+        expect(init.data[:covered]).to eq(
           [
             { verb: "GET", path: "/articles", status: "200" },
             { verb: "POST", path: "/articles", status: "201" }
@@ -132,13 +136,14 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_ignore.yml") }
 
-      it { expect(init.total).to eq(2) }
-      it { expect(init.covered).to eq(2) }
-      it { expect(init.ignored).to eq(4) }
-      it { expect(init.routes_not_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(2) }
+      it { expect(init.data[:covered_count]).to eq(2) }
+      it { expect(init.data[:ignored_count]).to eq(4) }
+      it { expect(init.data[:uncovered_count]).to eq(0) }
+      it { expect(init.data[:uncovered]).to eq([]) }
 
       it "has array of ignored routes" do
-        expect(init.routes_ignored).to eq(
+        expect(init.data[:ignored]).to eq(
           [
             { verb: "GET", path: "/articles/:id", status: "ignored" },
             { verb: "PATCH", path: "/articles/:id", status: "ignored" },
@@ -149,7 +154,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it "has array of covered routes" do
-        expect(init.routes_covered).to eq(
+        expect(init.data[:covered]).to eq(
           [
             { verb: "GET", path: "/articles", status: "200" },
             { verb: "POST", path: "/articles", status: "201" }
@@ -165,13 +170,14 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_ignore.yml") }
 
-      it { expect(init.total).to eq(4) }
-      it { expect(init.covered).to eq(0) }
-      it { expect(init.ignored).to eq(2) }
-      it { expect(init.routes_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(4) }
+      it { expect(init.data[:covered_count]).to eq(0) }
+      it { expect(init.data[:ignored_count]).to eq(2) }
+      it { expect(init.data[:uncovered_count]).to eq(4) }
+      it { expect(init.data[:covered]).to eq([]) }
 
       it "has array of uncovered routes" do
-        expect(init.routes_not_covered).to eq(
+        expect(init.data[:uncovered]).to eq(
           [
             { verb: "GET", path: "/articles/:id", status: "none" },
             { verb: "PATCH", path: "/articles/:id", status: "none" },
@@ -182,7 +188,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it "has array of ignored routes" do
-        expect(init.routes_ignored).to eq(
+        expect(init.data[:ignored]).to eq(
           [
             { verb: "GET", path: "/articles", status: "ignored" },
             { verb: "POST", path: "/articles", status: "ignored" }
@@ -198,13 +204,14 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/ignored_verbs.yml") }
 
-      it { expect(init.total).to eq(2) }
-      it { expect(init.covered).to eq(2) }
-      it { expect(init.ignored).to eq(4) }
-      it { expect(init.routes_not_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(2) }
+      it { expect(init.data[:covered_count]).to eq(2) }
+      it { expect(init.data[:ignored_count]).to eq(4) }
+      it { expect(init.data[:uncovered_count]).to eq(0) }
+      it { expect(init.data[:uncovered]).to eq([]) }
 
       it "has array of ignored routes" do
-        expect(init.routes_ignored).to eq(
+        expect(init.data[:ignored]).to eq(
           [
             { verb: "GET", path: "/articles", status: "ignored" },
             { verb: "POST", path: "/articles", status: "ignored" },
@@ -215,7 +222,7 @@ RSpec.describe Swagcov::Coverage do
       end
 
       it "has array of covered routes" do
-        expect(init.routes_covered).to eq(
+        expect(init.data[:covered]).to eq(
           [
             { verb: "GET", path: "/articles/:id", status: "200" },
             { verb: "PATCH", path: "/articles/:id", status: "200" }
@@ -231,14 +238,15 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_only.yml") }
 
-      it { expect(init.total).to eq(4) }
-      it { expect(init.covered).to eq(4) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_not_covered).to eq([]) }
-      it { expect(init.routes_ignored).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(4) }
+      it { expect(init.data[:covered_count]).to eq(4) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(0) }
+      it { expect(init.data[:uncovered]).to eq([]) }
+      it { expect(init.data[:ignored]).to eq([]) }
 
       it "has array of covered routes" do
-        expect(init.routes_covered).to eq(
+        expect(init.data[:covered]).to eq(
           [
             { verb: "GET", path: "/articles/:id", status: "200" },
             { verb: "PATCH", path: "/articles/:id", status: "200" },
@@ -256,14 +264,15 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_only.yml") }
 
-      it { expect(init.total).to eq(4) }
-      it { expect(init.covered).to eq(0) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_ignored).to eq([]) }
-      it { expect(init.routes_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(4) }
+      it { expect(init.data[:covered_count]).to eq(0) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(4) }
+      it { expect(init.data[:ignored]).to eq([]) }
+      it { expect(init.data[:covered]).to eq([]) }
 
       it "has array of uncovered routes" do
-        expect(init.routes_not_covered).to eq(
+        expect(init.data[:uncovered]).to eq(
           [
             { verb: "GET", path: "/articles/:id", status: "none" },
             { verb: "PATCH", path: "/articles/:id", status: "none" },
@@ -292,12 +301,13 @@ RSpec.describe Swagcov::Coverage do
         ]
       end
 
-      it { expect(init.total).to eq(1) }
-      it { expect(init.covered).to eq(0) }
-      it { expect(init.ignored).to eq(0) }
-      it { expect(init.routes_not_covered).to eq([{ verb: "GET", path: "/articles", status: "none" }]) }
-      it { expect(init.routes_ignored).to eq([]) }
-      it { expect(init.routes_covered).to eq([]) }
+      it { expect(init.data[:total_count]).to eq(1) }
+      it { expect(init.data[:covered_count]).to eq(0) }
+      it { expect(init.data[:ignored_count]).to eq(0) }
+      it { expect(init.data[:uncovered_count]).to eq(1) }
+      it { expect(init.data[:uncovered]).to eq([{ verb: "GET", path: "/articles", status: "none" }]) }
+      it { expect(init.data[:ignored]).to eq([]) }
+      it { expect(init.data[:covered]).to eq([]) }
       it { expect(result).not_to eq(0) }
     end
 
