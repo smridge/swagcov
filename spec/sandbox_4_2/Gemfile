@@ -1,0 +1,18 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+ruby "2.5.9"
+
+gem "rails", "4.2.11.3"
+
+# resolve loading error
+gem "multi_json"
+
+group :development, :test do
+  gem "pry-byebug"
+  gem "rspec-rails"
+  gem "rswag-specs", "2.11.0" # Fix FrozenError: can't modify frozen Hash & ignore deprecation outside of project scope
+  gem "simplecov"
+  gem "swagcov", path: "../.."
+end

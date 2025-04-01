@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "action_dispatch/routing/inspector"
+
 RSpec.describe Swagcov::Coverage do
   subject(:init) do
     described_class.new(dotfile: Swagcov::Dotfile.new(pathname: pathname), routes: routes)
@@ -10,16 +12,28 @@ RSpec.describe Swagcov::Coverage do
   let(:article_path) { instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles/:id(.:format)") }
 
   let(:routes) do
-    [
-      instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true),
-      instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil),
-      instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: "GET", internal: nil),
-      instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: "POST", internal: nil),
-      instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "GET", internal: nil),
-      instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "PATCH", internal: nil),
-      instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "PUT", internal: nil),
-      instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "DELETE", internal: nil)
-    ]
+    if Rails::VERSION::STRING > "5"
+      [
+        instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true),
+        instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil),
+        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: "GET", internal: nil),
+        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: "POST", internal: nil),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "GET", internal: nil),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "PATCH", internal: nil),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "PUT", internal: nil),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "DELETE", internal: nil)
+      ]
+    else
+      [
+        instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: ""),
+        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: /^GET$/),
+        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: /^POST$/),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^GET$/),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^PATCH$/),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^PUT$/),
+        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^DELETE$/)
+      ]
+    end
   end
 
   describe "#report" do
@@ -27,16 +41,32 @@ RSpec.describe Swagcov::Coverage do
 
     let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
 
-    # suppress output in specs
-    before { allow($stdout).to receive(:puts) }
+    # before { allow($stdout).to receive(:puts) } # suppress output in specs
+    before do
+      allow($stdout).to receive(:puts)
+
+      if Rails::VERSION::STRING < "5"
+        dbl = instance_double(ActionDispatch::Routing::RouteWrapper, internal?: nil)
+        routes.each { |_route| allow(ActionDispatch::Routing::RouteWrapper).to receive(:new).and_return(dbl) }
+      end
+    end
 
     context "when internal route only" do
-      before { result }
+      before do
+        if Rails::VERSION::STRING < "5"
+          dbl = instance_double(ActionDispatch::Routing::RouteWrapper, internal?: 0)
+          routes.each { |_route| allow(ActionDispatch::Routing::RouteWrapper).to receive(:new).and_return(dbl) }
+        end
+
+        result
+      end
 
       let(:routes) do
-        [
-          instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)
-        ]
+        if Rails::VERSION::STRING > "5"
+          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)]
+        else
+          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: /^GET$/)]
+        end
       end
 
       it { expect(init.data[:total_count]).to eq(0) }
@@ -54,9 +84,11 @@ RSpec.describe Swagcov::Coverage do
 
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
       let(:routes) do
-        [
-          instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)
-        ]
+        if Rails::VERSION::STRING > "5"
+          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)]
+        else
+          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "")]
+        end
       end
 
       it { expect(init.data[:total_count]).to eq(0) }
@@ -291,14 +323,24 @@ RSpec.describe Swagcov::Coverage do
       let(:pathname) { Pathname.new("spec/fixtures/dotfiles/v1.yml") }
 
       let(:routes) do
-        [
-          instance_double(
-            ActionDispatch::Journey::Route,
-            path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
-            verb: "GET",
-            internal: nil
-          )
-        ]
+        if Rails::VERSION::STRING > "5"
+          [
+            instance_double(
+              ActionDispatch::Journey::Route,
+              path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
+              verb: "GET",
+              internal: nil
+            )
+          ]
+        else
+          [
+            instance_double(
+              ActionDispatch::Journey::Route,
+              path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
+              verb: /^GET$/
+            )
+          ]
+        end
       end
 
       it { expect(init.data[:total_count]).to eq(1) }

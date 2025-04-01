@@ -10,6 +10,7 @@ jobs:
       matrix:
         ruby-version: ['2.5', '2.6', '2.7', '3.0', '3.1', '3.2', '3.3', '3.4']
         gemfile:
+          - gemfiles/rails_4_2
           - gemfiles/rails_5_0
           - gemfiles/rails_5_1
           - gemfiles/rails_5_2
@@ -46,21 +47,34 @@ jobs:
             gemfile: gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
           - ruby-version: '3.1'
             gemfile: gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
+          - ruby-version: '3.2'
+            gemfile: gemfiles/rails_4_2 # bundler < 2 needed
+          - ruby-version: '3.3'
+            gemfile: gemfiles/rails_4_2 # bundler < 2 needed
+          - ruby-version: '3.4'
+            gemfile: gemfiles/rails_4_2 # bundler < 2 needed
 
     env:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Setup Ruby (rails 4.2)
+        if: ${{ matrix.gemfile == 'gemfiles/rails_4_2' }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler: 1.17.3
+          bundler-cache: true
+          cache-version: 1
       - name: Setup Ruby
+        if: ${{ matrix.gemfile != 'gemfiles/rails_4_2' }}
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby-version }}
           rubygems: 'latest'
           bundler-cache: true
           cache-version: 1
-      - name: Install dependencies
-        run: bundle install
       - name: Run tests
         run: bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
       - name: Coveralls Parallel
@@ -75,6 +89,7 @@ jobs:
     strategy:
       matrix:
         sandbox:
+          - spec/sandbox_4_2
           - spec/sandbox_5_0
           - spec/sandbox_5_1
           - spec/sandbox_5_2
