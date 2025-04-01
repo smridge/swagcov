@@ -107,12 +107,12 @@ GEM
     net-smtp (0.5.1)
       net-protocol
     nio4r (2.7.4)
-    nokogiri (1.15.7)
+    nokogiri (1.17.2)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
-    nokogiri (1.15.7-x86_64-darwin)
+    nokogiri (1.17.2-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.7-x86_64-linux)
+    nokogiri (1.17.2-x86_64-linux)
       racc (~> 1.4)
     pry (0.14.2)
       coderay (~> 1.1)
@@ -120,7 +120,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    public_suffix (5.1.1)
+    public_suffix (6.0.1)
     puma (4.3.12)
       nio4r (~> 2.0)
     racc (1.8.1)
@@ -212,7 +212,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 2.7.8p225
+   ruby 3.0.7p220
 
 BUNDLED WITH
-   2.4.22
+   2.5.23

@@ -244,7 +244,7 @@ GEM
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.18)
+    zeitwerk (2.7.2)
 
 PLATFORMS
   aarch64-linux
@@ -269,7 +269,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.1.7p261
+   ruby 3.2.8p263
 
 BUNDLED WITH
    2.6.6
