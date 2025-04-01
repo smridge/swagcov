@@ -11,15 +11,10 @@ gem "bootsnap", ">= 1.4.4", require: false
 gem "puma", "~> 5.0"
 
 group :development, :test do
-  gem "pry"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rswag-specs"
   gem "swagcov", path: "../.."
-end
-
-group :development do
-  gem "listen", "~> 3.3"
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]

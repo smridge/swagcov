@@ -17,15 +17,10 @@ gem "puma", "~> 3.7"
 gem "multi_json"
 
 group :development, :test do
-  gem "pry"
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rswag-specs", "2.11.0" # Fix FrozenError: can't modify frozen Hash & ignore deprecation outside of project scope
   gem "swagcov", path: "../.."
-end
-
-group :development do
-  gem "listen", ">= 3.0.5", "< 3.2"
 end
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
