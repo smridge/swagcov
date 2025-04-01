@@ -62,17 +62,12 @@ GEM
     date (3.4.1)
     diff-lcs (1.6.1)
     erubi (1.13.1)
-    ffi (1.17.1)
     globalid (1.1.0)
       activesupport (>= 5.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     json-schema (4.3.1)
       addressable (>= 2.8)
-    listen (3.1.5)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-      ruby_dep (~> 1.2)
     loofah (2.24.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -140,9 +135,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (13.2.1)
-    rb-fsevent (0.11.2)
-    rb-inotify (0.11.1)
-      ffi (~> 1.0)
     rspec-core (3.13.3)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.3)
@@ -165,7 +157,6 @@ GEM
       json-schema (>= 2.2, < 6.0)
       railties (>= 5.2, < 8.1)
       rspec-core (>= 2.14)
-    ruby_dep (1.5.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -188,9 +179,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  listen (>= 3.0.5, < 3.2)
   multi_json
-  pry
   pry-byebug
   puma
   rails (= 5.2.8.1)
