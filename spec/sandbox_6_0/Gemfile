@@ -14,6 +14,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rswag-specs"
+  gem "simplecov"
   gem "swagcov", path: "../.."
 end
 

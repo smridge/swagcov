@@ -7,6 +7,7 @@ SimpleCov.start do
   SimpleCov.minimum_coverage line: 98, branch: 96
   SimpleCov.refuse_coverage_drop :line, :branch
 end
+SimpleCov.command_name "unit"
 
 require "logger"
 require "rails"

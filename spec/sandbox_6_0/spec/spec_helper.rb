@@ -1,5 +1,14 @@
 # frozen_string_literal: true
 
+require "simplecov"
+
+SimpleCov.root(File.expand_path("../../..", __dir__))
+SimpleCov.start do
+  add_filter "/spec/"
+  enable_coverage :branch
+end
+SimpleCov.command_name "e2e:sandbox_6_0"
+
 ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rspec/rails"
