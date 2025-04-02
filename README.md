@@ -4,10 +4,10 @@
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
 [![GitHub License](https://img.shields.io/github/license/smridge/swagcov.svg)](https://github.com/smridge/swagcov/blob/main/LICENSE)
 
-![System Tests Build](https://github.com/smridge/swagcov/actions/workflows/system_tests.yml/badge.svg)
-![Unit Tests Build](https://github.com/smridge/swagcov/actions/workflows/unit_tests.yml/badge.svg)
+![Tests Build](https://github.com/smridge/swagcov/actions/workflows/tests.yml/badge.svg)
 ![Linting Build](https://github.com/smridge/swagcov/actions/workflows/linting.yml/badge.svg)
 ![CodeQL Build](https://github.com/smridge/swagcov/actions/workflows/codeql-analysis.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/smridge/swagcov/badge.svg?branch=main)](https://coveralls.io/github/smridge/swagcov?branch=main)
 
 See OpenAPI documentation coverage report for Rails Routes.
 
@@ -27,7 +27,7 @@ See OpenAPI documentation coverage report for Rails Routes.
 | `3.3` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | `3.4` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 
-See [unit_tests.yml](/.github/workflows/unit_tests.yml) and [system_tests.yml](/.github/workflows/system_tests.yml) for detail
+See [tests.yml](/.github/workflows/tests.yml) for detail
 
 ## Installation
 Add this line to your application's Gemfile:
