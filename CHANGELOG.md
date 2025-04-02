@@ -1,6 +1,10 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Enhancement
+- Improve path matching processing for `ignore` and `only` routes ([#65](https://github.com/smridge/swagcov/pull/65))
+
+### Code Coverage
+  - Add test coverage reporting ([#68](https://github.com/smridge/swagcov/pull/68), [#69](https://github.com/smridge/swagcov/pull/69))
 
 ## 0.5.0 (2025-03-26)
 ### Enhancement
@@ -23,7 +27,7 @@
 - Output width for better layout alignment ([#48](https://github.com/smridge/swagcov/pull/48))
 
 ### Code Coverage
-  - Added official support for ruby 3.3 and 3.4 and rails 7.1, 7.2, 8.0. See [unit_tests.yml](/.github/workflows/unit_tests.yml) and [system_tests.yml](/.github/workflows/system_tests.yml) for detail
+  - Added official support for ruby 3.3 and 3.4 and rails 7.1, 7.2, 8.0. See [tests.yml](/.github/workflows/tests.yml) for detail
 
 ## 0.4.0 (2022-08-11)
   - Improve OpenAPI file processing ([#26](https://github.com/smridge/swagcov/pull/26))
