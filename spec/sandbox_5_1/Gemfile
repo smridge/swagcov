@@ -20,6 +20,7 @@ group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"
   gem "rswag-specs", "2.11.0" # Fix FrozenError: can't modify frozen Hash & ignore deprecation outside of project scope
+  gem "simplecov"
   gem "swagcov", path: "../.."
 end
 
