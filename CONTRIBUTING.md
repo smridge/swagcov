@@ -42,3 +42,4 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 
 ## TODO
 - Add autogeneration of ignore paths
+- Skip new/edit GET routes designed as rails default html forms (for non api_only apps)
