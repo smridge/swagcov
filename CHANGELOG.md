@@ -2,6 +2,7 @@
 ## main (unreleased)
 ### Enhancement
 - Improve path matching processing for `ignore` and `only` routes ([#65](https://github.com/smridge/swagcov/pull/65))
+- Add support for Rails 4.2 ([#72](https://github.com/smridge/swagcov/pull/72))
 
 ### Code Coverage
   - Add test coverage reporting ([#68](https://github.com/smridge/swagcov/pull/68), [#69](https://github.com/smridge/swagcov/pull/69))
