@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 0.6.0 (2025-04-09)
 ### Fix
 - Grammatical number for endpoint(s) count output ([#78](https://github.com/smridge/swagcov/pull/78))
 
