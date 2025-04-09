@@ -1,7 +1,9 @@
 # CHANGELOG
 ## main (unreleased)
 ### Refactor
-- `BREAKING CHANGE`: `Swagcov::BadConfigurationError` is now `Swagcov::Errors::BadConfiguration` ([#74](https://github.com/smridge/swagcov/pull/74))
+- `BREAKING CHANGE`s:
+  - `Swagcov::BadConfigurationError` is now `Swagcov::Errors::BadConfiguration` ([#74](https://github.com/smridge/swagcov/pull/74))
+  - `Swagcov::VERSION` is now `Swagcov::Version::STRING` ([#77](https://github.com/smridge/swagcov/pull/77))
 - Improve path matching processing for `ignore` and `only` routes ([#65](https://github.com/smridge/swagcov/pull/65))
 
 ### Enhancement
