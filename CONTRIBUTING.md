@@ -31,7 +31,7 @@ bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 > Note: Publishing a new version of this gem is only meant for maintainers.
 - Ensure you have access to publish on [rubygems](https://rubygems.org/gems/swagcov).
 - Update [CHANGELOG](https://github.com/smridge/swagcov/blob/main/CHANGELOG.md).
-- Update [`VERSION`](https://github.com/smridge/swagcov/blob/main/lib/swagcov/version.rb).
+- Update [`Swagcov::Version::STRING`](https://github.com/smridge/swagcov/blob/main/lib/swagcov/version.rb).
 - Run `bundle update` at the gem root and for each sandbox application to reflect new swagcov version in each `Gemfile.lock`
 - Open a Pull Request to ensure all specs pass, then merge to `main`.
 - Checkout the latest `main` on your machine.

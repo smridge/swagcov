@@ -1,13 +1,15 @@
 # CHANGELOG
 ## main (unreleased)
-### Refactor
-- `BREAKING CHANGE`s:
-  - `Swagcov::BadConfigurationError` is now `Swagcov::Errors::BadConfiguration` ([#74](https://github.com/smridge/swagcov/pull/74))
-  - `Swagcov::VERSION` is now `Swagcov::Version::STRING` ([#77](https://github.com/smridge/swagcov/pull/77))
-- Improve path matching processing for `ignore` and `only` routes ([#65](https://github.com/smridge/swagcov/pull/65))
+### Fix
+- Grammatical number for endpoint(s) count output ([#78](https://github.com/smridge/swagcov/pull/78))
 
 ### Enhancement
 - Add support for Rails 4.2 ([#72](https://github.com/smridge/swagcov/pull/72))
+
+### Refactor
+- `BREAKING CHANGE`: `Swagcov::BadConfigurationError` is now `Swagcov::Errors::BadConfiguration` ([#74](https://github.com/smridge/swagcov/pull/74))
+- `BREAKING CHANGE`: `Swagcov::VERSION` is now `Swagcov::Version::STRING` ([#77](https://github.com/smridge/swagcov/pull/77))
+- Improve path matching processing for `ignore` and `only` routes ([#65](https://github.com/smridge/swagcov/pull/65))
 
 ### Code Coverage
   - Add test coverage reporting ([#68](https://github.com/smridge/swagcov/pull/68), [#69](https://github.com/smridge/swagcov/pull/69))
