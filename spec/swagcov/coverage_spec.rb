@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "action_dispatch/routing/inspector"
+require "action_dispatch/routing/inspector" # for rails < 5
 
 RSpec.describe Swagcov::Coverage do
   subject(:init) do
@@ -41,7 +41,6 @@ RSpec.describe Swagcov::Coverage do
 
     let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
 
-    # before { allow($stdout).to receive(:puts) } # suppress output in specs
     before do
       allow($stdout).to receive(:puts)
 

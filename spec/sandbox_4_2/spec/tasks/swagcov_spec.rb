@@ -38,10 +38,10 @@ describe "rake swagcov", type: :task do
             DELETE /v2/articles/:id  #{204.to_s.green}
 
         OpenAPI documentation coverage 100.00% (24/24)
-        #{0.to_s.yellow} endpoints ignored
-        #{24.to_s.blue} endpoints checked
-        #{24.to_s.green} endpoints covered
-        #{0.to_s.red} endpoints missing documentation
+        #{0.to_s.yellow} ignored endpoints
+        #{24.to_s.blue} total endpoints
+        #{24.to_s.green} covered endpoints
+        #{0.to_s.red} uncovered endpoints
       MESSAGE
     end
 
@@ -56,7 +56,10 @@ describe "rake swagcov", type: :task do
 
   context "with full configuration and partial documentation coverage" do
     before do
-      stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "spec/fixtures/dotfiles/only_and_ignore_config.yml")
+      stub_const(
+        "Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME",
+        Pathname.new("#{Rails.root}/spec/fixtures/dotfiles/only_and_ignore_config.yml")
+      )
     end
 
     it "outputs coverage" do
@@ -77,10 +80,10 @@ describe "rake swagcov", type: :task do
             DELETE /v1/articles/:id  #{'none'.red}
 
         OpenAPI documentation coverage 20.00% (1/5)
-        #{5.to_s.yellow} endpoints ignored
-        #{5.to_s.blue} endpoints checked
-        #{1.to_s.green} endpoints covered
-        #{4.to_s.red} endpoints missing documentation
+        #{5.to_s.yellow} ignored endpoints
+        #{5.to_s.blue} total endpoints
+        #{1.to_s.green} covered endpoint
+        #{4.to_s.red} uncovered endpoints
       MESSAGE
     end
 

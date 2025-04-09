@@ -79,6 +79,8 @@ bundle exec rake swagcov:install
         - ^/v1
       ignore:
         - /v1/foobar/:token
+        - /v1/foobar:
+          - GET
   ```
 
 Execute:

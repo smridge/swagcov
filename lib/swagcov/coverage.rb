@@ -120,33 +120,25 @@ module Swagcov
         )
       )
 
-      $stdout.puts(
-        format(
-          "%<total>s endpoints ignored",
-          { total: @data[:ignored_count].to_s.yellow }
-        )
-      )
+      count_output
+    end
 
-      $stdout.puts(
-        format(
-          "%<total>s endpoints checked",
-          { total: @data[:total_count].to_s.blue }
-        )
-      )
+    def count_output
+      {
+        ignored: "yellow",
+        total: "blue",
+        covered: "green",
+        uncovered: "red"
+      }.each do |key, color|
+        count = @data[:"#{key}_count"]
 
-      $stdout.puts(
-        format(
-          "%<covered>s endpoints covered",
-          { covered: @data[:covered_count].to_s.green }
+        $stdout.puts(
+          format(
+            "%<status>s #{key} #{count == 1 ? 'endpoint' : 'endpoints'}",
+            { status: count.to_s.send(color) }
+          )
         )
-      )
-
-      $stdout.puts(
-        format(
-          "%<missing>s endpoints missing documentation",
-          { missing: @data[:uncovered_count].to_s.red }
-        )
-      )
+      end
     end
   end
 end
