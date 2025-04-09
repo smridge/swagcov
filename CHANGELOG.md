@@ -1,7 +1,10 @@
 # CHANGELOG
 ## main (unreleased)
-### Enhancement
+### Refactor
+- `BREAKING CHANGE`: `Swagcov::BadConfigurationError` is now `Swagcov::Errors::BadConfiguration` ([#74](https://github.com/smridge/swagcov/pull/74))
 - Improve path matching processing for `ignore` and `only` routes ([#65](https://github.com/smridge/swagcov/pull/65))
+
+### Enhancement
 - Add support for Rails 4.2 ([#72](https://github.com/smridge/swagcov/pull/72))
 
 ### Code Coverage

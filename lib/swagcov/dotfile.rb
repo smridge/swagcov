@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 module Swagcov
-  class BadConfigurationError < RuntimeError
-  end
-
   class Dotfile
     DEFAULT_CONFIG_FILE_NAME = ".swagcov.yml"
 
     def initialize pathname: ::Rails.root.join(DEFAULT_CONFIG_FILE_NAME)
       @dotfile = load_yaml(pathname)
 
-      raise ::Swagcov::BadConfigurationError, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
+      raise ::Swagcov::Errors::BadConfiguration, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
 
       @ignored_regex = path_config_regex(ignored_config)
       @only_regex = path_config_regex(only_config)
@@ -49,11 +46,13 @@ module Swagcov
     attr_reader :dotfile
 
     def load_yaml pathname
-      raise ::Swagcov::BadConfigurationError, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})" unless pathname.exist?
+      unless pathname.exist?
+        raise ::Swagcov::Errors::BadConfiguration, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})"
+      end
 
-      YAML.load_file(pathname)
+      ::YAML.load_file(pathname)
     rescue Psych::SyntaxError
-      raise ::Swagcov::BadConfigurationError, "Malinformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
+      raise ::Swagcov::Errors::BadConfiguration, "Malinformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
     end
 
     def path_config_regex path_config

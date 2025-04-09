@@ -11,6 +11,7 @@ if defined?(Rails)
 end
 
 require "swagcov/core_ext/string"
+require "swagcov/errors"
 
 module Swagcov
 end
