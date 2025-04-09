@@ -6,8 +6,9 @@ RSpec.describe Swagcov::Dotfile do
   let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/dotfile.yml") }
 
   it "loads yaml config from dotfile" do
-    expect(YAML).to receive(:load_file).with(fixture_dotfile).and_call_original
+    allow(YAML).to receive(:load_file).with(fixture_dotfile).and_call_original
     dotfile
+    expect(YAML).to have_received(:load_file).with(fixture_dotfile)
   end
 
   context "with empty dotfile" do

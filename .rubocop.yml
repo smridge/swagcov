@@ -1,12 +1,13 @@
 plugins:
   - rubocop-performance
   - rubocop-rspec
+  - rubocop-rake
+  - rubocop-thread_safety
 
 AllCops:
   TargetRubyVersion: 2.5
   NewCops: enable
   Exclude:
-    - '**/db/*'
     - '**/bin/*'
     - vendor/bundle/**/* # https://github.com/rubocop/rubocop/issues/9832#issuecomment-882111229
 
@@ -31,10 +32,8 @@ RSpec/ExampleLength:
   Enabled: false
 
 RSpec/EmptyExampleGroup:
-  Enabled: false # due to using rswag in sandbox applications
-
-RSpec/MessageSpies:
-  EnforcedStyle: receive
+  Exclude:
+    - '**/spec/requests/**/*' # due to using rswag in sandbox applications
 
 Style/Documentation:
   Enabled: false
