@@ -50,10 +50,10 @@ RSpec.describe Swagcov::Install do
 
   context "when dotfile exists" do
     before do
+      allow($stdout).to receive(:puts) # suppress output in spec
       FileUtils.mkdir_p("rails_root")
-      FileUtils.cd("rails_root")
-      File.write(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME, "")
-      FileUtils.cd("..")
+      install.generate_dotfile # create existing
+      File.truncate(dotfile, 0)
     end
 
     after do
@@ -62,8 +62,6 @@ RSpec.describe Swagcov::Install do
     end
 
     it "does not overwrite existing file" do
-      allow($stdout).to receive(:puts) # suppress output in spec
-
       install.generate_dotfile
       expect(File.read(dotfile)).to eq("")
     end

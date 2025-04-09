@@ -11,8 +11,9 @@ RSpec.describe Swagcov::OpenapiFiles do
     end
 
     it "loads yaml" do
-      expect(YAML).to receive(:load_file).with("spec/fixtures/openapi/no_versions.yml").and_call_original
+      allow(YAML).to receive(:load_file).with("spec/fixtures/openapi/no_versions.yml").and_call_original
       openapi_files
+      expect(YAML).to have_received(:load_file).with("spec/fixtures/openapi/no_versions.yml")
     end
   end
 
