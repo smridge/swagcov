@@ -8,9 +8,7 @@ end
 SimpleCov.command_name "unit"
 
 require "logger"
-require "rails"
 require "pry-byebug"
-require "active_support/core_ext"
 require "swagcov"
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }
