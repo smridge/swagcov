@@ -4,7 +4,7 @@ require_relative "lib/swagcov/version"
 
 Gem::Specification.new do |spec|
   spec.name     = "swagcov"
-  spec.version  = Swagcov::VERSION
+  spec.version  = Swagcov::Version::STRING
   spec.authors  = ["Sarah Ridge"]
   spec.email    = ["sarahmarie@hey.com"]
   spec.summary  = "OpenAPI documentation coverage for Rails Routes"
