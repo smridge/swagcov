@@ -24,7 +24,7 @@ RSpec.describe Swagcov::OpenapiFiles do
       ]
     end
 
-    it { expect { openapi_files }.to raise_error(Swagcov::BadConfigurationError) }
+    it { expect { openapi_files }.to raise_error(Swagcov::Errors::BadConfiguration) }
     it { expect { openapi_files }.to raise_error("Malinformed openapi file (spec/fixtures/openapi/malinformed.yml)") }
   end
 
