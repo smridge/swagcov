@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
 describe "rake swagcov:install", type: :task do
-  it "preloads the Rails environment" do
-    expect(task.prerequisites).to include "environment"
-  end
+  it { expect(task.prerequisites).to include "environment" }
 
   context "when dotfile exists" do
     it "does not overwrite existing file" do
@@ -29,7 +27,7 @@ describe "rake swagcov:install", type: :task do
   end
 
   context "when dotfile does not exist" do
-    let(:dotfile) { "#{Rails.root}/swagcov_test.yml" }
+    let(:dotfile) { ".swagcov_test.yml" }
 
     before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", dotfile) }
     after { FileUtils.rm_f(dotfile) }
