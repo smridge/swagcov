@@ -52,7 +52,7 @@ module Swagcov
 
       ::YAML.load_file(pathname)
     rescue Psych::SyntaxError
-      raise ::Swagcov::Errors::BadConfiguration, "Malinformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
+      raise ::Swagcov::Errors::BadConfiguration, "Malformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
     end
 
     def path_config_regex path_config

@@ -353,7 +353,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when maliformed openapi yaml" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/malinformed_openapi.yml") }
+      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/malformed_openapi.yml") }
 
       it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }
     end

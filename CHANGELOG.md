@@ -45,7 +45,7 @@
 
 ## 0.3.0 (2022-02-21)
 ### Enhancement
-  - Raise specific `Swagcov::BadConfigurationError` for malinformed yaml files ([#23](https://github.com/smridge/swagcov/pull/23))
+  - Raise specific `Swagcov::BadConfigurationError` for malformed yaml files ([#23](https://github.com/smridge/swagcov/pull/23))
 
 ### Security
   - Require Multi-Factor Authentication for RubyGems privileged operations ([#16](https://github.com/smridge/swagcov/pull/16))
