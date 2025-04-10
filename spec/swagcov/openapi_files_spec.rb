@@ -17,16 +17,16 @@ RSpec.describe Swagcov::OpenapiFiles do
     end
   end
 
-  context "when malinformed yaml" do
+  context "with malformed yaml" do
     let(:fixture_doc_paths) do
       [
         Pathname.new("spec/fixtures/openapi/no_versions.yml"),
-        Pathname.new("spec/fixtures/openapi/malinformed.yml")
+        Pathname.new("spec/fixtures/openapi/malformed.yml")
       ]
     end
 
     it { expect { openapi_files }.to raise_error(Swagcov::Errors::BadConfiguration) }
-    it { expect { openapi_files }.to raise_error("Malinformed openapi file (spec/fixtures/openapi/malinformed.yml)") }
+    it { expect { openapi_files }.to raise_error("Malformed openapi file (spec/fixtures/openapi/malformed.yml)") }
   end
 
   describe "#find_response_keys" do

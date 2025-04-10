@@ -1,0 +1,3 @@
+docs:
+  paths:
+    - spec/fixtures/openapi/malformed.yml

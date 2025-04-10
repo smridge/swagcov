@@ -28,7 +28,7 @@ module Swagcov
     def load_yaml filepath
       ::YAML.load_file(filepath)["paths"]
     rescue ::Psych::SyntaxError
-      raise ::Swagcov::Errors::BadConfiguration, "Malinformed openapi file (#{filepath})"
+      raise ::Swagcov::Errors::BadConfiguration, "Malformed openapi file (#{filepath})"
     end
   end
 end
