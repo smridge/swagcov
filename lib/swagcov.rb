@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require "rails"
-require "active_support/core_ext"
 
 require "swagcov/core_ext/string"
 require "swagcov/formatter/console"
