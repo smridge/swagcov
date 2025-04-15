@@ -63,7 +63,7 @@ module Swagcov
           if path.is_a?(::Hash)
             "^#{path.keys.first}$"
           else
-            path.first == "^" ? path : "^#{path}$"
+            path.chr == "^" ? path : "^#{path}$"
           end
         end
 

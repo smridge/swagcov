@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "action_dispatch/routing/inspector" # for rails < 5
+require "action_dispatch/routing/inspector" if Rails::VERSION::STRING < "5"
 
 RSpec.describe Swagcov::Coverage do
   subject(:init) do
