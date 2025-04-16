@@ -4,13 +4,13 @@ module Swagcov
   class Install
     attr_reader :dotfile
 
-    def initialize pathname: ::Rails.root.join(::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME).to_s
-      @dotfile = pathname
+    def initialize basename: ::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME
+      @dotfile = ::Swagcov.project_root.join(basename).to_s
     end
 
     def generate_dotfile
       if ::File.exist?(dotfile)
-        $stdout.puts "#{dotfile} already exists"
+        $stdout.puts "#{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists"
         return
       end
 

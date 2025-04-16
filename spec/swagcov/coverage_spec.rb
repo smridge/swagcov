@@ -4,7 +4,7 @@ require "action_dispatch/routing/inspector" if Rails::VERSION::STRING < "5"
 
 RSpec.describe Swagcov::Coverage do
   subject(:init) do
-    described_class.new(dotfile: Swagcov::Dotfile.new(pathname: pathname), routes: routes)
+    described_class.new(dotfile: Swagcov::Dotfile.new(basename: basename), routes: routes)
   end
 
   let(:irrelevant_path) { instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/anything") }
@@ -36,7 +36,7 @@ RSpec.describe Swagcov::Coverage do
     end
   end
 
-  let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
+  let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
 
   before { allow($stdout).to receive(:puts) }
 
@@ -70,7 +70,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when route without verb (mounted applications)" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
       let(:routes) do
         if Rails::VERSION::STRING > "5"
           [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)]
@@ -83,49 +83,49 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and minimal configuration (no only or ignores)" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
 
       it { expect(result).to eq(0) }
     end
 
     context "without full documentation coverage and minimal configuration" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/missing_paths.yml" }
 
       it { expect(result).not_to eq(0) }
     end
 
     context "with full documentation coverage and ignore routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_ignore.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions_with_ignore.yml" }
 
       it { expect(result).to eq(0) }
     end
 
     context "without full documentation coverage and ignore routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_ignore.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_ignore.yml" }
 
       it { expect(result).not_to eq(0) }
     end
 
     context "with ignored routes configured with actions (verbs)" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/ignored_verbs.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/ignored_verbs.yml" }
 
       it { expect(result).to eq(0) }
     end
 
     context "with full documentation coverage and only routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_only.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions_with_only.yml" }
 
       it { expect(result).to eq(0) }
     end
 
     context "without full documentation coverage and only routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_only.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_only.yml" }
 
       it { expect(result).not_to eq(0) }
     end
 
     context "when path name partially exists in swagger file" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/v1.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/v1.yml" }
 
       let(:routes) do
         if Rails::VERSION::STRING > "5"
@@ -152,7 +152,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when maliformed openapi yaml" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/malformed_openapi.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/malformed_openapi.yml" }
 
       it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }
     end
@@ -200,7 +200,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when route without verb (mounted applications)" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
       let(:routes) do
         if Rails::VERSION::STRING > "5"
           [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)]
@@ -225,7 +225,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and minimal configuration (no only or ignores)" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -251,7 +251,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "without full documentation coverage and minimal configuration" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/missing_paths.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -279,7 +279,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and ignore routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_ignore.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions_with_ignore.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -307,7 +307,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "without full documentation coverage and ignore routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_ignore.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_ignore.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -337,7 +337,7 @@ RSpec.describe Swagcov::Coverage do
     context "with ignored routes configured with actions (verbs)" do
       before { result }
 
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/ignored_verbs.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/ignored_verbs.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -365,7 +365,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "with full documentation coverage and only routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/no_versions_with_only.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/no_versions_with_only.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -389,7 +389,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "without full documentation coverage and only routes configured" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/missing_paths_with_only.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_only.yml" }
 
       it "collects route data" do
         expect(result).to eq(
@@ -413,7 +413,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when path name partially exists in swagger file" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/v1.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/v1.yml" }
 
       let(:routes) do
         if Rails::VERSION::STRING > "5"
@@ -452,7 +452,7 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when maliformed openapi yaml" do
-      let(:pathname) { Pathname.new("spec/fixtures/dotfiles/malformed_openapi.yml") }
+      let(:basename) { "spec/fixtures/dotfiles/malformed_openapi.yml" }
 
       it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }
     end
