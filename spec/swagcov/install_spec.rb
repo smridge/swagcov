@@ -16,7 +16,7 @@ RSpec.describe Swagcov::Install do
     it "creates a minimum configuration file" do
       allow($stdout).to receive(:puts) # suppress output in spec
 
-      install.generate_dotfile
+      install.run
 
       expect(File.read(dotfile)).to eq(
         <<~YAML
@@ -40,19 +40,21 @@ RSpec.describe Swagcov::Install do
     end
 
     it "has message" do
-      expect { install.generate_dotfile }.to output(
+      expect { install.run }.to output(
         <<~MESSAGE
-          created #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}
+          created #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
+
+    it { expect(install.run).to eq(Swagcov::Install::STATUS_SUCCESS) }
   end
 
   context "when dotfile exists" do
     before do
       allow($stdout).to receive(:puts) # suppress output in spec
       FileUtils.mkdir_p("rails_root")
-      install.generate_dotfile # create existing
+      install.run # create existing
       File.truncate(dotfile, 0)
     end
 
@@ -62,16 +64,18 @@ RSpec.describe Swagcov::Install do
     end
 
     it "does not overwrite existing file" do
-      install.generate_dotfile
+      install.run
       expect(File.read(dotfile)).to eq("")
     end
 
     it "has message" do
-      expect { install.generate_dotfile }.to output(
+      expect { install.run }.to output(
         <<~MESSAGE
-          #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists
+          #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
+
+    it { expect(install.run).to eq(Swagcov::Install::STATUS_ERROR) }
   end
 end

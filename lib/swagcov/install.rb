@@ -4,14 +4,19 @@ module Swagcov
   class Install
     attr_reader :dotfile
 
+    STATUS_SUCCESS = 0
+    STATUS_ERROR = 2
+
     def initialize basename: ::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME
       @dotfile = ::Swagcov.project_root.join(basename).to_s
     end
 
-    def generate_dotfile
+    def run
+      path = ::Swagcov.project_root
+
       if ::File.exist?(dotfile)
-        $stdout.puts "#{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists"
-        return
+        $stdout.puts "#{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{path}"
+        return STATUS_ERROR
       end
 
       ::File.write(
@@ -35,7 +40,9 @@ module Swagcov
         YAML
       )
 
-      $stdout.puts "created #{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}"
+      $stdout.puts "created #{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} at #{path}"
+
+      STATUS_SUCCESS
     end
   end
 end
