@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Swagcov::Install do
+RSpec.describe Swagcov::Command::GenerateDotfile do
   subject(:install) { described_class.new(basename: dotfile) }
 
   let(:dotfile) { "rails_root/#{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}" }
@@ -47,7 +47,7 @@ RSpec.describe Swagcov::Install do
       ).to_stdout
     end
 
-    it { expect(install.run).to eq(Swagcov::Install::STATUS_SUCCESS) }
+    it { expect(install.run).to eq(Swagcov::Command::GenerateDotfile::STATUS_SUCCESS) }
   end
 
   context "when dotfile exists" do
@@ -76,6 +76,6 @@ RSpec.describe Swagcov::Install do
       ).to_stdout
     end
 
-    it { expect(install.run).to eq(Swagcov::Install::STATUS_ERROR) }
+    it { expect(install.run).to eq(Swagcov::Command::GenerateDotfile::STATUS_ERROR) }
   end
 end
