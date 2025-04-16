@@ -1,6 +1,14 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Refactor
+- Separate coverage collection and output ([#83](https://github.com/smridge/swagcov/pull/83))
+- Replace ActiveSupport string method with ruby string method ([#85](https://github.com/smridge/swagcov/pull/85))
+- Add project_root method ([#86](https://github.com/smridge/swagcov/pull/86))
+- Rename `Swagcov::Install` to `Swagcov::Command::GenerateDotfile` ([#88](https://github.com/smridge/swagcov/pull/88))
+- Replace `Swagcov::Coverage.new.report` with `Swagcov::Command::ReportCoverage.new.run`  ([#89](https://github.com/smridge/swagcov/pull/89))
+
+### Fix
+- Add exit code to install task + update messaging ([#87](https://github.com/smridge/swagcov/pull/87))
 
 ## 0.6.0 (2025-04-09)
 ### Fix
