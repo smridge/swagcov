@@ -2,5 +2,5 @@
 
 desc "check documentation coverage for endpoints"
 task swagcov: :environment do
-  exit Swagcov::Coverage.new.report
+  exit Swagcov::Command::ReportCoverage.new.run
 end

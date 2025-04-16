@@ -18,10 +18,6 @@ module Swagcov
       }
     end
 
-    def report
-      ::Swagcov::Formatter::Console.new(data: collect).run
-    end
-
     def collect
       openapi_files = ::Swagcov::OpenapiFiles.new(filepaths: dotfile.docs_config)
       rails_version = ::Rails::VERSION::STRING
