@@ -3,6 +3,7 @@
 require "rails"
 
 require "swagcov/command/generate_dotfile"
+require "swagcov/command/report_coverage"
 require "swagcov/core_ext/string"
 require "swagcov/formatter/console"
 require "swagcov/coverage"

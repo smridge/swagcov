@@ -324,7 +324,7 @@ RSpec.describe Swagcov::Formatter::Console do
       it { expect(result).not_to eq(0) }
     end
 
-    context "when maliformed openapi yaml" do
+    context "when malformed openapi yaml" do
       let(:basename) { "spec/fixtures/dotfiles/malformed_openapi.yml" }
 
       it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }

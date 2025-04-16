@@ -36,127 +36,7 @@ RSpec.describe Swagcov::Coverage do
     end
   end
 
-  let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
-
   before { allow($stdout).to receive(:puts) }
-
-  describe "#report" do
-    subject(:result) { init.report }
-
-    before do
-      if Rails::VERSION::STRING < "5"
-        dbl = instance_double(ActionDispatch::Routing::RouteWrapper, internal?: nil)
-        routes.each { |_route| allow(ActionDispatch::Routing::RouteWrapper).to receive(:new).and_return(dbl) }
-      end
-    end
-
-    context "when internal route only" do
-      before do
-        if Rails::VERSION::STRING < "5"
-          dbl = instance_double(ActionDispatch::Routing::RouteWrapper, internal?: 0)
-          routes.each { |_route| allow(ActionDispatch::Routing::RouteWrapper).to receive(:new).and_return(dbl) }
-        end
-      end
-
-      let(:routes) do
-        if Rails::VERSION::STRING > "5"
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)]
-        else
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: /^GET$/)]
-        end
-      end
-
-      it { expect(result).to eq(0) }
-    end
-
-    context "when route without verb (mounted applications)" do
-      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
-      let(:routes) do
-        if Rails::VERSION::STRING > "5"
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)]
-        else
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "")]
-        end
-      end
-
-      it { expect(result).to eq(0) }
-    end
-
-    context "with full documentation coverage and minimal configuration (no only or ignores)" do
-      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
-
-      it { expect(result).to eq(0) }
-    end
-
-    context "without full documentation coverage and minimal configuration" do
-      let(:basename) { "spec/fixtures/dotfiles/missing_paths.yml" }
-
-      it { expect(result).not_to eq(0) }
-    end
-
-    context "with full documentation coverage and ignore routes configured" do
-      let(:basename) { "spec/fixtures/dotfiles/no_versions_with_ignore.yml" }
-
-      it { expect(result).to eq(0) }
-    end
-
-    context "without full documentation coverage and ignore routes configured" do
-      let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_ignore.yml" }
-
-      it { expect(result).not_to eq(0) }
-    end
-
-    context "with ignored routes configured with actions (verbs)" do
-      let(:basename) { "spec/fixtures/dotfiles/ignored_verbs.yml" }
-
-      it { expect(result).to eq(0) }
-    end
-
-    context "with full documentation coverage and only routes configured" do
-      let(:basename) { "spec/fixtures/dotfiles/no_versions_with_only.yml" }
-
-      it { expect(result).to eq(0) }
-    end
-
-    context "without full documentation coverage and only routes configured" do
-      let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_only.yml" }
-
-      it { expect(result).not_to eq(0) }
-    end
-
-    context "when path name partially exists in swagger file" do
-      let(:basename) { "spec/fixtures/dotfiles/v1.yml" }
-
-      let(:routes) do
-        if Rails::VERSION::STRING > "5"
-          [
-            instance_double(
-              ActionDispatch::Journey::Route,
-              path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
-              verb: "GET",
-              internal: nil
-            )
-          ]
-        else
-          [
-            instance_double(
-              ActionDispatch::Journey::Route,
-              path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
-              verb: /^GET$/
-            )
-          ]
-        end
-      end
-
-      it { expect(result).not_to eq(0) }
-    end
-
-    context "when maliformed openapi yaml" do
-      let(:basename) { "spec/fixtures/dotfiles/malformed_openapi.yml" }
-
-      it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }
-    end
-  end
 
   describe "#collect" do
     subject(:result) { init.collect }
@@ -169,18 +49,19 @@ RSpec.describe Swagcov::Coverage do
     end
 
     context "when internal route only" do
-      before do
-        if Rails::VERSION::STRING < "5"
-          dbl = instance_double(ActionDispatch::Routing::RouteWrapper, internal?: 0)
-          routes.each { |_route| allow(ActionDispatch::Routing::RouteWrapper).to receive(:new).and_return(dbl) }
-        end
-      end
-
+      let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
       let(:routes) do
         if Rails::VERSION::STRING > "5"
           [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)]
         else
           [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: /^GET$/)]
+        end
+      end
+
+      before do
+        if Rails::VERSION::STRING < "5"
+          dbl = instance_double(ActionDispatch::Routing::RouteWrapper, internal?: 0)
+          routes.each { |_route| allow(ActionDispatch::Routing::RouteWrapper).to receive(:new).and_return(dbl) }
         end
       end
 
@@ -451,7 +332,7 @@ RSpec.describe Swagcov::Coverage do
       end
     end
 
-    context "when maliformed openapi yaml" do
+    context "when malformed openapi yaml" do
       let(:basename) { "spec/fixtures/dotfiles/malformed_openapi.yml" }
 
       it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }
