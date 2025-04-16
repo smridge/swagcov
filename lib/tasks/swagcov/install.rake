@@ -3,6 +3,6 @@
 namespace :swagcov do
   desc "create config file"
   task install: :environment do
-    exit Swagcov::Install.new.run
+    exit Swagcov::Command::GenerateDotfile.new.run
   end
 end

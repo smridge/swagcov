@@ -2,12 +2,12 @@
 
 require "rails"
 
+require "swagcov/command/generate_dotfile"
 require "swagcov/core_ext/string"
 require "swagcov/formatter/console"
 require "swagcov/coverage"
 require "swagcov/dotfile"
 require "swagcov/errors"
-require "swagcov/install"
 require "swagcov/openapi_files"
 require "swagcov/railtie"
 require "swagcov/version"
