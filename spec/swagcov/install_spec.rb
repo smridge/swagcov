@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 RSpec.describe Swagcov::Install do
-  subject(:install) { described_class.new(pathname: dotfile) }
+  subject(:install) { described_class.new(basename: dotfile) }
 
-  let(:dotfile) { "#{FileUtils.pwd}/rails_root/#{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}" }
+  let(:dotfile) { "rails_root/#{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}" }
 
   context "when dotfile does not exist" do
     before { FileUtils.mkdir_p("rails_root") }
@@ -69,7 +69,7 @@ RSpec.describe Swagcov::Install do
     it "has message" do
       expect { install.generate_dotfile }.to output(
         <<~MESSAGE
-          #{dotfile} already exists
+          #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists
         MESSAGE
       ).to_stdout
     end

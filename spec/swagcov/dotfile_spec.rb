@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 RSpec.describe Swagcov::Dotfile do
-  subject(:dotfile) { described_class.new(pathname: fixture_dotfile) }
+  subject(:dotfile) { described_class.new(basename: fixture_dotfile) }
 
-  let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/dotfile.yml") }
+  let(:fixture_dotfile) { "spec/fixtures/dotfiles/dotfile.yml" }
 
   it "loads yaml config from dotfile" do
-    allow(YAML).to receive(:load_file).with(fixture_dotfile).and_call_original
+    allow(YAML).to receive(:load_file).with(Swagcov.project_root.join(fixture_dotfile)).and_call_original
     dotfile
-    expect(YAML).to have_received(:load_file).with(fixture_dotfile)
+    expect(YAML).to have_received(:load_file).with(Swagcov.project_root.join(fixture_dotfile))
   end
 
   context "with empty dotfile" do
-    let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/empty_dotfile.yml") }
+    let(:fixture_dotfile) { "spec/fixtures/dotfiles/empty_dotfile.yml" }
 
     it "raises error if file is empty" do
       expect { dotfile }.to raise_error(Swagcov::Errors::BadConfiguration)
@@ -20,7 +20,7 @@ RSpec.describe Swagcov::Dotfile do
   end
 
   context "when malformed dotfile" do
-    let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/malformed.yml") }
+    let(:fixture_dotfile) { "spec/fixtures/dotfiles/malformed.yml" }
 
     it "raises error if the yaml can not be loaded" do
       expect { dotfile }.to raise_error(Swagcov::Errors::BadConfiguration)
@@ -28,7 +28,7 @@ RSpec.describe Swagcov::Dotfile do
   end
 
   context "when misconfigured" do
-    let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/missing_docs_dotfile.yml") }
+    let(:fixture_dotfile) { "spec/fixtures/dotfiles/missing_docs_dotfile.yml" }
 
     it "raises error if doc paths are not specified in the dotfile" do
       expect { dotfile }.to raise_error(Swagcov::Errors::BadConfiguration)
@@ -36,7 +36,7 @@ RSpec.describe Swagcov::Dotfile do
   end
 
   context "when dotfile is missing" do
-    let(:fixture_dotfile) { Pathname.new("spec/fixtures/dotfiles/missing_file.yml") }
+    let(:fixture_dotfile) { "spec/fixtures/dotfiles/missing_file.yml" }
 
     it "raises error if doc paths are not specified in the dotfile" do
       expect { dotfile }.to raise_error(Swagcov::Errors::BadConfiguration)

@@ -20,7 +20,7 @@ describe "rake swagcov:install", type: :task do
     it "has message" do
       expect { task.execute }.to output(
         <<~MESSAGE
-          #{Rails.root}/#{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists
+          #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists
         MESSAGE
       ).to_stdout
     end

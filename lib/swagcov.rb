@@ -13,4 +13,9 @@ require "swagcov/railtie"
 require "swagcov/version"
 
 module Swagcov
+  module_function
+
+  def project_root
+    ::Rails.root || ::Pathname.new(::FileUtils.pwd)
+  end
 end
