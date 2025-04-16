@@ -9,6 +9,7 @@
 
 ### Fix
 - Add exit code to install task + update messaging ([#87](https://github.com/smridge/swagcov/pull/87))
+- Ignored path verb matching when duplicate path keys are present ([#92](https://github.com/smridge/swagcov/pull/92))
 
 ## 0.6.0 (2025-04-09)
 ### Fix
