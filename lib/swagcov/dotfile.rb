@@ -18,11 +18,12 @@ module Swagcov
 
       ignore_all_path_actions = @ignored_regex.match?(path)
 
-      ignored_verbs = @ignored_config.find { |config| config[path] }
+      ignored_verbs =
+        @ignored_config.select { |config| config[path]&.is_a?(::Array) }.map(&:values).flatten.map(&:downcase)
 
-      return ignore_all_path_actions unless ignored_verbs.is_a?(::Hash)
+      return ignore_all_path_actions if ignored_verbs.empty?
 
-      ignored_verbs.values.flatten.map(&:downcase).any?(verb.downcase)
+      ignored_verbs.any?(verb.downcase)
     end
 
     def only_path_mismatch? path

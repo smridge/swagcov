@@ -12,3 +12,7 @@ routes:
       - ^/v2
       - /users/:id:
         - PUT
+      - /duplicate/:id:
+        - PUT
+      - "/duplicate/:id":
+        - GET

@@ -75,6 +75,8 @@ RSpec.describe Swagcov::Dotfile do
       it { expect(dotfile.ignore_path?("/users/:id", verb: "PATCH")).to be(false) }
       it { expect(dotfile.ignore_path?("/v1/users/:id", verb: "PATCH")).to be(false) }
       it { expect(dotfile.ignore_path?("/v1/foo/:bar", verb: "PATCH")).to be(false) }
+      it { expect(dotfile.ignore_path?("/duplicate/:id", verb: "PUT")).to be(true) }
+      it { expect(dotfile.ignore_path?("/duplicate/:id", verb: "GET")).to be(true) }
     end
   end
 
