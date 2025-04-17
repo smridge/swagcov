@@ -1,0 +1,4 @@
+# only routes.paths.ignore should be configured for a .swagcov_todo.yml file
+docs:
+  paths:
+    - wrong-file.yaml

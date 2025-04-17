@@ -112,6 +112,28 @@ RSpec.describe Swagcov::Dotfile do
     subject(:docs_config) { dotfile.ignored_config }
 
     it { is_expected.to contain_exactly("^/v1", "/v3/specific", "/ignore/specific/path") }
+
+    context "with misconfigured todo_file" do
+      subject(:dotfile) do
+        described_class.new(basename: fixture_dotfile, todo_basename: "spec/fixtures/dotfiles/.todo_misconfigured.yml")
+      end
+
+      it "only captures ignored routes" do
+        expect(dotfile.ignored_config).to contain_exactly("^/v1", "/v3/specific", "/ignore/specific/path")
+      end
+    end
+
+    context "with todo_file" do
+      subject(:dotfile) do
+        described_class.new(basename: fixture_dotfile, todo_basename: "spec/fixtures/dotfiles/.todo.yml")
+      end
+
+      it "merges results" do
+        expect(dotfile.ignored_config).to contain_exactly(
+          "^/v1", "/v3/specific", "/ignore/specific/path", { "/foo/:id" => %w[GET PATCH] }
+        )
+      end
+    end
   end
 
   describe "#only_config" do
