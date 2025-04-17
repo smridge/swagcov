@@ -1,0 +1,6 @@
+routes:
+  paths:
+    ignore:
+      - "/foo/:id":
+        - GET
+        - PATCH

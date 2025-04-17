@@ -15,10 +15,11 @@ See OpenAPI documentation coverage report for Rails Routes.
 - See overview of different endpoints covered, missing and what you choose to ignore.
 - Add pass/fail to your build pipeline when missing Documentation Coverage.
 
-| Description | `rake task` | `rails console` |
+| `rake task` | `rails console` | Description |
 | :--- | :--- | :--- |
-| Install required config file | `rake swagcov:install` | `Swagcov::Command::GenerateDotfile.new.run` |
-| Check documentation coverage | `rake swagcov` | `Swagcov::Command::ReportCoverage.new.run` |
+| `rake swagcov` | `Swagcov::Command::ReportCoverage.new.run` | Check documentation coverage |
+| `rake swagcov:install` | `Swagcov::Command::GenerateDotfile.new.run` | Install required `.swagcov.yml` config file |
+|  | `Swagcov::Command::GenerateTodoFile.new.run` | Generate `.swagcov_todo.yml` |
 
 ## Ruby and Rails Version Support
 Versioning support from a test coverage perspective, see [tests.yml](/.github/workflows/tests.yml) for detail

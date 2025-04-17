@@ -3,12 +3,14 @@
 module Swagcov
   class Dotfile
     DEFAULT_CONFIG_FILE_NAME = ".swagcov.yml"
+    TODO_CONFIG_FILE_NAME = ".swagcov_todo.yml"
 
-    def initialize basename: DEFAULT_CONFIG_FILE_NAME
-      @dotfile = load_yaml(basename)
+    def initialize basename: DEFAULT_CONFIG_FILE_NAME, todo_basename: TODO_CONFIG_FILE_NAME, skip_todo: false
+      @dotfile = load_yaml(basename, required: true)
 
       raise ::Swagcov::Errors::BadConfiguration, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
 
+      @todo_file = load_yaml(todo_basename) unless skip_todo
       @ignored_regex = path_config_regex(ignored_config)
       @only_regex = path_config_regex(only_config)
     end
@@ -35,7 +37,11 @@ module Swagcov
     end
 
     def ignored_config
-      @ignored_config ||= dotfile.dig("routes", "paths", "ignore")
+      dotfile_routes = dotfile.dig("routes", "paths", "ignore").to_a
+      todo_routes = todo_file ? todo_file.dig("routes", "paths", "ignore").to_a : []
+      routes = dotfile_routes + todo_routes
+
+      @ignored_config ||= routes.empty? ? nil : routes
     end
 
     def only_config
@@ -44,18 +50,18 @@ module Swagcov
 
     private
 
-    attr_reader :dotfile
+    attr_reader :dotfile, :todo_file
 
-    def load_yaml basename
+    def load_yaml basename, required: false
       pathname = ::Swagcov.project_root.join(basename)
 
-      unless pathname.exist?
-        raise ::Swagcov::Errors::BadConfiguration, "Missing config file (#{DEFAULT_CONFIG_FILE_NAME})"
-      end
+      raise ::Swagcov::Errors::BadConfiguration, "Missing config file (#{basename})" if !pathname.exist? && required
+
+      return unless pathname.exist?
 
       ::YAML.load_file(pathname)
     rescue ::Psych::SyntaxError
-      raise ::Swagcov::Errors::BadConfiguration, "Malformed config file (#{DEFAULT_CONFIG_FILE_NAME})"
+      raise ::Swagcov::Errors::BadConfiguration, "Malformed config file (#{basename})"
     end
 
     def path_config_regex path_config
