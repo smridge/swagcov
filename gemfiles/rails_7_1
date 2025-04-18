@@ -13,5 +13,6 @@ gem "rails", "7.1.5.1"
 
 # development dependencies
 gem "pry-byebug"
+gem "rb-readline" # for pry on ruby 3.5
 gem "rspec"
 gem "simplecov"
