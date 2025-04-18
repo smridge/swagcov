@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 0.7.0 (2025-04-18)
 ### Enhancement
 - Add support for Ruby 3.5 ([#98](https://github.com/smridge/swagcov/pull/98))
 - Add rake task for auto-generation of `.swagcov_todo.yml` file ([#93](https://github.com/smridge/swagcov/pull/93), [#96](https://github.com/smridge/swagcov/pull/96))
