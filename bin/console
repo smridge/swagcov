@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "bundler/setup"
+require "swagcov"
+
+require "pry"
+
+def reload!
+  puts "Reloading..."
+  exec "bin/console"
+end
+
+Pry.start

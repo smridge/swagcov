@@ -13,7 +13,14 @@ gem "swagcov", path: "../swagcov"
 bundle
 ```
 
-Run Tests
+## Console Session
+```shell
+$ chmod +x bin/console
+$ ./bin/console
+> # use `reload!` to capture code changes in existing console session
+```
+
+## Run Tests
 ```
 bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
 ```
