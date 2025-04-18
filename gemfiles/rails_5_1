@@ -9,7 +9,7 @@ end
 
 gemspec path: ".."
 
-gem "rails", "5.1.7"
+gem "railties", "5.1.7"
 
 gem "bigdecimal" # Fix for ruby 3.4 (cannot load such file -- bigdecimal)
 gem "mutex_m" # Fix for ruby 3.4 (cannot load such file -- mutex_m)
