@@ -19,7 +19,7 @@ See OpenAPI documentation coverage report for Rails Routes.
 | :--- | :--- | :--- |
 | `rake swagcov` | `Swagcov::Command::ReportCoverage.new.run` | Check documentation coverage |
 | `rake swagcov:install` | `Swagcov::Command::GenerateDotfile.new.run` | Install required `.swagcov.yml` config file |
-|  | `Swagcov::Command::GenerateTodoFile.new.run` | Generate `.swagcov_todo.yml` |
+| `rake swagcov:generate_todo` | `Swagcov::Command::GenerateTodoFile.new.run` | Generate `.swagcov_todo.yml` |
 
 ## Ruby and Rails Version Support
 Versioning support from a test coverage perspective, see [tests.yml](/.github/workflows/tests.yml) for detail
