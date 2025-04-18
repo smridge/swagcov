@@ -12,8 +12,12 @@ gemspec path: ".."
 gem "rails", "7.0.4.3"
 gem "bigdecimal" # Fix for ruby 3.4 (cannot load such file -- bigdecimal)
 gem "mutex_m" # Fix for ruby 3.4 (cannot load such file -- mutex_m)
+gem "logger" # Fix for ruby 3.5 (cannot load such file -- logger)
+gem "irb" # Fix for ruby 3.5 (cannot load such file -- irb)
+gem "benchmark" # Fix for ruby 3.5 (cannot load such file -- benchmark)
 
 # development dependencies
 gem "pry-byebug"
+gem "rb-readline" # for pry on ruby 3.5
 gem "rspec"
 gem "simplecov"
