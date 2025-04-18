@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 describe "rake swagcov", type: :task do
+  before { allow($stdout).to receive(:puts) } # suppress output in specs
+
   it { expect(task.prerequisites).to include "environment" }
 
   context "with minimal configuration and full documentation coverage" do
@@ -46,9 +48,6 @@ describe "rake swagcov", type: :task do
     end
 
     context "when testing final result" do
-      # suppress output in specs
-      before { allow($stdout).to receive(:puts) }
-
       it { expect { task.execute }.to raise_exception(SystemExit) }
       it { expect { task.execute }.to exit_with_code(0) }
     end
@@ -87,11 +86,15 @@ describe "rake swagcov", type: :task do
     end
 
     context "when testing final result" do
-      # suppress output in specs
-      before { allow($stdout).to receive(:puts) }
-
       it { expect { task.execute }.to raise_exception(SystemExit) }
-      it { expect { task.execute }.not_to exit_with_code(0) }
+      it { expect { task.execute }.to exit_with_code(1) }
     end
+  end
+
+  context "without required configuration" do
+    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "spec/fixtures/dotfiles/no-dotfile.yml") }
+
+    it { expect { task.execute }.to raise_exception(SystemExit) }
+    it { expect { task.execute }.to exit_with_code(2) }
   end
 end

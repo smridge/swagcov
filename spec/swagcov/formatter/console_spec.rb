@@ -159,7 +159,7 @@ RSpec.describe Swagcov::Formatter::Console do
         ).to_stdout
       end
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "with full documentation coverage and ignore routes configured" do
@@ -209,7 +209,7 @@ RSpec.describe Swagcov::Formatter::Console do
         ).to_stdout
       end
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "with ignored routes configured with actions (verbs)" do
@@ -280,7 +280,7 @@ RSpec.describe Swagcov::Formatter::Console do
         ).to_stdout
       end
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "when path name partially exists in swagger file" do
@@ -321,7 +321,7 @@ RSpec.describe Swagcov::Formatter::Console do
         ).to_stdout
       end
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "when malformed openapi yaml" do

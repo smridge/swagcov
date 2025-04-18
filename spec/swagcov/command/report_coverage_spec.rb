@@ -92,7 +92,7 @@ RSpec.describe Swagcov::Command::ReportCoverage do
     context "without full documentation coverage and minimal configuration" do
       let(:basename) { "spec/fixtures/dotfiles/missing_paths.yml" }
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "with full documentation coverage and ignore routes configured" do
@@ -104,7 +104,7 @@ RSpec.describe Swagcov::Command::ReportCoverage do
     context "without full documentation coverage and ignore routes configured" do
       let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_ignore.yml" }
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "with ignored routes configured with actions (verbs)" do
@@ -122,7 +122,7 @@ RSpec.describe Swagcov::Command::ReportCoverage do
     context "without full documentation coverage and only routes configured" do
       let(:basename) { "spec/fixtures/dotfiles/missing_paths_with_only.yml" }
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "when path name partially exists in swagger file" do
@@ -149,7 +149,7 @@ RSpec.describe Swagcov::Command::ReportCoverage do
         end
       end
 
-      it { expect(result).not_to eq(0) }
+      it { expect(result).to eq(1) }
     end
 
     context "when malformed openapi yaml" do

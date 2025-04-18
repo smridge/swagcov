@@ -48,7 +48,7 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
         ).to_stdout
       end
 
-      it { expect(install.run).to eq(Swagcov::Command::GenerateDotfile::STATUS_SUCCESS) }
+      it { expect(install.run).to eq(0) }
     end
 
     context "when dotfile exists" do
@@ -76,7 +76,7 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
         ).to_stdout
       end
 
-      it { expect(install.run).to eq(Swagcov::Command::GenerateDotfile::STATUS_ERROR) }
+      it { expect(install.run).to eq(2) }
     end
   end
 end

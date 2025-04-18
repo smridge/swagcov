@@ -3,8 +3,6 @@
 module Swagcov
   module Command
     class GenerateTodoFile
-      STATUS_SUCCESS = 0
-
       def initialize basename: ::Swagcov::Dotfile::TODO_CONFIG_FILE_NAME,
                      data: ::Swagcov::Coverage.new(dotfile: ::Swagcov::Dotfile.new(skip_todo: true)).collect[:uncovered]
         @dotfile = ::Swagcov.project_root.join(basename)
@@ -23,7 +21,7 @@ module Swagcov
 
         $stdout.puts "created #{@dotfile.basename} at #{@dotfile.dirname}"
 
-        STATUS_SUCCESS
+        ::Swagcov::STATUS_SUCCESS
       end
 
       private
