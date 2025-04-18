@@ -9,7 +9,7 @@ end
 
 gemspec path: ".."
 
-gem "rails", "7.1.5.1"
+gem "railties", "7.1.5.1"
 
 # development dependencies
 gem "pry-byebug"

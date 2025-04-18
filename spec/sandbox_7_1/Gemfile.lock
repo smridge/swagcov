@@ -2,7 +2,7 @@ PATH
   remote: ../..
   specs:
     swagcov (0.7.0)
-      rails (>= 4.2)
+      railties (>= 4.2)
 
 GEM
   remote: https://rubygems.org/

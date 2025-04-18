@@ -9,8 +9,9 @@ end
 
 gemspec path: ".."
 
-gem "rails", "5.2.8.1"
+gem "railties", "5.2.8.1"
 
+gem "base64" # Fix for ruby 3.4 (cannot load such file -- base64)
 gem "bigdecimal" # Fix for ruby 3.4 (cannot load such file -- bigdecimal)
 gem "mutex_m" # Fix for ruby 3.4 (cannot load such file -- mutex_m)
 gem "logger" # Fix for ruby 3.5 (cannot load such file -- logger)

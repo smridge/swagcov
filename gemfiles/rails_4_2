@@ -9,7 +9,7 @@ end
 
 gemspec path: ".."
 
-gem "rails", "4.2.11.3"
+gem "railties", "4.2.11.3"
 
 gem "bigdecimal", "1.4.4" # Fix for undefined method `new' for BigDecimal:Class
 

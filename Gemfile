@@ -4,8 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 # development dependencies
-
-# console
+## console
 gem "pry-byebug"
 gem "rb-readline" # for pry on ruby 3.5
 
