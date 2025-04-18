@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
 describe "rake swagcov:generate_todo", type: :task do
-  let(:dotfile) { ".swagcov_test.yml" }
+  let(:basename) { ".swagcov_test.yml" }
 
   before do
     allow($stdout).to receive(:puts) # suppress output in spec
-    stub_const("Swagcov::Dotfile::TODO_CONFIG_FILE_NAME", dotfile)
+    stub_const("Swagcov::Dotfile::TODO_CONFIG_FILE_NAME", basename)
   end
 
-  after { FileUtils.rm_f(dotfile) }
+  after { FileUtils.rm_f(basename) }
 
   it { expect(task.prerequisites).to include "environment" }
 
@@ -57,7 +57,7 @@ describe "rake swagcov:generate_todo", type: :task do
     it "generates a todo configuration file" do
       task.execute
     rescue SystemExit => _e
-      expect(File.read(dotfile)).to eq(
+      expect(File.read(Swagcov::Dotfile::TODO_CONFIG_FILE_NAME)).to eq(
         <<~YAML
           # This configuration was auto generated
           # The intent is to remove these route configurations as documentation is added

@@ -1,25 +1,23 @@
 # frozen_string_literal: true
 
 RSpec.describe Swagcov::Command::GenerateDotfile do
-  subject(:install) { described_class.new(basename: dotfile) }
+  subject(:install) { described_class.new(basename: basename) }
 
-  let(:dotfile) { "rails_root/#{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME}" }
+  let(:basename) { ".swagcov_test.yml" }
 
-  before { allow($stdout).to receive(:puts) } # suppress output in spec
+  before do
+    allow($stdout).to receive(:puts) # suppress output in spec
+    stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename)
+  end
+
+  after { FileUtils.rm_f(basename) }
 
   describe "#run" do
     context "when dotfile does not exist" do
-      before { FileUtils.mkdir_p("rails_root") }
-
-      after do
-        FileUtils.rm_f(dotfile)
-        FileUtils.rmdir("rails_root")
-      end
-
       it "creates a minimum configuration file" do
         install.run
 
-        expect(File.read(dotfile)).to eq(
+        expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
           <<~YAML
             ## Required field:
             # List your OpenAPI documentation files
@@ -53,19 +51,13 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
 
     context "when dotfile exists" do
       before do
-        FileUtils.mkdir_p("rails_root")
         install.run # create existing
-        File.truncate(dotfile, 0)
-      end
-
-      after do
-        FileUtils.rm_f(dotfile)
-        FileUtils.rmdir("rails_root")
+        File.truncate(basename, 0)
       end
 
       it "does not overwrite existing file" do
         install.run
-        expect(File.read(dotfile)).to eq("")
+        expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq("")
       end
 
       it "has message" do

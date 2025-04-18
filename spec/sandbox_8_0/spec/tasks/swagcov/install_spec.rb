@@ -35,15 +35,15 @@ describe "rake swagcov:install", type: :task do
   end
 
   context "when dotfile does not exist" do
-    let(:dotfile) { ".swagcov_test.yml" }
+    let(:basename) { ".swagcov_test.yml" }
 
-    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", dotfile) }
-    after { FileUtils.rm_f(dotfile) }
+    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename) }
+    after { FileUtils.rm_f(basename) }
 
     it "creates a minimum configuration file" do
       task.execute
     rescue SystemExit => _e
-      expect(File.read(dotfile)).to eq(
+      expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
         <<~YAML
           ## Required field:
           # List your OpenAPI documentation files
