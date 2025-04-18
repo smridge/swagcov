@@ -6,14 +6,12 @@ module Swagcov
       attr_reader :dotfile
 
       def initialize basename: ::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME
-        @dotfile = ::Swagcov.project_root.join(basename).to_s
+        @dotfile = ::Swagcov.project_root.join(basename)
       end
 
       def run
-        path = ::Swagcov.project_root
-
-        if ::File.exist?(dotfile)
-          $stdout.puts "#{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{path}"
+        if ::File.exist?(@dotfile)
+          $stdout.puts "#{@dotfile.basename} already exists at #{@dotfile.dirname}"
           return ::Swagcov::STATUS_ERROR
         end
 
@@ -38,7 +36,7 @@ module Swagcov
           YAML
         )
 
-        $stdout.puts "created #{::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} at #{path}"
+        $stdout.puts "created #{@dotfile.basename} at #{@dotfile.dirname}"
 
         ::Swagcov::STATUS_SUCCESS
       end
