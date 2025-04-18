@@ -34,7 +34,7 @@ RSpec.describe Swagcov::Command::GenerateTodoFile do
         ).to_stdout
       end
 
-      it { expect(init.run).to eq(Swagcov::Command::GenerateTodoFile::STATUS_SUCCESS) }
+      it { expect(init.run).to eq(0) }
     end
 
     context "with uncovered routes" do
@@ -74,7 +74,7 @@ RSpec.describe Swagcov::Command::GenerateTodoFile do
         ).to_stdout
       end
 
-      it { expect(init.run).to eq(Swagcov::Command::GenerateTodoFile::STATUS_SUCCESS) }
+      it { expect(init.run).to eq(0) }
     end
 
     context "with existing empty .swavcov_todo.yml file" do
@@ -102,7 +102,7 @@ RSpec.describe Swagcov::Command::GenerateTodoFile do
         ).to_stdout
       end
 
-      it { expect(init.run).to eq(Swagcov::Command::GenerateTodoFile::STATUS_SUCCESS) }
+      it { expect(init.run).to eq(0) }
     end
 
     context "with existing ignore config in .swagcov.yml and without full documentation coverage" do
@@ -174,7 +174,7 @@ RSpec.describe Swagcov::Command::GenerateTodoFile do
         ).to_stdout
       end
 
-      it { expect(init.run).to eq(Swagcov::Command::GenerateTodoFile::STATUS_SUCCESS) }
+      it { expect(init.run).to eq(0) }
     end
 
     context "with existing ignore config in .swagcov_todo.yml" do
@@ -256,7 +256,7 @@ RSpec.describe Swagcov::Command::GenerateTodoFile do
         ).to_stdout
       end
 
-      it { expect(init.run).to eq(Swagcov::Command::GenerateTodoFile::STATUS_SUCCESS) }
+      it { expect(init.run).to eq(0) }
     end
   end
 end

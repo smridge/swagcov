@@ -17,6 +17,10 @@ require "swagcov/version"
 module Swagcov
   module_function
 
+  STATUS_SUCCESS     = 0
+  STATUS_OFFENSES    = 1
+  STATUS_ERROR       = 2
+
   def project_root
     ::Rails.root || ::Pathname.new(::FileUtils.pwd)
   end

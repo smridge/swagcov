@@ -15,7 +15,7 @@ module Swagcov
         routes_output(data[:uncovered], "red")
         final_output
 
-        data[:uncovered_count]
+        data[:uncovered_count].zero? ? ::Swagcov::STATUS_SUCCESS : ::Swagcov::STATUS_OFFENSES
       end
 
       private
