@@ -3,11 +3,7 @@
 describe "rake swagcov:generate_todo", type: :task do
   let(:basename) { ".swagcov_test.yml" }
 
-  before do
-    allow($stdout).to receive(:puts) # suppress output in spec
-    stub_const("Swagcov::Dotfile::TODO_CONFIG_FILE_NAME", basename)
-  end
-
+  before { stub_const("Swagcov::Dotfile::TODO_CONFIG_FILE_NAME", basename) }
   after { FileUtils.rm_f(basename) }
 
   it { expect(task.prerequisites).to include "environment" }
@@ -38,18 +34,13 @@ describe "rake swagcov:generate_todo", type: :task do
     end
 
     it "has message" do
-      expect do
-        task.execute
-      rescue SystemExit => e
-        e.inspect
-      end.to output(
+      expect { task.execute }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
           created #{Swagcov::Dotfile::TODO_CONFIG_FILE_NAME} at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
 
-    it { expect { task.execute }.to raise_exception(SystemExit) }
     it { expect { task.execute }.to exit_with_code(0) }
   end
 
@@ -67,18 +58,13 @@ describe "rake swagcov:generate_todo", type: :task do
     end
 
     it "has message" do
-      expect do
-        task.execute
-      rescue SystemExit => e
-        e.inspect
-      end.to output(
+      expect { task.execute }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
           created #{Swagcov::Dotfile::TODO_CONFIG_FILE_NAME} at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
 
-    it { expect { task.execute }.to raise_exception(SystemExit) }
     it { expect { task.execute }.to exit_with_code(0) }
   end
 end

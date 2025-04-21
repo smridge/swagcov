@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 describe "rake swagcov:install", type: :task do
-  before { allow($stdout).to receive(:puts) } # suppress output in spec
-
   it { expect(task.prerequisites).to include "environment" }
 
   context "when dotfile exists" do
@@ -19,31 +17,26 @@ describe "rake swagcov:install", type: :task do
     end
 
     it "has message" do
-      expect do
-        task.execute
-      rescue SystemExit => e
-        e.inspect
-      end.to output(
+      expect { task.execute }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
           #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
 
-    it { expect { task.execute }.to raise_exception(SystemExit) }
     it { expect { task.execute }.to exit_with_code(2) }
   end
 
   context "when dotfile does not exist" do
-    let(:dotfile) { ".swagcov_test.yml" }
+    let(:basename) { ".swagcov_test.yml" }
 
-    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", dotfile) }
-    after { FileUtils.rm_f(dotfile) }
+    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename) }
+    after { FileUtils.rm_f(basename) }
 
     it "creates a minimum configuration file" do
       task.execute
     rescue SystemExit => _e
-      expect(File.read(dotfile)).to eq(
+      expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
         <<~YAML
           ## Required field:
           # List your OpenAPI documentation files
@@ -65,18 +58,13 @@ describe "rake swagcov:install", type: :task do
     end
 
     it "has message" do
-      expect do
-        task.execute
-      rescue SystemExit => e
-        e.inspect
-      end.to output(
+      expect { task.execute }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
           created #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
 
-    it { expect { task.execute }.to raise_exception(SystemExit) }
     it { expect { task.execute }.to exit_with_code(0) }
   end
 end
