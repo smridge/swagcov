@@ -38,8 +38,6 @@ RSpec.describe Swagcov::Formatter::Console do
     end
   end
 
-  before { allow($stdout).to receive(:puts) }
-
   describe "#run" do
     subject(:result) { init.run }
 

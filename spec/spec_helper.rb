@@ -26,4 +26,6 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.warnings = true
+
+  config.before { allow($stdout).to receive(:puts) } # suppress output in specs
 end

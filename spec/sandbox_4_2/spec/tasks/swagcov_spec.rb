@@ -1,17 +1,11 @@
 # frozen_string_literal: true
 
 describe "rake swagcov", type: :task do
-  before { allow($stdout).to receive(:puts) } # suppress output in specs
-
   it { expect(task.prerequisites).to include "environment" }
 
   context "with minimal configuration and full documentation coverage" do
     it "outputs coverage" do
-      expect do
-        task.execute
-      rescue SystemExit => e # ignore to test output
-        e.inspect
-      end.to output(
+      expect { task.execute }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
                  GET /articles         #{200.to_s.green}
                 POST /articles         #{201.to_s.green}
@@ -47,10 +41,7 @@ describe "rake swagcov", type: :task do
       ).to_stdout
     end
 
-    context "when testing final result" do
-      it { expect { task.execute }.to raise_exception(SystemExit) }
-      it { expect { task.execute }.to exit_with_code(0) }
-    end
+    it { expect { task.execute }.to exit_with_code(0) }
   end
 
   context "with full configuration and partial documentation coverage" do
@@ -59,11 +50,7 @@ describe "rake swagcov", type: :task do
     end
 
     it "outputs coverage" do
-      expect do
-        task.execute
-      rescue SystemExit => e # ignore to test output
-        e.inspect
-      end.to output(
+      expect { task.execute }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
                 POST /v1/articles      #{201.to_s.green}
                  GET /v1/articles      #{'ignored'.yellow}
@@ -85,10 +72,7 @@ describe "rake swagcov", type: :task do
       ).to_stdout
     end
 
-    context "when testing final result" do
-      it { expect { task.execute }.to raise_exception(SystemExit) }
-      it { expect { task.execute }.to exit_with_code(1) }
-    end
+    it { expect { task.execute }.to exit_with_code(1) }
   end
 
   context "without required configuration" do

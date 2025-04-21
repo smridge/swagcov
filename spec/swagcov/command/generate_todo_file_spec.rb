@@ -7,7 +7,6 @@ RSpec.describe Swagcov::Command::GenerateTodoFile do
 
   let(:basename) { ".swagcov_todo_test.yml" }
 
-  before { allow($stdout).to receive(:puts) } # suppress output in spec
   after { FileUtils.rm_f(basename) }
 
   describe "#run" do

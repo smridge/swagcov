@@ -36,8 +36,6 @@ RSpec.describe Swagcov::Coverage do
     end
   end
 
-  before { allow($stdout).to receive(:puts) }
-
   describe "#collect" do
     subject(:result) { init.collect }
 

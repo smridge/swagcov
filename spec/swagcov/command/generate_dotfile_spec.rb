@@ -5,10 +5,7 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
 
   let(:basename) { ".swagcov_test.yml" }
 
-  before do
-    allow($stdout).to receive(:puts) # suppress output in spec
-    stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename)
-  end
+  before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename) }
 
   after { FileUtils.rm_f(basename) }
 

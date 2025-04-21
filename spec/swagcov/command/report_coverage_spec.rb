@@ -38,8 +38,6 @@ RSpec.describe Swagcov::Command::ReportCoverage do
     end
   end
 
-  before { allow($stdout).to receive(:puts) } # suppress output in spec
-
   describe "#run" do
     subject(:result) { init.run }
 
