@@ -337,5 +337,27 @@ RSpec.describe Swagcov::Coverage do
 
       it { expect { result }.to raise_error(Swagcov::Errors::BadConfiguration) }
     end
+
+    context "without rails routes" do
+      subject(:init) do
+        described_class.new(dotfile: Swagcov::Dotfile.new(basename: basename))
+      end
+
+      let(:basename) { "spec/fixtures/dotfiles/dotfile.yml" }
+
+      it "does not fail" do
+        expect(result).to eq(
+          {
+            covered: [],
+            ignored: [],
+            uncovered: [],
+            total_count: 0,
+            covered_count: 0,
+            ignored_count: 0,
+            uncovered_count: 0
+          }
+        )
+      end
+    end
   end
 end
