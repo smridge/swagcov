@@ -4,7 +4,7 @@ module Swagcov
   class Coverage
     attr_reader :dotfile
 
-    def initialize dotfile: ::Swagcov::Dotfile.new, routes: ::Rails.application.routes.routes
+    def initialize dotfile: ::Swagcov::Dotfile.new, routes: ::Swagcov.project_routes
       @dotfile = dotfile
       @routes = routes
       @data = {

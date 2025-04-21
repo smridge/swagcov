@@ -24,4 +24,8 @@ module Swagcov
   def project_root
     ::Rails.root || ::Pathname.new(::FileUtils.pwd)
   end
+
+  def project_routes
+    ::Rails.application&.routes&.routes || []
+  end
 end
