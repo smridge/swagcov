@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 0.8.0 (2025-04-22)
 ### Enhancement
 - Reduce gem dependencies by replacing `rails` with `railties` ([#101](https://github.com/smridge/swagcov/pull/101))
 - Remove unnecessary file from gem package ([#105](https://github.com/smridge/swagcov/pull/105))
