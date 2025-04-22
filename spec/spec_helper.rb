@@ -27,5 +27,8 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
   config.warnings = true
 
+  # E2E tests are ran from real rails applications and are ran separately from unit tests
+  config.exclude_pattern = "sandbox_**/**/*_spec.rb"
+
   config.before { allow($stdout).to receive(:puts) } # suppress output in specs
 end
