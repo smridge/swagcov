@@ -22,7 +22,7 @@ $ ./bin/console
 
 ## Run Tests
 ```
-bundle exec rspec spec --exclude-pattern spec/sandbox_**/**/*_spec.rb
+bundle exec rspec
 ```
 
 ### Test via Sandbox Application
