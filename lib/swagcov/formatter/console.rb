@@ -10,6 +10,7 @@ module Swagcov
       end
 
       def run
+        min_path_width
         routes_output(data[:covered], "green")
         routes_output(data[:ignored], "yellow")
         routes_output(data[:uncovered], "red")
@@ -24,20 +25,20 @@ module Swagcov
         routes.each do |route|
           $stdout.puts(
             format(
-              "%<verb>10s %<path>-#{min_width(:path) + 1}s %<status>s",
+              "%<verb>10s %<path>-#{@min_path_width}s %<status>s",
               { verb: route[:verb], path: route[:path], status: route[:status].send(status_color) }
             )
           )
         end
       end
 
-      def min_width key
+      def min_path_width
         strings =
-          data[:covered].map { |hash| hash[key] } +
-          data[:ignored].map { |hash| hash[key] } +
-          data[:uncovered].map { |hash| hash[key] }
+          data[:covered].map { |hash| hash[:path] } +
+          data[:ignored].map { |hash| hash[:path] } +
+          data[:uncovered].map { |hash| hash[:path] }
 
-        strings.max_by(&:length).size
+        @min_path_width ||= strings.max_by(&:length)&.size.to_i + 1
       end
 
       def final_output
