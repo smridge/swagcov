@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Fix
+- Performance of coverage output by memoizing path string length ([#108](https://github.com/smridge/swagcov/pull/108))
 
 ## 0.8.0 (2025-04-22)
 ### Enhancement
