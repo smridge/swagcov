@@ -40,10 +40,11 @@ describe "rake swagcov:install", type: :task do
       expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
         <<~YAML
           ## Required field:
-          # List your OpenAPI documentation files
+          # List your OpenAPI documentation file(s) (accepts json or yaml)
           docs:
             paths:
               - swagger.yaml
+              - swagger.json
 
           ## Optional fields:
           # routes:

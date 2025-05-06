@@ -51,11 +51,12 @@ Create a `.swagcov.yml` in root of your Rails application. Alternatively, run:
 bundle exec rake swagcov:install
 ```
 
-- Add the paths of your `openapi` yml files (**required**):
+- Add the paths of your OpenAPI `.yml` and/or `.json` files (**required**):
   ```yml
   docs:
     paths:
       - swagger.yaml
+      - swagger.json
   ```
 
 - Add `only` routes (**optional**) :
