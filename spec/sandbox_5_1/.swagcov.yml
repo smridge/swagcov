@@ -1,3 +1,4 @@
 docs:
   paths:
     - swagger/openapi.yaml
+    - swagger/v2_openapi.json
