@@ -19,10 +19,11 @@ module Swagcov
           dotfile,
           <<~YAML
             ## Required field:
-            # List your OpenAPI documentation files
+            # List your OpenAPI documentation file(s) (accepts json or yaml)
             docs:
               paths:
                 - swagger.yaml
+                - swagger.json
 
             ## Optional fields:
             # routes:
