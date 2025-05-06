@@ -1,6 +1,9 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Enhancement
+- Add support for `.json` OpenAPI file types ([#112](https://github.com/smridge/swagcov/pull/112), [#113](https://github.com/smridge/swagcov/pull/113))
+- Update rake task descriptions ([#114](https://github.com/smridge/swagcov/pull/114))
+- Improve performance of OpenAPI response key matching for route paths ([#115](https://github.com/smridge/swagcov/pull/115))
 
 ## 0.8.1 (2025-04-29)
 ### Fix
