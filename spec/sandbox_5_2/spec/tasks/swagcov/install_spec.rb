@@ -12,6 +12,7 @@ describe "rake swagcov:install", type: :task do
           docs:
             paths:
               - swagger/openapi.yaml
+              - swagger/v2_openapi.json
         YAML
       )
     end

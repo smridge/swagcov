@@ -29,20 +29,42 @@ RSpec.describe Swagcov::OpenapiFiles do
     it { expect { openapi_files }.to raise_error("Malformed openapi file (spec/fixtures/openapi/malformed.yml)") }
   end
 
-  describe "#find_response_keys" do
+  context "with malformed json" do
     let(:fixture_doc_paths) do
       [
-        Pathname.new("spec/fixtures/openapi/no_versions.yml"),
-        Pathname.new("spec/fixtures/openapi/v1.yml")
+        Pathname.new("spec/fixtures/openapi/malformed.json")
       ]
     end
 
-    context "when matching route to openapi path" do
+    it { expect { openapi_files }.to raise_error(Swagcov::Errors::BadConfiguration) }
+    it { expect { openapi_files }.to raise_error("Malformed openapi file (spec/fixtures/openapi/malformed.json)") }
+  end
+
+  describe "#find_response_keys" do
+    context "with yaml file" do
+      let(:fixture_doc_paths) do
+        [
+          Pathname.new("spec/fixtures/openapi/no_versions.yml"),
+          Pathname.new("spec/fixtures/openapi/v1.yml")
+        ]
+      end
+
       it { expect(openapi_files.find_response_keys(path: "/articles/:id", route_verb: "GET")).to eq(["200"]) }
+      it { expect(openapi_files.find_response_keys(path: "/v1/articles/:id", route_verb: "GET")).to eq(["200"]) }
+      it { expect(openapi_files.find_response_keys(path: "/not_in_yaml/:id", route_verb: "GET")).to be_nil }
     end
 
-    context "without matching route to path" do
-      it { expect(openapi_files.find_response_keys(path: "/not_in_yaml/:id", route_verb: "GET")).to be_nil }
+    context "with json and yaml files" do
+      let(:fixture_doc_paths) do
+        [
+          Pathname.new("spec/fixtures/openapi/no_versions.yml"),
+          Pathname.new("spec/fixtures/openapi/v1.json")
+        ]
+      end
+
+      it { expect(openapi_files.find_response_keys(path: "/articles/:id", route_verb: "GET")).to eq(["200"]) }
+      it { expect(openapi_files.find_response_keys(path: "/v1/articles/:id", route_verb: "GET")).to eq(["200"]) }
+      it { expect(openapi_files.find_response_keys(path: "/v1/not_in_json/:id", route_verb: "GET")).to be_nil }
     end
   end
 end
