@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 0.9.0 (2025-05-07)
 ### Enhancement
 - Add support for `.json` OpenAPI file types ([#112](https://github.com/smridge/swagcov/pull/112), [#113](https://github.com/smridge/swagcov/pull/113))
 - Update rake task descriptions ([#114](https://github.com/smridge/swagcov/pull/114))

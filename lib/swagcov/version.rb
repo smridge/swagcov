@@ -2,6 +2,6 @@
 
 module Swagcov
   module Version
-    STRING = "0.8.1"
+    STRING = "0.9.0"
   end
 end
