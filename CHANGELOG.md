@@ -1,7 +1,29 @@
 # CHANGELOG
 ## main (unreleased)
-- `BREAKING CHANGE`: `rake swagcov:generate_todo` is now `rake swagcov -- --todo` ([#123](https://github.com/smridge/swagcov/pull/123))
-- `BREAKING CHANGE`: `rake swagcov:install` is now `rake swagcov -- --init` ([#121](https://github.com/smridge/swagcov/pull/121), [#122](https://github.com/smridge/swagcov/pull/122))
+-
+
+## 0.10.0 (2025-05-08)
+### Enhancement
+- Added executable for streamlined command line usage ([#120](https://github.com/smridge/swagcov/pull/120))
+  - The below options are now available:
+    ```
+    swagcov
+    swagcov --init
+    swagcov --todo
+    swagcov --help
+    ```
+  - **Note**: This is experimental as it may not work for all use cases. Use `rake swagcov` as a fallback
+- Added command line options to the existing `rake swagcov` task ([#121](https://github.com/smridge/swagcov/pull/121), [#122](https://github.com/smridge/swagcov/pull/122), [#123](https://github.com/smridge/swagcov/pull/123))
+  - The below options are now available:
+    ```
+    rake swagcov
+    rake swagcov -- --init
+    rake swagcov -- --todo
+    rake swagcov -- --help
+    ```
+  - **Note**: This refactor involved `BREAKING CHANGES`:
+    - `rake swagcov:generate_todo` is now `rake swagcov -- --todo`
+    - `rake swagcov:install` is now `rake swagcov -- --init`
 
 ## 0.9.0 (2025-05-07)
 ### Enhancement

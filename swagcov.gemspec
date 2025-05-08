@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.version  = Swagcov::Version::STRING
   spec.authors  = ["Sarah Ridge"]
   spec.email    = ["sarahmarie@hey.com"]
-  spec.summary  = "OpenAPI documentation coverage for Rails Routes"
+  spec.summary  = "OpenAPI documentation coverage report for Rails Route endpoints"
   spec.homepage = "https://github.com/smridge/swagcov"
   spec.license  = "MIT"
 
