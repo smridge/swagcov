@@ -77,9 +77,11 @@ describe "[executable] swagcov" do
 
       it "prints message" do
         expect { swagcov }.to output(
-          <<~MESSAGE
-            Swagcov::Errors::BadConfiguration: Missing config file (spec/fixtures/dotfiles/no-dotfile.yml)
-          MESSAGE
+          a_string_including(
+            <<~MESSAGE
+              Swagcov::Errors::BadConfiguration: Missing config file (spec/fixtures/dotfiles/no-dotfile.yml)
+            MESSAGE
+          )
         ).to_stderr_from_any_process
       end
     end

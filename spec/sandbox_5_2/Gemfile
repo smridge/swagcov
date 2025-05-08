@@ -14,7 +14,6 @@ gem "puma"
 gem "multi_json"
 
 group :development, :test do
-  gem "pry-byebug"
   gem "rspec-rails"
   gem "rswag-specs"
   gem "simplecov"
