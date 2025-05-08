@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
-- `BREAKING CHANGE`: `rake swagcov:install` is now `rake swagcov -- --init` ([#121](https://github.com/smridge/swagcov/pull/121))
+- `BREAKING CHANGE`: `rake swagcov:generate_todo` is now `rake swagcov -- --todo` ([#123](https://github.com/smridge/swagcov/pull/123))
+- `BREAKING CHANGE`: `rake swagcov:install` is now `rake swagcov -- --init` ([#121](https://github.com/smridge/swagcov/pull/121), [#122](https://github.com/smridge/swagcov/pull/122))
 
 ## 0.9.0 (2025-05-07)
 ### Enhancement
