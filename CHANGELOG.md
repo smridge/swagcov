@@ -1,6 +1,6 @@
 # CHANGELOG
 ## main (unreleased)
--
+- `BREAKING CHANGE`: `rake swagcov:install` is now `rake swagcov -- --init` ([#121](https://github.com/smridge/swagcov/pull/121))
 
 ## 0.9.0 (2025-05-07)
 ### Enhancement

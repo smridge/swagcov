@@ -33,7 +33,9 @@ RSpec.describe Swagcov::Options do
       it "prints options" do
         expect { init.define }.to raise_exception(SystemExit).and output(
           <<~MESSAGE
-            Usage: swagcov [options]
+            Usage:
+            * as executable: swagcov [options]
+            * as rake task: rake swagcov -- [options]
                 -i, --init                       Generate required .swagcov.yml config file
                 -t, --todo                       Generate optional .swagcov_todo.yml config file
           MESSAGE
@@ -49,7 +51,9 @@ RSpec.describe Swagcov::Options do
       it "prints options" do
         expect { init.define }.to raise_exception(SystemExit).and output(
           <<~MESSAGE
-            Usage: swagcov [options]
+            Usage:
+            * as executable: swagcov [options]
+            * as rake task: rake swagcov -- [options]
                 -i, --init                       Generate required .swagcov.yml config file
                 -t, --todo                       Generate optional .swagcov_todo.yml config file
           MESSAGE

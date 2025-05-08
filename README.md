@@ -23,7 +23,7 @@ OpenAPI documentation coverage report for Rails Routes.
 **Generate required `.swagcov.yml` config file**
 | `executable    ` | `rake task                 ` | `rails console                             ` |
 | :---             | :---                         | :---                                         |
-| `swagcov --init` | `rake swagcov:install`       | `Swagcov::Command::GenerateDotfile.new.run`  |
+| `swagcov --init` | `rake swagcov -- --init`     | `Swagcov::Command::GenerateDotfile.new.run`  |
 
 
 **Generate optional `.swagcov_todo.yml` config file**

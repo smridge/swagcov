@@ -12,7 +12,11 @@ module Swagcov
       options = {}
 
       ::OptionParser.new do |opts|
-        opts.banner = "Usage: swagcov [options]"
+        opts.banner = <<~MESSAGE
+          Usage:
+          * as executable: swagcov [options]
+          * as rake task: rake swagcov -- [options]
+        MESSAGE
 
         opts.on("-i", "--init", "Generate required .swagcov.yml config file") do |opt|
           options[:init] = opt

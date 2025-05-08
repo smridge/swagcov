@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-describe "rake swagcov:install", type: :task do
-  it { expect(task.prerequisites).to include "environment" }
+describe "rake swagcov -- --init", type: :task do
+  let(:rake_task) { system %(rake swagcov -- --init) }
 
   context "when dotfile exists" do
     it "does not overwrite existing file" do
-      task.execute
-    rescue SystemExit => _e
+      rake_task
+
       expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
         <<~YAML
           docs:
@@ -18,26 +18,28 @@ describe "rake swagcov:install", type: :task do
     end
 
     it "has message" do
-      expect { task.execute }.to raise_exception(SystemExit).and output(
+      expect { rake_task }.to output(
         <<~MESSAGE
           #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
         MESSAGE
-      ).to_stdout
+      ).to_stdout_from_any_process
     end
-
-    it { expect { task.execute }.to exit_with_code(2) }
   end
 
   context "when dotfile does not exist" do
     let(:basename) { ".swagcov_test.yml" }
 
-    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename) }
-    after { FileUtils.rm_f(basename) }
+    before { ENV["SWAGCOV_DOTFILE"] = basename }
+
+    after do
+      ENV["SWAGCOV_DOTFILE"] = nil
+      FileUtils.rm_f(basename)
+    end
 
     it "creates a minimum configuration file" do
-      task.execute
-    rescue SystemExit => _e
-      expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
+      rake_task
+
+      expect(File.read(basename)).to eq(
         <<~YAML
           ## Required field:
           # List your OpenAPI documentation file(s) (accepts json or yaml)
@@ -60,13 +62,11 @@ describe "rake swagcov:install", type: :task do
     end
 
     it "has message" do
-      expect { task.execute }.to raise_exception(SystemExit).and output(
+      expect { rake_task }.to output(
         <<~MESSAGE
-          created #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} at #{Swagcov.project_root}
+          created #{basename} at #{Swagcov.project_root}
         MESSAGE
-      ).to_stdout
+      ).to_stdout_from_any_process
     end
-
-    it { expect { task.execute }.to exit_with_code(0) }
   end
 end
