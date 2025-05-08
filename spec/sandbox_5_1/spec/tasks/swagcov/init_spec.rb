@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 describe "rake swagcov -- --init", type: :task do
-  let(:rake_task) { system %(rake swagcov -- --init) }
+  subject(:rake_task) { system %(rake swagcov -- --init) }
 
   context "when dotfile exists" do
     it "does not overwrite existing file" do
