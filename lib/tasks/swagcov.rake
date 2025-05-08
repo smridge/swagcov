@@ -2,5 +2,6 @@
 
 desc "Check OpenAPI documentation coverage for Rails Route endpoints"
 task swagcov: :environment do
-  exit Swagcov::Command::ReportCoverage.new.run
+  args = ARGV.drop(2) # Remove "swagcov" and "--" to ignore standard rake arguments
+  Swagcov::Runner.new(args: args).run
 end

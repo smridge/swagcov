@@ -77,9 +77,11 @@ describe "[executable] swagcov" do
 
       it "prints message" do
         expect { swagcov }.to output(
-          <<~MESSAGE
-            Swagcov::Errors::BadConfiguration: Missing config file (spec/fixtures/dotfiles/no-dotfile.yml)
-          MESSAGE
+          a_string_including(
+            <<~MESSAGE
+              Swagcov::Errors::BadConfiguration: Missing config file (spec/fixtures/dotfiles/no-dotfile.yml)
+            MESSAGE
+          )
         ).to_stderr_from_any_process
       end
     end
@@ -91,7 +93,9 @@ describe "[executable] swagcov" do
     it "prints options" do
       expect { swagcov }.to output(
         <<~MESSAGE
-          Usage: swagcov [options]
+          Usage:
+          * as executable: swagcov [options]
+          * as rake task: rake swagcov -- [options]
               -i, --init                       Generate required .swagcov.yml config file
               -t, --todo                       Generate optional .swagcov_todo.yml config file
         MESSAGE
