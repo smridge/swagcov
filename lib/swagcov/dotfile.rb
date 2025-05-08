@@ -2,8 +2,8 @@
 
 module Swagcov
   class Dotfile
-    DEFAULT_CONFIG_FILE_NAME = ".swagcov.yml"
-    TODO_CONFIG_FILE_NAME = ".swagcov_todo.yml"
+    DEFAULT_CONFIG_FILE_NAME = ::ENV.fetch("SWAGCOV_DOTFILE", ".swagcov.yml")
+    TODO_CONFIG_FILE_NAME = ::ENV.fetch("SWAGCOV_TODOFILE", ".swagcov_todo.yml")
 
     def initialize basename: DEFAULT_CONFIG_FILE_NAME, todo_basename: TODO_CONFIG_FILE_NAME, skip_todo: false
       @dotfile = load_yaml(basename, required: true)

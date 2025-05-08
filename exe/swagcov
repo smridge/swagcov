@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# Experimental executable
+#
+# Booting rails approach should work for most applications
+# Rake task option as an alternative should always work as expected
+
+# Load logger before rails
+# Fix for booting rails 6.0-7.0 apps (uninitialized constant ActiveSupport::LoggerThreadSafeLevel::Logger)
+require "logger"
+
+require "swagcov"
+
+RAILS_APP_PATH = File.expand_path("config/application", Dir.pwd)
+
+def boot_rails_application!
+  require RAILS_APP_PATH
+  Rails.application.initialize!
+rescue LoadError, NoMethodError
+  warn "Unable to load Rails application, try running `rake swagcov` instead"
+  exit Swagcov::STATUS_ERROR
+end
+
+boot_rails_application!
+
+Swagcov::Runner.new(args: ARGV).run

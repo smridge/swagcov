@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.metadata["rubygems_mfa_required"] = "true"
 
   spec.files = Dir["lib/**/*", "CHANGELOG.md", "LICENSE", "README.md"]
+  spec.bindir = "exe"
+  spec.executables = ["swagcov"]
 
   spec.required_ruby_version = ">= 2.5.0"
   spec.add_dependency "railties", ">= 4.2"

@@ -11,7 +11,9 @@ require "swagcov/coverage"
 require "swagcov/dotfile"
 require "swagcov/errors"
 require "swagcov/openapi_files"
+require "swagcov/options"
 require "swagcov/railtie"
+require "swagcov/runner"
 require "swagcov/version"
 
 module Swagcov
