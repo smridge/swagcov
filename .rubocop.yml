@@ -27,6 +27,7 @@ RSpec/DescribeClass:
   Exclude:
     - '**/spec/tasks/**/*'
     - '**/spec/requests/**/*'
+    - '**/spec/exe/**/*'
 
 RSpec/ExampleLength:
   Enabled: false
