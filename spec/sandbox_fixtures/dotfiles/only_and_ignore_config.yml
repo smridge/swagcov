@@ -1,6 +1,6 @@
 docs:
   paths:
-    - spec/fixtures/openapi/only_and_ignore.yml
+    - ../sandbox_fixtures/openapi/only_and_ignore.yml
 
 routes:
   paths:

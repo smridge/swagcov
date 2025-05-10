@@ -46,7 +46,10 @@ describe "rake swagcov", type: :task do
 
   context "with full configuration and partial documentation coverage" do
     before do
-      stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "spec/fixtures/dotfiles/only_and_ignore_config.yml")
+      stub_const(
+        "Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME",
+        "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml"
+      )
     end
 
     it "outputs coverage" do
@@ -76,7 +79,7 @@ describe "rake swagcov", type: :task do
   end
 
   context "without required configuration" do
-    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "spec/fixtures/dotfiles/no-dotfile.yml") }
+    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "../sandbox_fixtures/dotfiles/no-dotfile.yml") }
 
     it { expect { task.execute }.to raise_exception(SystemExit) }
     it { expect { task.execute }.to exit_with_code(2) }
