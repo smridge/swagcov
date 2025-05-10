@@ -34,7 +34,7 @@ RSpec/ExampleLength:
 
 RSpec/EmptyExampleGroup:
   Exclude:
-    - '**/spec/requests/**/*' # due to using rswag in sandbox applications
+    - '**/requests/**/*' # due to using rswag in sandbox applications
 
 Style/Documentation:
   Enabled: false
