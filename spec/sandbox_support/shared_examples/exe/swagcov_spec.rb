@@ -44,7 +44,7 @@ describe "[executable] swagcov" do
     end
 
     context "with full configuration and partial documentation coverage" do
-      before { ENV["SWAGCOV_DOTFILE"] = "spec/fixtures/dotfiles/only_and_ignore_config.yml" }
+      before { ENV["SWAGCOV_DOTFILE"] = "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml" }
       after { ENV["SWAGCOV_DOTFILE"] = nil }
 
       it "outputs coverage" do
@@ -72,14 +72,14 @@ describe "[executable] swagcov" do
     end
 
     context "without required configuration" do
-      before { ENV["SWAGCOV_DOTFILE"] = "spec/fixtures/dotfiles/no-dotfile.yml" }
+      before { ENV["SWAGCOV_DOTFILE"] = "../sandbox_fixtures/dotfiles/no-dotfile.yml" }
       after { ENV["SWAGCOV_DOTFILE"] = nil }
 
       it "prints message" do
         expect { swagcov }.to output(
           a_string_including(
             <<~MESSAGE
-              Swagcov::Errors::BadConfiguration: Missing config file (spec/fixtures/dotfiles/no-dotfile.yml)
+              Swagcov::Errors::BadConfiguration: Missing config file (../sandbox_fixtures/dotfiles/no-dotfile.yml)
             MESSAGE
           )
         ).to_stderr_from_any_process
@@ -187,7 +187,7 @@ describe "[executable] swagcov" do
     end
 
     context "with uncovered routes" do
-      before { ENV["SWAGCOV_DOTFILE"] = "spec/fixtures/dotfiles/only_and_ignore_config.yml" }
+      before { ENV["SWAGCOV_DOTFILE"] = "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml" }
       after { ENV["SWAGCOV_DOTFILE"] = nil }
 
       it "generates a todo configuration file" do

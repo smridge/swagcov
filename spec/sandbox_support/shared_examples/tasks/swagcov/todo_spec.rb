@@ -13,7 +13,7 @@ describe "rake swagcov -- --todo", type: :task do
   end
 
   context "with uncovered routes" do
-    before { ENV["SWAGCOV_DOTFILE"] = "spec/fixtures/dotfiles/only_and_ignore_config.yml" }
+    before { ENV["SWAGCOV_DOTFILE"] = "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml" }
     after { ENV["SWAGCOV_DOTFILE"] = nil }
 
     it "generates a todo configuration file" do
