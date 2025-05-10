@@ -13,7 +13,7 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../config/environment", __dir__)
 require "rspec/rails"
 
-Dir["../sandbox_support/**/*.rb"].sort.each { |f| require f }
+Dir["../sandbox_support/custom_**/**/*.rb"].sort.each { |f| require f }
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
