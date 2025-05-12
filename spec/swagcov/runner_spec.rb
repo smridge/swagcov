@@ -18,6 +18,7 @@ RSpec.describe Swagcov::Runner do
           * as rake task: rake swagcov -- [options]
               -i, --init                       Generate required .swagcov.yml config file
               -t, --todo                       Generate optional .swagcov_todo.yml config file
+              -v, --version                    Display version
         MESSAGE
       ).to_stdout
     end
@@ -193,5 +194,33 @@ RSpec.describe Swagcov::Runner do
     end
 
     it { expect { init.run }.to exit_with_code(2) }
+  end
+
+  context "with --version option" do
+    let(:args) { ["--version"] }
+
+    it "prints message" do
+      expect { init.run }.to raise_exception(SystemExit).and output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout
+    end
+
+    it { expect { init.run }.to exit_with_code(0) }
+  end
+
+  context "with -v option" do
+    let(:args) { ["-v"] }
+
+    it "prints message" do
+      expect { init.run }.to raise_exception(SystemExit).and output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout
+    end
+
+    it { expect { init.run }.to exit_with_code(0) }
   end
 end

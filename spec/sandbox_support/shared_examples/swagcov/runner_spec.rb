@@ -107,6 +107,7 @@ describe Swagcov::Runner do
           * as rake task: rake swagcov -- [options]
               -i, --init                       Generate required .swagcov.yml config file
               -t, --todo                       Generate optional .swagcov_todo.yml config file
+              -v, --version                    Display version
         MESSAGE
       ).to_stdout
     end
@@ -256,5 +257,20 @@ describe Swagcov::Runner do
       it { expect { runner }.to exit_with_code(0) }
       it { expect { described_class.new(args: ["-t"]).run }.to exit_with_code(0) }
     end
+  end
+
+  context "with --version option" do
+    let(:args) { ["--version"] }
+
+    it "prints message" do
+      expect { runner }.to raise_exception(SystemExit).and output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout
+    end
+
+    it { expect { runner }.to exit_with_code(0) }
+    it { expect { described_class.new(args: ["-v"]).run }.to exit_with_code(0) }
   end
 end

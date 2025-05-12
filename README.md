@@ -30,6 +30,11 @@ OpenAPI documentation coverage report for Rails Routes.
 | :---             | :---                     | :---                                        |
 | `swagcov --todo` | `rake swagcov -- --todo` | `Swagcov::Runner.new(args: ["--todo"]).run` |
 
+**View `swagcov` version**
+| `executable    ` | `rake task             ` | `rails console                            ` |
+| :---             | :---                     | :---                                        |
+| `swagcov -v`     | `rake swagcov -- -v`     | `Swagcov::Runner.new(args: ["-v"]).run`     |
+
 **View command line usage options**
 | `executable    ` | `rake task             ` | `rails console                            ` |
 | :---             | :---                     | :---                                        |
