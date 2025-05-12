@@ -15,26 +15,25 @@ OpenAPI documentation coverage report for Rails Routes.
 - See overview of different endpoints covered, missing and what you choose to ignore.
 - Add pass/fail to your build pipeline when missing documentation coverage.
 
-**Check OpenAPI documentation coverage for Rails Route endpoints**
-| `executable    ` | `rake task             ` | `rails console                             ` |
-| :---             | :---                     | :---                                         |
-| `swagcov`        | `rake swagcov`           | `Swagcov::Command::ReportCoverage.new.run`   |
+**View OpenAPI documentation coverage report for Rails Route endpoints**
+| `executable    ` | `rake task             ` | `rails console                            ` |
+| :---             | :---                     | :---                                        |
+| `swagcov`        | `rake swagcov`           | `Swagcov::Runner.new.run`                   |
 
 **Generate required `.swagcov.yml` config file**
-| `executable    ` | `rake task             ` | `rails console                             ` |
-| :---             | :---                     | :---                                         |
-| `swagcov --init` | `rake swagcov -- --init` | `Swagcov::Command::GenerateDotfile.new.run`  |
-
+| `executable    ` | `rake task             ` | `rails console                            ` |
+| :---             | :---                     | :---                                        |
+| `swagcov --init` | `rake swagcov -- --init` | `Swagcov::Runner.new(args: ["--init"]).run` |
 
 **Generate optional `.swagcov_todo.yml` config file**
-| `executable    ` | `rake task             ` | `rails console                             ` |
-| :---             | :---                     | :---                                         |
-| `swagcov --todo` | `rake swagcov -- --todo` | `Swagcov::Command::GenerateTodoFile.new.run` |
+| `executable    ` | `rake task             ` | `rails console                            ` |
+| :---             | :---                     | :---                                        |
+| `swagcov --todo` | `rake swagcov -- --todo` | `Swagcov::Runner.new(args: ["--todo"]).run` |
 
-**See command line usage options**
-| `executable    ` | `rake task             ` | `rails console                             ` |
-| :---             | :---                     | :---                                         |
-| `swagcov --help` | `rake swagcov -- --help` | n/a |
+**View command line usage options**
+| `executable    ` | `rake task             ` | `rails console                            ` |
+| :---             | :---                     | :---                                        |
+| `swagcov --help` | `rake swagcov -- --help` | `Swagcov::Runner.new(args: ["--help"]).run` |
 
 ## Ruby and Rails Version Support
 Versioning support from a test coverage perspective, see [tests.yml](/.github/workflows/tests.yml) for detail
