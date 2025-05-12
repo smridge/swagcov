@@ -15,44 +15,51 @@ OpenAPI documentation coverage report for Rails Routes.
 - See overview of different endpoints covered, missing and what you choose to ignore.
 - Add pass/fail to your build pipeline when missing documentation coverage.
 
-**View OpenAPI documentation coverage report for Rails Route endpoints**
-| `executable    ` | `rake task             ` | `rails console                            ` |
-| :---             | :---                     | :---                                        |
-| `swagcov`        | `rake swagcov`           | `Swagcov::Runner.new.run`                   |
+### Usage Options
+`swagcov` can be used with a few different approachs.
+The approaches below are listed in the following order:
+- via executable
+- via rake task
+- via rails console
 
-**Generate required `.swagcov.yml` config file**
-| `executable    ` | `rake task             ` | `rails console                            ` |
-| :---             | :---                     | :---                                        |
-| `swagcov --init` | `rake swagcov -- --init` | `Swagcov::Runner.new(args: ["--init"]).run` |
+#### View OpenAPI documentation coverage report for Rails Route endpoints
+- `swagcov`
+- `rake swagcov`
+- `Swagcov::Runner.new.run`
 
-**Generate optional `.swagcov_todo.yml` config file**
-| `executable    ` | `rake task             ` | `rails console                            ` |
-| :---             | :---                     | :---                                        |
-| `swagcov --todo` | `rake swagcov -- --todo` | `Swagcov::Runner.new(args: ["--todo"]).run` |
+#### Generate required `.swagcov.yml` config file
+- `swagcov --init`
+- `rake swagcov -- --init`
+- `Swagcov::Runner.new(args: ["--init"]).run`
 
-**View `swagcov` version**
-| `executable    ` | `rake task             ` | `rails console                            ` |
-| :---             | :---                     | :---                                        |
-| `swagcov -v`     | `rake swagcov -- -v`     | `Swagcov::Runner.new(args: ["-v"]).run`     |
+#### Generate optional `.swagcov_todo.yml` config file
+- `swagcov --todo`
+- `rake swagcov -- --todo`
+- `Swagcov::Runner.new(args: ["--todo"]).run`
 
-**View command line usage options**
-| `executable    ` | `rake task             ` | `rails console                            ` |
-| :---             | :---                     | :---                                        |
-| `swagcov --help` | `rake swagcov -- --help` | `Swagcov::Runner.new(args: ["--help"]).run` |
+#### View `swagcov` version
+- `swagcov -v`
+- `rake swagcov -- -v`
+- `Swagcov::Runner.new(args: ["-v"]).run`
+
+#### View command line usage options
+- `swagcov --help`
+- `rake swagcov -- --help`
+- `Swagcov::Runner.new(args: ["--help"]).run`
 
 ## Ruby and Rails Version Support
 Versioning support from a test coverage perspective, see [tests.yml](/.github/workflows/tests.yml) for detail
 | `ruby -v` | `rails 4.2` | `rails 5.0` | `rails 5.1` | `rails 5.2` | `rails 6.0` | `rails 6.1` | `rails 7.0` | `rails 7.1` | `rails 7.2` | `rails 8.0` |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `2.5` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| `2.6` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
-| `2.7` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| `3.0` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| `3.1` | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| `3.2` | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `3.3` | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `3.4` | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| `3.5` | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
+| ---       | ---         | ---         | ---         | ---         | ---         | ---         | ---         | ---         | ---         | ---         |
+| `2.5`     | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ❌          | ❌          | ❌          | ❌          |
+| `2.6`     | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ❌          | ❌          | ❌          | ❌          |
+| `2.7`     | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ❌          | ❌          |
+| `3.0`     | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ❌          | ❌          |
+| `3.1`     | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ❌          |
+| `3.2`     | ❌          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          |
+| `3.3`     | ❌          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          |
+| `3.4`     | ❌          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          |
+| `3.5`     | ❌          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          |
 
 ## Installation
 Add this line to your application's Gemfile:
