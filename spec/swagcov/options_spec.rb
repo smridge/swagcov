@@ -38,6 +38,7 @@ RSpec.describe Swagcov::Options do
             * as rake task: rake swagcov -- [options]
                 -i, --init                       Generate required .swagcov.yml config file
                 -t, --todo                       Generate optional .swagcov_todo.yml config file
+                -v, --version                    Display version
           MESSAGE
         ).to_stdout
       end
@@ -56,6 +57,7 @@ RSpec.describe Swagcov::Options do
             * as rake task: rake swagcov -- [options]
                 -i, --init                       Generate required .swagcov.yml config file
                 -t, --todo                       Generate optional .swagcov_todo.yml config file
+                -v, --version                    Display version
           MESSAGE
         ).to_stdout
       end
@@ -64,19 +66,21 @@ RSpec.describe Swagcov::Options do
     end
 
     context "with valid shorthand options" do
-      let(:args) { ["-i", "-t"] }
+      let(:args) { ["-i", "-t", "-v"] }
 
-      it { expect(init.define).to eq({ init: true, todo: true }) }
+      it { expect(init.define).to eq({ init: true, todo: true, version: true }) }
       it { expect(described_class.new(args: ["-i"]).define).to eq({ init: true }) }
       it { expect(described_class.new(args: ["-t"]).define).to eq({ todo: true }) }
+      it { expect(described_class.new(args: ["-v"]).define).to eq({ version: true }) }
     end
 
     context "with valid explicit options" do
-      let(:args) { ["--init", "--todo"] }
+      let(:args) { ["--init", "--todo", "--version"] }
 
-      it { expect(init.define).to eq({ init: true, todo: true }) }
+      it { expect(init.define).to eq({ init: true, todo: true, version: true }) }
       it { expect(described_class.new(args: ["--init"]).define).to eq({ init: true }) }
       it { expect(described_class.new(args: ["--todo"]).define).to eq({ todo: true }) }
+      it { expect(described_class.new(args: ["--version"]).define).to eq({ version: true }) }
     end
   end
 end

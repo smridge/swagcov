@@ -98,6 +98,7 @@ describe "[executable] swagcov" do
           * as rake task: rake swagcov -- [options]
               -i, --init                       Generate required .swagcov.yml config file
               -t, --todo                       Generate optional .swagcov_todo.yml config file
+              -v, --version                    Display version
         MESSAGE
       ).to_stdout_from_any_process
     end
@@ -239,6 +240,30 @@ describe "[executable] swagcov" do
           MESSAGE
         ).to_stdout_from_any_process
       end
+    end
+  end
+
+  context "with --version option" do
+    subject(:swagcov) { system %(swagcov --version) }
+
+    it "prints message" do
+      expect { swagcov }.to output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout_from_any_process
+    end
+  end
+
+  context "with --v option" do
+    subject(:swagcov) { system %(swagcov -v) }
+
+    it "prints message" do
+      expect { swagcov }.to output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout_from_any_process
     end
   end
 end

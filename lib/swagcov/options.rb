@@ -25,6 +25,10 @@ module Swagcov
         opts.on("-t", "--todo", "Generate optional .swagcov_todo.yml config file") do |opt|
           options[:todo] = opt
         end
+
+        opts.on("-v", "--version", "Display version") do |opt|
+          options[:version] = opt
+        end
       end.parse!(@args)
 
       options

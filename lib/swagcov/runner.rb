@@ -12,6 +12,7 @@ module Swagcov
     def run
       exit ::Swagcov::Command::GenerateDotfile.new.run if options[:init]
       exit ::Swagcov::Command::GenerateTodoFile.new.run if options[:todo]
+      exit ::Swagcov::Command::ReportVersion.new.run if options[:version]
       exit ::Swagcov::Command::ReportCoverage.new.run
     end
   end
