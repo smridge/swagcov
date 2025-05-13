@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 0.11.0 (2025-05-13)
 ### Enhancement
 - Add swagcov `version` option ([#134](https://github.com/smridge/swagcov/pull/134))
   ```
