@@ -7,7 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gemspec path: ".."
+gemspec path: "../.."
 
 gem "railties", "5.2.8.1"
 
