@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module V1
-  class ArticlesController < ApplicationController
+  class ArticlesController < ::ApplicationController
     # GET /v1/articles
     def index
       render json: {

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+# sandbox_controllers are eager loaded, see application.rb
+
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 end

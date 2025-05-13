@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-module V1
-  class ArticlesController < ApplicationController
-    # GET /v1/articles
+module V2
+  class ArticlesController < ::ApplicationController
+    # GET /v2/articles
     def index
       render json: {
         data: [
@@ -24,7 +24,7 @@ module V1
       }
     end
 
-    # POST /v1/articles
+    # POST /v2/articles
     def create
       render json: {
         data: {
@@ -37,7 +37,7 @@ module V1
       }, status: :created
     end
 
-    # GET /v1/articles/:id
+    # GET /v2/articles/:id
     def show
       render json: {
         data: {
@@ -50,7 +50,7 @@ module V1
       }
     end
 
-    # PATCH /v1/articles/:id
+    # PATCH /v2/articles/:id
     def update
       render json: {
         data: {
@@ -63,7 +63,7 @@ module V1
       }
     end
 
-    # DELETE /v1/articles/:id
+    # DELETE /v2/articles/:id
     def destroy
       head :no_content
     end
