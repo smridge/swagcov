@@ -1,10 +1,18 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Enhancement
+- Add swagcov `version` option ([#134](https://github.com/smridge/swagcov/pull/134))
+  ```
+  swagcov -v
+  rake swagcov -- -v
+  ```
+
+### Refactor
+- Reduce `Metrics/AbcSize` for better maintainability ([#138](https://github.com/smridge/swagcov/pull/138), [#139](https://github.com/smridge/swagcov/pull/139), [#140](https://github.com/smridge/swagcov/pull/140))
 
 ## 0.10.0 (2025-05-08)
 ### Enhancement
-- Added executable for streamlined command line usage ([#120](https://github.com/smridge/swagcov/pull/120))
+- Add executable for streamlined command line usage ([#120](https://github.com/smridge/swagcov/pull/120))
   - The below options are now available:
     ```
     swagcov
@@ -13,7 +21,7 @@
     swagcov --help
     ```
   - **Note**: This is experimental as it may not work for all use cases. Use `rake swagcov` as a fallback
-- Added command line options to the existing `rake swagcov` task ([#121](https://github.com/smridge/swagcov/pull/121), [#122](https://github.com/smridge/swagcov/pull/122), [#123](https://github.com/smridge/swagcov/pull/123))
+- Add command line options to the existing `rake swagcov` task ([#121](https://github.com/smridge/swagcov/pull/121), [#122](https://github.com/smridge/swagcov/pull/122), [#123](https://github.com/smridge/swagcov/pull/123))
   - The below options are now available:
     ```
     rake swagcov
