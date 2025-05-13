@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Refactor
+- Default Environment Variable approach ([#143](https://github.com/smridge/swagcov/pull/143))
 
 ## 0.11.0 (2025-05-13)
 ### Enhancement
