@@ -48,13 +48,19 @@ The approaches below are listed in the following order:
 - `Swagcov::Runner.new(args: ["--help"]).run`
 
 ### Environment Variables
-The following default environment variables are automatically set (and can be changed to your needs)
+The following default environment variables are automatically set (and can optionally be changed to your needs)
 | Key                | Value               |
-| ---                | ---                 |
+| :---               | :---                |
 | `SWAGCOV_DOTFILE`  | `.swagcov.yml`      |
 | `SWAGCOV_TODOFILE` | `.swagcov_todo.yml` |
 
 For example `SWAGCOV_DOTFILE=".openapi_coverage_config.yml" bundle exec swagcov`
+
+### Exit Codes
+`swagcov` exits with the following status codes:
+- `0` - (`success`) if no missing documentation coverage is detected
+- `1` - (`offenses`) if missing documentation coverage is detected
+- `2` - (`error`) if abnormal termination due to invalid configuration, cli options, or an internal error
 
 ## Ruby and Rails Version Support
 Versioning support from a test coverage perspective, see [tests.yml](/.github/workflows/tests.yml) for detail
@@ -81,9 +87,10 @@ Execute:
 bundle
 ```
 
-Create a `.swagcov.yml` in root of your Rails application. Alternatively, run:
-```shell
-bundle exec rake swagcov:install
+Generate the required `.swagcov.yml` configuration file in the root of your Rails application by executing one of the following commands:
+```
+bundle exec swagcov --init
+bundle exec rake swagcov -- --init
 ```
 
 - Add the paths of your OpenAPI `.yml` and/or `.json` files (**required**):
@@ -126,13 +133,14 @@ bundle exec rake swagcov:install
           - GET
   ```
 
-Execute:
-```shell
+Execute one of the following commands:
+```
+bundle exec swagcov
 bundle exec rake swagcov
 ```
 
 ## Examples
-Configurations and output from running `bundle exec rake swagcov` from the root of your Rails Application
+Configurations and output from running `swagcov` / `rake swagcov` from the root of your Rails Application
 - All Routes (minimal configuration):
   ```yml
   docs:
