@@ -11,9 +11,6 @@ AllCops:
     - '**/bin/*'
     - vendor/bundle/**/* # https://github.com/rubocop/rubocop/issues/9832#issuecomment-882111229
 
-Metrics/AbcSize:
-  Enabled: false
-
 Metrics/BlockLength:
   Enabled: false
 
