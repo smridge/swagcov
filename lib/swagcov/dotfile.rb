@@ -2,13 +2,10 @@
 
 module Swagcov
   class Dotfile
-    DEFAULT_CONFIG_FILE_NAME = ::ENV.fetch("SWAGCOV_DOTFILE", ".swagcov.yml")
-    TODO_CONFIG_FILE_NAME = ::ENV.fetch("SWAGCOV_TODOFILE", ".swagcov_todo.yml")
-
-    def initialize basename: DEFAULT_CONFIG_FILE_NAME, todo_basename: TODO_CONFIG_FILE_NAME, skip_todo: false
+    def initialize basename: ::Swagcov::DOTFILE, todo_basename: ::Swagcov::TODOFILE, skip_todo: false
       @dotfile = load_yaml(basename, required: true)
 
-      raise ::Swagcov::Errors::BadConfiguration, "Invalid config file (#{DEFAULT_CONFIG_FILE_NAME})" unless valid?
+      raise ::Swagcov::Errors::BadConfiguration, "Invalid config file (#{::Swagcov::DOTFILE})" unless valid?
 
       @todo_file = load_yaml(todo_basename) unless skip_todo
       @ignored_regex = path_config_regex(ignored_config)

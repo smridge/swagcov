@@ -7,7 +7,7 @@ describe "rake swagcov -- --init", type: :task do
     it "does not overwrite existing file" do
       rake_task
 
-      expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
+      expect(File.read(Swagcov::DOTFILE)).to eq(
         <<~YAML
           docs:
             paths:
@@ -20,7 +20,7 @@ describe "rake swagcov -- --init", type: :task do
     it "has message" do
       expect { rake_task }.to output(
         <<~MESSAGE
-          #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
+          #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout_from_any_process
     end

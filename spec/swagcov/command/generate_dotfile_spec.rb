@@ -5,7 +5,7 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
 
   let(:basename) { ".swagcov_test.yml" }
 
-  before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename) }
+  before { stub_const("Swagcov::DOTFILE", basename) }
 
   after { FileUtils.rm_f(basename) }
 
@@ -14,7 +14,7 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
       it "creates a minimum configuration file" do
         install.run
 
-        expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
+        expect(File.read(Swagcov::DOTFILE)).to eq(
           <<~YAML
             ## Required field:
             # List your OpenAPI documentation file(s) (accepts json or yaml)
@@ -39,7 +39,7 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
       it "has message" do
         expect { install.run }.to output(
           <<~MESSAGE
-            created #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} at #{Swagcov.project_root}
+            created #{Swagcov::DOTFILE} at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout
       end
@@ -55,13 +55,13 @@ RSpec.describe Swagcov::Command::GenerateDotfile do
 
       it "does not overwrite existing file" do
         install.run
-        expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq("")
+        expect(File.read(Swagcov::DOTFILE)).to eq("")
       end
 
       it "has message" do
         expect { install.run }.to output(
           <<~MESSAGE
-            #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
+            #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout
       end

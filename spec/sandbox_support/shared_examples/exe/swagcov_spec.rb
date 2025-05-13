@@ -72,14 +72,16 @@ describe "[executable] swagcov" do
     end
 
     context "without required configuration" do
-      before { ENV["SWAGCOV_DOTFILE"] = "../sandbox_fixtures/dotfiles/no-dotfile.yml" }
+      let(:basename) { "../sandbox_fixtures/dotfiles/no-dotfile.yml" }
+
+      before { ENV["SWAGCOV_DOTFILE"] = basename }
       after { ENV["SWAGCOV_DOTFILE"] = nil }
 
       it "prints message" do
         expect { swagcov }.to output(
           a_string_including(
             <<~MESSAGE
-              Swagcov::Errors::BadConfiguration: Missing config file (../sandbox_fixtures/dotfiles/no-dotfile.yml)
+              Swagcov::Errors::BadConfiguration: Missing config file (#{basename})
             MESSAGE
           )
         ).to_stderr_from_any_process
@@ -111,7 +113,7 @@ describe "[executable] swagcov" do
       it "does not overwrite existing file" do
         swagcov
 
-        expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
+        expect(File.read(Swagcov::DOTFILE)).to eq(
           <<~YAML
             docs:
               paths:
@@ -124,7 +126,7 @@ describe "[executable] swagcov" do
       it "has message" do
         expect { swagcov }.to output(
           <<~MESSAGE
-            #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
+            #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout_from_any_process
       end

@@ -48,12 +48,7 @@ describe Swagcov::Runner do
     end
 
     context "with full configuration and partial documentation coverage" do
-      before do
-        stub_const(
-          "Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME",
-          "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml"
-        )
-      end
+      before { stub_const("Swagcov::DOTFILE", "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml") }
 
       it "outputs coverage" do
         expect { runner }.to raise_exception(SystemExit).and output(
@@ -82,12 +77,12 @@ describe Swagcov::Runner do
     end
 
     context "without required configuration" do
-      before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", "../sandbox_fixtures/dotfiles/no-dotfile.yml") }
+      before { stub_const("Swagcov::DOTFILE", "../sandbox_fixtures/dotfiles/no-dotfile.yml") }
 
       it "prints message" do
         expect { runner }.to raise_exception(SystemExit).and output(
           <<~MESSAGE
-            Swagcov::Errors::BadConfiguration: Missing config file (#{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME})
+            Swagcov::Errors::BadConfiguration: Missing config file (#{Swagcov::DOTFILE})
           MESSAGE
         ).to_stderr
       end
@@ -120,7 +115,7 @@ describe Swagcov::Runner do
       it "does not overwrite existing file" do
         runner
       rescue SystemExit => _e
-        expect(File.read(Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME)).to eq(
+        expect(File.read(Swagcov::DOTFILE)).to eq(
           <<~YAML
             docs:
               paths:
@@ -133,7 +128,7 @@ describe Swagcov::Runner do
       it "has message" do
         expect { runner }.to raise_exception(SystemExit).and output(
           <<~MESSAGE
-            #{Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME} already exists at #{Swagcov.project_root}
+            #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout
       end
@@ -145,7 +140,7 @@ describe Swagcov::Runner do
     context "when dotfile does not exist" do
       let(:basename) { ".swagcov_test.yml" }
 
-      before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", basename) }
+      before { stub_const("Swagcov::DOTFILE", basename) }
       after { FileUtils.rm_f(basename) }
 
       it "creates a minimum configuration file" do
@@ -190,16 +185,11 @@ describe Swagcov::Runner do
     let(:args) { ["--todo"] }
     let(:basename) { ".swagcov_test.yml" }
 
-    before { stub_const("Swagcov::Dotfile::TODO_CONFIG_FILE_NAME", basename) }
+    before { stub_const("Swagcov::TODOFILE", basename) }
     after { FileUtils.rm_f(basename) }
 
     context "with uncovered routes" do
-      before do
-        stub_const(
-          "Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME",
-          "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml"
-        )
-      end
+      before { stub_const("Swagcov::DOTFILE", "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml") }
 
       it "generates a todo configuration file" do
         runner
@@ -237,7 +227,7 @@ describe Swagcov::Runner do
       it "generates a todo configuration file" do
         runner
       rescue SystemExit => _e
-        expect(File.read(Swagcov::Dotfile::TODO_CONFIG_FILE_NAME)).to eq(
+        expect(File.read(Swagcov::TODOFILE)).to eq(
           <<~YAML
             # This configuration was auto generated
             # The intent is to remove these route configurations as documentation is added
@@ -249,7 +239,7 @@ describe Swagcov::Runner do
       it "has message" do
         expect { runner }.to raise_exception(SystemExit).and output(
           <<~MESSAGE
-            created #{Swagcov::Dotfile::TODO_CONFIG_FILE_NAME} at #{Swagcov.project_root}
+            created #{Swagcov::TODOFILE} at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout
       end
