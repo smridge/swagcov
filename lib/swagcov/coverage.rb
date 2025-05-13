@@ -2,11 +2,11 @@
 
 module Swagcov
   class Coverage
-    attr_reader :dotfile
-
     def initialize dotfile: ::Swagcov::Dotfile.new, routes: ::Swagcov.project_routes
       @dotfile = dotfile
+      @openapi_files = ::Swagcov::OpenapiFiles.new(filepaths: @dotfile.docs_config)
       @routes = routes
+      @rails_version = ::Rails::VERSION::STRING
       @data = {
         covered: [],
         ignored: [],
@@ -19,14 +19,11 @@ module Swagcov
     end
 
     def collect
-      openapi_files = ::Swagcov::OpenapiFiles.new(filepaths: dotfile.docs_config)
-      rails_version = ::Rails::VERSION::STRING
-
       @routes.each do |route|
-        path = route.path.spec.to_s.chomp("(.:format)")
-        verb = rails_version > "5" ? route.verb : route.verb.inspect.gsub(%r{[$^/]}, "")
+        path = route_path(route)
+        verb = route_verb(route)
 
-        next if third_party_route?(route, path, rails_version)
+        next if third_party_route?(route, path)
 
         if dotfile.ignore_path?(path, verb: verb)
           update_data(:ignored, verb, path, "ignored")
@@ -49,10 +46,20 @@ module Swagcov
 
     private
 
-    def third_party_route? route, path, rails_version
+    attr_reader :dotfile, :openapi_files, :rails_version
+
+    def route_path route
+      route.path.spec.to_s.chomp("(.:format)")
+    end
+
+    def route_verb route
+      rails_version > "5" ? route.verb : route.verb.inspect.gsub(%r{[$^/]}, "")
+    end
+
+    def third_party_route? route, path
       # https://github.com/rails/rails/blob/48f3c3e201b57a4832314b2c957a3b303e89bfea/actionpack/lib/action_dispatch/routing/inspector.rb#L105-L107
       # Skips route paths like ["/rails/info/properties", "/rails/info", "/rails/mailers"]
-      internal_rails_route?(route, rails_version) ||
+      internal_rails_route?(route) ||
 
         # Skips routes like "/sidekiq"
         route.verb.blank? ||
@@ -63,7 +70,7 @@ module Swagcov
         path.include?("/active_storage/") || path.include?("/action_mailbox/")
     end
 
-    def internal_rails_route? route, rails_version
+    def internal_rails_route? route
       if rails_version > "5"
         route.internal
       else
