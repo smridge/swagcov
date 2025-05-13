@@ -33,10 +33,9 @@ module Swagcov
       end
 
       def min_path_width
-        strings =
-          data[:covered].map { |hash| hash[:path] } +
-          data[:ignored].map { |hash| hash[:path] } +
-          data[:uncovered].map { |hash| hash[:path] }
+        strings = []
+
+        %i[covered ignored uncovered].each { |key| data[key].each { |hash| strings << hash[:path] } }
 
         @min_path_width ||= strings.max_by(&:length)&.size.to_i + 1
       end
