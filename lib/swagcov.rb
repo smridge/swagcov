@@ -24,6 +24,9 @@ module Swagcov
   STATUS_OFFENSES    = 1
   STATUS_ERROR       = 2
 
+  DOTFILE = ENV["SWAGCOV_DOTFILE"] ||= ".swagcov.yml"
+  TODOFILE = ENV["SWAGCOV_TODOFILE"] ||= ".swagcov_todo.yml"
+
   def project_root
     ::Rails.root || ::Pathname.new(::FileUtils.pwd)
   end

@@ -5,7 +5,7 @@ module Swagcov
     class GenerateDotfile
       attr_reader :dotfile
 
-      def initialize basename: ::Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME
+      def initialize basename: ::Swagcov::DOTFILE
         @dotfile = ::Swagcov.project_root.join(basename)
       end
 

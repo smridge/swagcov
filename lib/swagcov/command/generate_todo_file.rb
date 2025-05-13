@@ -3,7 +3,7 @@
 module Swagcov
   module Command
     class GenerateTodoFile
-      def initialize basename: ::Swagcov::Dotfile::TODO_CONFIG_FILE_NAME,
+      def initialize basename: ::Swagcov::TODOFILE,
                      data: ::Swagcov::Coverage.new(dotfile: ::Swagcov::Dotfile.new(skip_todo: true)).collect[:uncovered]
         @dotfile = ::Swagcov.project_root.join(basename)
         @data = data

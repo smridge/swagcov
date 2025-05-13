@@ -31,7 +31,7 @@ RSpec.describe Swagcov::Runner do
     let(:args) { ["--init"] }
     let(:dotfile_basename) { ".swagcov_test.yml" }
 
-    before { stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", dotfile_basename) }
+    before { stub_const("Swagcov::DOTFILE", dotfile_basename) }
     after { FileUtils.rm_f(dotfile_basename) }
 
     context "when dotfile does not exist" do
@@ -105,8 +105,8 @@ RSpec.describe Swagcov::Runner do
     let(:dotfile_basename) { ".swagcov_test.yml" }
 
     before do
-      stub_const("Swagcov::Dotfile::TODO_CONFIG_FILE_NAME", todo_basename)
-      stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", dotfile_basename)
+      stub_const("Swagcov::TODOFILE", todo_basename)
+      stub_const("Swagcov::DOTFILE", dotfile_basename)
       Swagcov::Command::GenerateDotfile.new(basename: dotfile_basename).run
     end
 
@@ -158,7 +158,7 @@ RSpec.describe Swagcov::Runner do
     let(:dotfile_basename) { ".swagcov_test.yml" }
 
     before do
-      stub_const("Swagcov::Dotfile::DEFAULT_CONFIG_FILE_NAME", dotfile_basename)
+      stub_const("Swagcov::DOTFILE", dotfile_basename)
       Swagcov::Command::GenerateDotfile.new(basename: dotfile_basename).run # create for minimum required config
     end
 

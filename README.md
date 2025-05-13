@@ -47,6 +47,15 @@ The approaches below are listed in the following order:
 - `rake swagcov -- --help`
 - `Swagcov::Runner.new(args: ["--help"]).run`
 
+### Environment Variables
+The following default environment variables are automatically set (and can be changed to your needs)
+| Key                | Value               |
+| ---                | ---                 |
+| `SWAGCOV_DOTFILE`  | `.swagcov.yml`      |
+| `SWAGCOV_TODOFILE` | `.swagcov_todo.yml` |
+
+For example `SWAGCOV_DOTFILE=".openapi_coverage_config.yml" bundle exec swagcov`
+
 ## Ruby and Rails Version Support
 Versioning support from a test coverage perspective, see [tests.yml](/.github/workflows/tests.yml) for detail
 | `ruby -v` | `rails 4.2` | `rails 5.0` | `rails 5.1` | `rails 5.2` | `rails 6.0` | `rails 6.1` | `rails 7.0` | `rails 7.1` | `rails 7.2` | `rails 8.0` |
