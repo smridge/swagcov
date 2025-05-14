@@ -5,6 +5,8 @@ require_relative "boot"
 require "rails"
 require "action_controller/railtie"
 
+ActiveSupport::Deprecation.behavior = :silence # in particular rswag
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)

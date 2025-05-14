@@ -18,7 +18,7 @@ gem "multi_json"
 
 group :development, :test do
   gem "rspec-rails"
-  gem "rswag-specs"
+  gem "rswag-specs", "2.11.0" # silence deprecations with older version + application.rb config
   gem "simplecov"
   gem "swagcov", path: "../.."
 end
