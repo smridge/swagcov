@@ -77,67 +77,84 @@ Versioning support from a test coverage perspective, see [tests.yml](/.github/wo
 | `3.5`     | ❌          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          | ✅          |
 
 ## Installation
-Add this line to your application's Gemfile:
-```ruby
-gem "swagcov"
-```
+- Add this line to your application's Gemfile:
+  ```ruby
+  gem "swagcov"
+  ```
 
-Execute:
-```shell
-bundle
-```
+- Execute `bundle install` to install the gem
 
-Generate the required `.swagcov.yml` configuration file in the root of your Rails application by executing one of the following commands:
-```
-bundle exec swagcov --init
-bundle exec rake swagcov -- --init
-```
+- Generate the required `.swagcov.yml` configuration file in the root of your Rails application by executing one of the following commands:
+  ```
+  bundle exec swagcov --init
+  bundle exec rake swagcov -- --init
+  ```
 
-- Add the paths of your OpenAPI `.yml` and/or `.json` files (**required**):
-  ```yml
+  You should now see the following file to configure to your needs:
+  ```yaml
+  ## Required field:
+  # List your OpenAPI documentation file(s) (accepts json or yaml)
   docs:
     paths:
       - swagger.yaml
       - swagger.json
+
+  ## Optional fields:
+  # routes:
+  #   paths:
+  #     only:
+  #       - ^/v2 # only track v2 endpoints
+  #     ignore:
+  #       - /v2/users # do not track certain endpoints
+  #       - /v2/users/:id: # ignore only certain actions (verbs)
+  #         - GET
   ```
 
-- Add `only` routes (**optional**) :
-  ```yml
-  routes:
-    paths:
-      only:
-        - ^/v1
+- Execute one of the following commands:
+  ```
+  bundle exec swagcov
+  bundle exec rake swagcov
   ```
 
-- Add `ignore` routes (**optional**) :
-  ```yml
-  routes:
-    paths:
-      ignore:
-        - /v1/foobar/:token
+  Example Output:
+  ```
+       GET /articles         200
+     PATCH /articles/:id     200
+    DELETE /articles/:id     204
+       GET /users            200
+      POST /users            201
+       GET /users/:id        200
+       PUT /users/:id        200
+    DELETE /users/:id        204
+       GET /v1/articles      200
+      POST /v1/articles      201
+       GET /v1/articles/:id  200
+     PATCH /v1/articles/:id  200
+       PUT /v1/articles/:id  200
+    DELETE /v1/articles/:id  204
+       GET /v2/articles      200
+      POST /v2/articles      201
+     PATCH /v2/articles/:id  200
+    DELETE /v2/articles/:id  204
+       GET /v2/articles/:id  ignored
+       PUT /v2/articles/:id  ignored
+      POST /articles         none
+       GET /articles/:id     none
+       PUT /articles/:id     none
+     PATCH /users/:id        none
+
+  OpenAPI documentation coverage 81.82% (18/22)
+  2 ignored endpoints
+  22 total endpoints
+  18 covered endpoints
+  4 uncovered endpoints
   ```
 
-- Full Example `.swagcov.yml` Config File:
-  ```yml
-  docs:
-    paths:
-      - swagger.yaml
-
-  routes:
-    paths:
-      only:
-        - ^/v1
-      ignore:
-        - /v1/foobar/:token
-        - /v1/foobar:
-          - GET
+- Optionally generate a `.swagcov_todo.yml` config file acting as a TODO list
   ```
-
-Execute one of the following commands:
-```
-bundle exec swagcov
-bundle exec rake swagcov
-```
+  bundle exec swagcov --todo
+  bundle exec rake swagcov -- --todo
+  ```
 
 ## Examples
 Configurations and output from running `swagcov` / `rake swagcov` from the root of your Rails Application
