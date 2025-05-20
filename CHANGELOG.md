@@ -1,7 +1,11 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 1.0.0 (2025-05-19)
 ### Refactor
 - Default Environment Variable approach ([#143](https://github.com/smridge/swagcov/pull/143))
+- `swagcov` is considered tested and stable for a version 1.0.0 release, see [README](/README.md) for documentation
 
 ## 0.11.0 (2025-05-13)
 ### Enhancement
