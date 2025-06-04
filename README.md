@@ -1,6 +1,7 @@
 # Swagcov
-[![Gem Version](https://img.shields.io/gem/v/swagcov)](https://rubygems.org/gems/swagcov)
-![Gem Downloads](https://img.shields.io/gem/dt/swagcov)
+[![Gem Version](https://img.shields.io/gem/v/swagcov?logo=rubygems)](https://rubygems.org/gems/swagcov)
+[![GitHub Top Language](https://img.shields.io/github/languages/top/smridge/swagcov)](https://rubygems.org/gems/swagcov)
+[![Gem Downloads](https://img.shields.io/gem/dt/swagcov)](https://rubygems.org/gems/swagcov)
 [![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop-hq/rubocop)
 [![GitHub License](https://img.shields.io/github/license/smridge/swagcov.svg)](https://github.com/smridge/swagcov/blob/main/LICENSE)
 
