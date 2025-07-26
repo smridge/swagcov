@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "3.4.4"
+ruby "3.5.0-preview1"
 
 gem "rails", "8.0.2"
 
@@ -12,6 +12,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
   gem "pry-byebug"
+  gem "rb-readline" # for pry on ruby 3.5
   gem "rspec-rails"
   gem "rswag-specs"
   gem "simplecov"
