@@ -8,6 +8,7 @@
       new_article GET    /articles/new(.:format)         articles#new
      edit_article GET    /articles/:id/edit(.:format)    articles#edit
     ```
+- Exclude `turbo-rails` related routes (part of rails frameworks that are not considered part of your OpenAPI documentation) ([#156](https://github.com/smridge/swagcov/pull/156))
 
 ## 1.0.0 (2025-05-19)
 ### Refactor
