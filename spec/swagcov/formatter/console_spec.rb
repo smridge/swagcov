@@ -104,7 +104,6 @@ RSpec.describe Swagcov::Formatter::Console do
         end
       end
 
-      # rubocop:disable Layout/EmptyLinesAroundArguments
       it "outputs coverage" do
         expect { result }.to output(
           <<~MESSAGE
@@ -151,7 +150,6 @@ RSpec.describe Swagcov::Formatter::Console do
           MESSAGE
         ).to_stdout
       end
-      # rubocop:enable Layout/EmptyLinesAroundArguments
 
       it { expect(result).to eq(0) }
     end
