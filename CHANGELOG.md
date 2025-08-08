@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 1.1.0 (2025-08-07)
 ### Enhancement
 - Exclude `new` and `edit` controller action routes that are non api routes by rails defaults/convention ([#155](https://github.com/smridge/swagcov/pull/155))
   - For example the below routes are now automatically skipped since these are _generally_ `html` formats.
@@ -10,7 +13,7 @@
     ```
 - Exclude `turbo-rails` related routes (part of rails frameworks that are not considered part of your OpenAPI documentation) ([#156](https://github.com/smridge/swagcov/pull/156))
 
-## 1.0.0 (2025-05-19)
+## 1.0.0 (2025-05-20)
 ### Refactor
 - Default Environment Variable approach ([#143](https://github.com/smridge/swagcov/pull/143))
 - `swagcov` is considered tested and stable for a version 1.0.0 release, see [README](/README.md) for documentation
@@ -126,7 +129,7 @@
 ### Code Coverage
   - Added official support for ruby 3.3 and 3.4 and rails 7.1, 7.2, 8.0. See [tests.yml](/.github/workflows/tests.yml) for detail
 
-## 0.4.0 (2022-08-11)
+## 0.4.0 (2022-08-12)
   - Improve OpenAPI file processing ([#26](https://github.com/smridge/swagcov/pull/26))
 
 ## 0.3.0 (2022-02-21)
