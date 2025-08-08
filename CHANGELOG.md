@@ -1,6 +1,13 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Enhancement
+- Exclude `new` and `edit` controller action routes that are non api routes by rails defaults/convention ([#155](https://github.com/smridge/swagcov/pull/155))
+  - For example the below routes are now automatically skipped since these are _generally_ `html` formats.
+    ```
+           Prefix Verb   URI Pattern                     Controller#Action
+      new_article GET    /articles/new(.:format)         articles#new
+     edit_article GET    /articles/:id/edit(.:format)    articles#edit
+    ```
 
 ## 1.0.0 (2025-05-19)
 ### Refactor
