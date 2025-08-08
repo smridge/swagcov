@@ -164,7 +164,6 @@ RSpec.describe Swagcov::Runner do
 
     after { FileUtils.rm_f(dotfile_basename) }
 
-    # rubocop:disable Layout/EmptyLinesAroundArguments
     it "prints coverage" do
       expect { init.run }.to raise_exception(SystemExit).and output(
         <<~MESSAGE
@@ -177,7 +176,6 @@ RSpec.describe Swagcov::Runner do
         MESSAGE
       ).to_stdout
     end
-    # rubocop:enable Layout/EmptyLinesAroundArguments
 
     it { expect { init.run }.to exit_with_code(0) }
   end
