@@ -68,10 +68,10 @@ module Swagcov
         # Skips routes like "/sidekiq"
         route.verb.blank? ||
 
-        # Exclude routes that are part of the rails gem that you would not write documentation for
-        # https://github.com/rails/rails/tree/main/activestorage/app/controllers/active_storage
-        # https://github.com/rails/rails/tree/main/actionmailbox/app/controllers/action_mailbox
-        path.include?("/active_storage/") || path.include?("/action_mailbox/")
+        # Exclude routes that are part of the rails frameworks that you would not write documentation for
+        path.include?("/active_storage/") ||
+        path.include?("/action_mailbox/") ||
+        turbo_rails_route?(route, path)
     end
 
     def internal_rails_route? route
@@ -80,6 +80,11 @@ module Swagcov
       else
         ::ActionDispatch::Routing::RouteWrapper.new(route).internal?
       end
+    end
+
+    def turbo_rails_route? route, path
+      # TODO: add route.source_location.include?("turbo-rails") - working on local machine but not in test env
+      path.include?("_historical_location") && route.name.include?("turbo_")
     end
 
     def non_api_route? route, path
