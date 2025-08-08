@@ -16,24 +16,54 @@ RSpec.describe Swagcov::Formatter::Console do
   let(:routes) do
     if Rails::VERSION::STRING > "5"
       [
-        instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true),
-        instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil),
-        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: "GET", internal: nil),
-        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: "POST", internal: nil),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "GET", internal: nil),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "PATCH", internal: nil),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "PUT", internal: nil),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: "DELETE", internal: nil)
+        instance_double(
+          ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true, defaults: { action: "anything" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil, defaults: { action: "anything" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: articles_path, verb: "GET", internal: nil, defaults: { action: "index" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: articles_path, verb: "POST", internal: nil, defaults: { action: "create" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: "GET", internal: nil, defaults: { action: "show" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: "PATCH", internal: nil, defaults: { action: "update" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: "PUT", internal: nil, defaults: { action: "update" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: "DELETE", internal: nil, defaults: { action: "destroy" }
+        )
       ]
     else
       [
-        instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: ""),
-        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: /^GET$/),
-        instance_double(ActionDispatch::Journey::Route, path: articles_path, verb: /^POST$/),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^GET$/),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^PATCH$/),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^PUT$/),
-        instance_double(ActionDispatch::Journey::Route, path: article_path, verb: /^DELETE$/)
+        instance_double(
+          ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", defaults: { action: "anything" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: articles_path, verb: /^GET$/, defaults: { action: "index" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: articles_path, verb: /^POST$/, defaults: { action: "create" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: /^GET$/, defaults: { action: "show" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: /^PATCH$/, defaults: { action: "update" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: /^PUT$/, defaults: { action: "update" }
+        ),
+        instance_double(
+          ActionDispatch::Journey::Route, path: article_path, verb: /^DELETE$/, defaults: { action: "destroy" }
+        )
       ]
     end
   end
@@ -60,9 +90,17 @@ RSpec.describe Swagcov::Formatter::Console do
 
       let(:routes) do
         if Rails::VERSION::STRING > "5"
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true)]
+          [
+            instance_double(
+              ActionDispatch::Journey::Route, path: irrelevant_path, verb: "GET", internal: true, defaults: { action: "anything" }
+            )
+          ]
         else
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: /^GET$/)]
+          [
+            instance_double(
+              ActionDispatch::Journey::Route, path: irrelevant_path, verb: /^GET$/, defaults: { action: "anything" }
+            )
+          ]
         end
       end
 
@@ -87,9 +125,17 @@ RSpec.describe Swagcov::Formatter::Console do
       let(:basename) { "spec/fixtures/dotfiles/no_versions.yml" }
       let(:routes) do
         if Rails::VERSION::STRING > "5"
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)]
+          [
+            instance_double(
+              ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil, defaults: { action: "anything" }
+            )
+          ]
         else
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "")]
+          [
+            instance_double(
+              ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", defaults: { action: "anything" }
+            )
+          ]
         end
       end
 
@@ -291,7 +337,8 @@ RSpec.describe Swagcov::Formatter::Console do
               ActionDispatch::Journey::Route,
               path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
               verb: "GET",
-              internal: nil
+              internal: nil,
+              defaults: { action: "index" }
             )
           ]
         else
@@ -299,7 +346,8 @@ RSpec.describe Swagcov::Formatter::Console do
             instance_double(
               ActionDispatch::Journey::Route,
               path: instance_double(ActionDispatch::Journey::Path::Pattern, spec: "/articles(.:format)"),
-              verb: /^GET$/
+              verb: /^GET$/,
+              defaults: { action: "index" }
             )
           ]
         end
