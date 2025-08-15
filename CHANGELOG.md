@@ -1,6 +1,7 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Fix
+- Better matching for non api and turbo related routes ([#161](https://github.com/smridge/swagcov/pull/161))
 
 ## 1.1.0 (2025-08-07)
 ### Enhancement
