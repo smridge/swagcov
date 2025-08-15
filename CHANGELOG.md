@@ -1,9 +1,12 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 1.1.1 (2025-08-15)
 ### Fix
 - Better matching for non api and turbo related routes ([#161](https://github.com/smridge/swagcov/pull/161))
 
-## 1.1.0 (2025-08-07)
+## 1.1.0 (2025-08-08)
 ### Enhancement
 - Exclude `new` and `edit` controller action routes that are non api routes by rails defaults/convention ([#155](https://github.com/smridge/swagcov/pull/155))
   - For example the below routes are now automatically skipped since these are _generally_ `html` formats.
