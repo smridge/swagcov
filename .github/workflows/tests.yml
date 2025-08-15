@@ -60,7 +60,7 @@ jobs:
       BUNDLE_GEMFILE: ${{ matrix.gemfile }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Setup Ruby (rails 4.2)
         if: ${{ matrix.gemfile == 'gemfiles/rails_4_2' }}
         uses: ruby/setup-ruby@v1
@@ -103,7 +103,7 @@ jobs:
           - spec/sandbox_8_0
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@v1
         with:
