@@ -85,7 +85,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    json-schema (5.2.1)
+    json-schema (5.2.2)
       addressable (~> 2.8)
       bigdecimal (~> 3.1)
     logger (1.7.0)
