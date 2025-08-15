@@ -108,9 +108,13 @@ Versioning support from a test coverage perspective, see [tests.yml](/.github/wo
   #     only:
   #       - ^/v2 # only track v2 endpoints
   #     ignore:
+  #       - /: # root
+  #         - GET
+  #       - /up: # health check
+  #         - GET
   #       - /v2/users # do not track certain endpoints
   #       - /v2/users/:id: # ignore only certain actions (verbs)
-  #         - GET
+  #         - PUT
   ```
 
 - Execute one of the following commands:
