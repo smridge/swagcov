@@ -2,11 +2,6 @@
 
 source "https://rubygems.org"
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 gemspec path: "../.."
 
 gem "railties", "4.2.11.3"
@@ -15,6 +10,5 @@ gem "bigdecimal", "1.4.4" # Fix for undefined method `new' for BigDecimal:Class
 
 # development dependencies
 gem "pry-byebug"
-gem "rb-readline" # for pry on ruby 3.5
 gem "rspec"
 gem "simplecov"

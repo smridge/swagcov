@@ -2,23 +2,23 @@
 
 source "https://rubygems.org"
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
-
 gemspec path: "../.."
 
 gem "railties", "5.1.7"
 
-gem "bigdecimal" # Fix for ruby 3.4 (cannot load such file -- bigdecimal)
-gem "mutex_m" # Fix for ruby 3.4 (cannot load such file -- mutex_m)
-gem "base64" # Fix for ruby 3.4 (cannot load such file -- base64)
-gem "logger" # Fix for ruby 3.5 (cannot load such file -- logger)
-gem "irb" # Fix for ruby 3.5 (cannot load such file -- irb)
+if RUBY_VERSION >= "3.4"
+  gem "base64" # Fix (cannot load such file -- base64)
+  gem "bigdecimal" # Fix (cannot load such file -- bigdecimal)
+  gem "mutex_m" # Fix (cannot load such file -- mutex_m)
+end
+
+if RUBY_VERSION >= "3.5"
+  gem "irb" # Fix (cannot load such file -- irb)
+  gem "logger" # Fix (cannot load such file -- logger)
+  gem "rb-readline" # Fix for pry-byebug
+end
 
 # development dependencies
 gem "pry-byebug"
-gem "rb-readline" # for pry on ruby 3.5
 gem "rspec"
 gem "simplecov"
