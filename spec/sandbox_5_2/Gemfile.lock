@@ -84,7 +84,6 @@ GEM
     mini_portile2 (2.8.9)
     minitest (5.25.5)
     msgpack (1.8.0)
-    multi_json (1.15.0)
     net-imap (0.4.22)
       date
       net-protocol
@@ -148,7 +147,7 @@ GEM
       rspec-expectations (~> 3.10)
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
-    rspec-support (3.13.4)
+    rspec-support (3.13.5)
     rswag-specs (2.16.0)
       activesupport (>= 5.2, < 8.1)
       json-schema (>= 2.2, < 6.0)
@@ -183,7 +182,6 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
-  multi_json
   puma
   rails (= 5.2.8.1)
   rspec-rails
