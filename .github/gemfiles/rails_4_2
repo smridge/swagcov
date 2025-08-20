@@ -6,7 +6,9 @@ gemspec path: "../.."
 
 gem "railties", "4.2.11.3"
 
-gem "bigdecimal", "1.4.4" # Fix for undefined method `new' for BigDecimal:Class
+if RUBY_VERSION >= "2.7"
+  gem "bigdecimal", "1.4.4" # Fix (undefined method `new' for BigDecimal:Class)
+end
 
 # development dependencies
 gem "pry-byebug"

@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 source "https://rubygems.org"
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.8"
+ruby file: ".ruby-version"
 
 gem "rails", "5.2.8.1"
 
 gem "bootsnap", ">= 1.1.0", require: false
 gem "puma"
-
-# resolve loading error
-gem "multi_json"
 
 group :development, :test do
   gem "rspec-rails"
