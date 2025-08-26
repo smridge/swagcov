@@ -79,4 +79,172 @@ describe "rake swagcov", type: :task do
     it { expect { task.execute }.to raise_exception(SystemExit) }
     it { expect { task.execute }.to exit_with_code(2) }
   end
+
+  context "with -- --init option" do
+    before { stub_const("ARGV", ["swagcov", "--", "--init"]) }
+
+    context "when dotfile exists" do
+      it "does not overwrite existing file" do
+        task.execute
+      rescue SystemExit => _e
+        expect(File.read(Swagcov::DOTFILE)).to eq(
+          <<~YAML
+            docs:
+              paths:
+                - swagger/openapi.yaml
+                - swagger/v2_openapi.json
+          YAML
+        )
+      end
+
+      it "has message" do
+        expect { task.execute }.to raise_exception(SystemExit).and output(
+          <<~MESSAGE
+            #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
+          MESSAGE
+        ).to_stdout
+      end
+
+      it { expect { task.execute }.to exit_with_code(2) }
+    end
+
+    context "when dotfile does not exist" do
+      let(:basename) { ".swagcov_test.yml" }
+
+      before { stub_const("Swagcov::DOTFILE", basename) }
+      after { FileUtils.rm_f(basename) }
+
+      it "creates a minimum configuration file" do
+        task.execute
+      rescue SystemExit => _e
+        expect(File.read(basename)).to eq(
+          <<~YAML
+            ## Required field:
+            # List your OpenAPI documentation file(s) (accepts json or yaml)
+            docs:
+              paths:
+                - swagger.yaml
+                - swagger.json
+
+            ## Optional fields:
+            # routes:
+            #   paths:
+            #     only:
+            #       - ^/v2 # only track v2 endpoints
+            #     ignore:
+            #       - /v2/users # do not track certain endpoints
+            #       - /v2/users/:id: # ignore only certain actions (verbs)
+            #         - GET
+          YAML
+        )
+      end
+
+      it "has message" do
+        expect { task.execute }.to raise_exception(SystemExit).and output(
+          <<~MESSAGE
+            created #{basename} at #{Swagcov.project_root}
+          MESSAGE
+        ).to_stdout
+      end
+
+      it { expect { task.execute }.to exit_with_code(0) }
+    end
+  end
+
+  describe "with -- --todo option" do
+    let(:basename) { ".swagcov_test.yml" }
+
+    before do
+      stub_const("ARGV", ["swagcov", "--", "--todo"])
+      stub_const("Swagcov::TODOFILE", basename)
+    end
+
+    after { FileUtils.rm_f(basename) }
+
+    context "with uncovered routes" do
+      before { stub_const("Swagcov::DOTFILE", "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml") }
+
+      it "generates a todo configuration file" do
+        task.execute
+      rescue SystemExit => _e
+        expect(File.read(basename)).to eq(
+          <<~YAML
+            # This configuration was auto generated
+            # The intent is to remove these route configurations as documentation is added
+            ---
+            routes:
+              paths:
+                ignore:
+                - "/v1/articles/:id":
+                  - GET
+                  - PATCH
+                  - PUT
+                  - DELETE
+          YAML
+        )
+      end
+
+      it "has message" do
+        expect { task.execute }.to raise_exception(SystemExit).and output(
+          <<~MESSAGE
+            created #{basename} at #{Swagcov.project_root}
+          MESSAGE
+        ).to_stdout
+      end
+
+      it { expect { task.execute }.to exit_with_code(0) }
+    end
+
+    context "without uncovered routes" do
+      it "generates a todo configuration file" do
+        task.execute
+      rescue SystemExit => _e
+        expect(File.read(basename)).to eq(
+          <<~YAML
+            # This configuration was auto generated
+            # The intent is to remove these route configurations as documentation is added
+
+          YAML
+        )
+      end
+
+      it "has message" do
+        expect { task.execute }.to raise_exception(SystemExit).and output(
+          <<~MESSAGE
+            created #{basename} at #{Swagcov.project_root}
+          MESSAGE
+        ).to_stdout
+      end
+
+      it { expect { task.execute }.to exit_with_code(0) }
+    end
+  end
+
+  context "with -- --version option" do
+    before { stub_const("ARGV", ["swagcov", "--", "--version"]) }
+
+    it "has message" do
+      expect { task.execute }.to raise_exception(SystemExit).and output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout
+    end
+
+    it { expect { task.execute }.to exit_with_code(0) }
+  end
+
+  context "with -- -v option" do
+    before { stub_const("ARGV", ["swagcov", "--", "-v"]) }
+
+    it "has message" do
+      expect { task.execute }.to raise_exception(SystemExit).and output(
+        <<~MESSAGE
+          #{Swagcov::Version::STRING}
+        MESSAGE
+      ).to_stdout
+    end
+
+    it { expect { task.execute }.to exit_with_code(0) }
+  end
 end
