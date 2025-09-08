@@ -52,7 +52,7 @@ GEM
       public_suffix (>= 2.0.2, < 7.0)
     arel (9.0.0)
     base64 (0.3.0)
-    bigdecimal (3.2.2)
+    bigdecimal (3.2.3)
     bootsnap (1.18.6)
       msgpack (~> 1.2)
     builder (3.3.0)
