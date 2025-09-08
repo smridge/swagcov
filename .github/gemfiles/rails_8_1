@@ -1,0 +1,16 @@
+# frozen_string_literal: true
+
+source "https://rubygems.org"
+
+gemspec path: "../.."
+
+gem "railties", "8.1.0.beta1"
+
+if RUBY_VERSION >= "3.5"
+  gem "rb-readline" # Fix for pry-byebug
+end
+
+# development dependencies
+gem "pry-byebug"
+gem "rspec"
+gem "simplecov"

@@ -20,6 +20,7 @@ jobs:
           - .github/gemfiles/rails_7_1
           - .github/gemfiles/rails_7_2
           - .github/gemfiles/rails_8_0
+          - .github/gemfiles/rails_8_1
         exclude:
           - ruby-version: '2.5'
             gemfile: .github/gemfiles/rails_7_0 # ruby 2.7 minimum for rails 7.0
@@ -29,6 +30,8 @@ jobs:
             gemfile: .github/gemfiles/rails_7_2 # ruby 3.1 minimum for rails 7.2
           - ruby-version: '2.5'
             gemfile: .github/gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
+          - ruby-version: '2.5'
+            gemfile: .github/gemfiles/rails_8_1 # ruby 3.2 minimum for rails 8.1
           - ruby-version: '2.6'
             gemfile: .github/gemfiles/rails_7_0 # ruby 2.7 minimum for rails 7.0
           - ruby-version: '2.6'
@@ -37,16 +40,24 @@ jobs:
             gemfile: .github/gemfiles/rails_7_2 # ruby 3.1 minimum for rails 7.2
           - ruby-version: '2.6'
             gemfile: .github/gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
+          - ruby-version: '2.6'
+            gemfile: .github/gemfiles/rails_8_1 # ruby 3.2 minimum for rails 8.1
           - ruby-version: '2.7'
             gemfile: .github/gemfiles/rails_7_2 # ruby 3.1 minimum for rails 7.2
           - ruby-version: '2.7'
             gemfile: .github/gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
+          - ruby-version: '2.7'
+            gemfile: .github/gemfiles/rails_8_1 # ruby 3.2 minimum for rails 8.1
           - ruby-version: '3.0'
             gemfile: .github/gemfiles/rails_7_2 # ruby 3.1 minimum for rails 7.2
           - ruby-version: '3.0'
             gemfile: .github/gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
+          - ruby-version: '3.0'
+            gemfile: .github/gemfiles/rails_8_1 # ruby 3.2 minimum for rails 8.1
           - ruby-version: '3.1'
             gemfile: .github/gemfiles/rails_8_0 # ruby 3.2 minimum for rails 8.0
+          - ruby-version: '3.1'
+            gemfile: .github/gemfiles/rails_8_1 # ruby 3.2 minimum for rails 8.1
           - ruby-version: '3.2'
             gemfile: .github/gemfiles/rails_4_2 # bundler < 2 needed
           - ruby-version: '3.3'
@@ -101,6 +112,7 @@ jobs:
           - spec/sandbox_7_1
           - spec/sandbox_7_2
           - spec/sandbox_8_0
+          - spec/sandbox_8_1
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
