@@ -76,7 +76,14 @@ describe "rake swagcov", type: :task do
   context "without required configuration" do
     before { stub_const("Swagcov::DOTFILE", "../sandbox_fixtures/dotfiles/no-dotfile.yml") }
 
-    it { expect { task.execute }.to raise_exception(SystemExit) }
+    it "prints message" do
+      expect { task.execute }.to raise_exception(SystemExit).and output(
+        <<~MESSAGE
+          Swagcov::Errors::BadConfiguration: Missing config file (#{Swagcov::DOTFILE})
+        MESSAGE
+      ).to_stderr
+    end
+
     it { expect { task.execute }.to exit_with_code(2) }
   end
 
