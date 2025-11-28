@@ -287,7 +287,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-   ruby 3.3.10p183
+  ruby 3.3.10p183
 
 BUNDLED WITH
-   2.7.2
+  4.0.0.beta2
