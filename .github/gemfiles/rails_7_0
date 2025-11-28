@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gemspec path: "../.."
 
-gem "railties", "7.0.4.3"
+gem "railties", "7.0.10"
 
 if RUBY_VERSION >= "3.4"
   gem "base64" # Fix (cannot load such file -- base64)

@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gemspec path: "../.."
 
-gem "railties", "8.0.3"
+gem "railties", "8.0.4"
 
 if RUBY_VERSION >= "3.5"
   gem "rb-readline" # Fix for pry-byebug
