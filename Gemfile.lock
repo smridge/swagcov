@@ -58,7 +58,7 @@ GEM
       pp (>= 0.6.0)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
-    json (2.16.0)
+    json (2.17.0)
     language_server-protocol (3.17.0.5)
     lint_roller (1.1.0)
     logger (1.7.0)
@@ -172,7 +172,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
-    stringio (3.1.8)
+    stringio (3.1.9)
     thor (1.4.0)
     tsort (0.2.0)
     tzinfo (2.0.6)
@@ -207,4 +207,4 @@ DEPENDENCIES
   swagcov!
 
 BUNDLED WITH
-  4.0.0.dev
+  4.0.0
