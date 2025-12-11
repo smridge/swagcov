@@ -44,7 +44,7 @@ RSpec.describe Swagcov::Command::ReportCoverage do
     else
       [
         instance_double(
-          ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", defaults: { action: "anything" }
+          ActionDispatch::Journey::Route, path: irrelevant_path, verb: //, defaults: { action: "anything" }
         ),
         instance_double(
           ActionDispatch::Journey::Route, path: articles_path, verb: /^GET$/, defaults: { action: "index" }
@@ -104,7 +104,7 @@ RSpec.describe Swagcov::Command::ReportCoverage do
         if Rails::VERSION::STRING > "5"
           [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", internal: nil)]
         else
-          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: "")]
+          [instance_double(ActionDispatch::Journey::Route, path: irrelevant_path, verb: //)]
         end
       end
 

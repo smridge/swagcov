@@ -11,6 +11,8 @@ gem "puma", "~> 3.0"
 # resolve loading error
 gem "multi_json"
 
+gem "sidekiq" # added to test skipping mounted applications
+
 group :development, :test do
   gem "rspec-rails"
   gem "rswag-specs", "2.11.0" # Fix FrozenError: can't modify frozen Hash & ignore deprecation outside of project scope
