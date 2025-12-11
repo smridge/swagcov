@@ -9,6 +9,8 @@ gem "rails", "5.2.8.1"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "puma"
 
+gem "sidekiq" # added to test skipping mounted applications
+
 group :development, :test do
   gem "rspec-rails"
   gem "rswag-specs"

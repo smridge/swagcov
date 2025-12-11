@@ -42,7 +42,7 @@ RSpec.describe Swagcov::Coverage do
     else
       [
         instance_double(
-          ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", defaults: { action: "anything" }
+          ActionDispatch::Journey::Route, path: irrelevant_path, verb: //, defaults: { action: "anything" }
         ),
         instance_double(
           ActionDispatch::Journey::Route, path: articles_path, verb: /^GET$/, defaults: { action: "index" }
@@ -128,7 +128,7 @@ RSpec.describe Swagcov::Coverage do
         else
           [
             instance_double(
-              ActionDispatch::Journey::Route, path: irrelevant_path, verb: "", defaults: { action: "anything" }
+              ActionDispatch::Journey::Route, path: irrelevant_path, verb: //, defaults: { action: "anything" }
             )
           ]
         end

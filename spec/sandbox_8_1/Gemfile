@@ -10,6 +10,7 @@ gem "bootsnap", require: false
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
+gem "sidekiq" # added to test skipping mounted applications
 gem "turbo-rails" # added to test skipping turbo related routes (system tests will catch)
 
 group :development, :test do

@@ -9,6 +9,8 @@ gem "rails", "4.2.11.3"
 # resolve loading error
 gem "multi_json"
 
+gem "sidekiq" # added to test skipping mounted applications
+
 group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"

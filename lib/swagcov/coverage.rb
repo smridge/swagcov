@@ -23,7 +23,7 @@ module Swagcov
         path = route_path(route)
         verb = route_verb(route)
 
-        next if default_skipped_route?(route, path)
+        next if default_skipped_route?(route, path, verb)
 
         if dotfile.ignore_path?(path, verb: verb)
           update_data(:ignored, verb, path, "ignored")
@@ -56,30 +56,35 @@ module Swagcov
       rails_version > "5" ? route.verb : route.verb.inspect.gsub(%r{[$^/]}, "")
     end
 
-    def default_skipped_route? route, path
-      third_party_route?(route, path) || non_api_route?(route, path)
+    def default_skipped_route? route, path, verb
+      third_party_route?(route, path, verb) || non_api_route?(route, path)
     end
 
-    def third_party_route? route, path
-      # https://github.com/rails/rails/blob/48f3c3e201b57a4832314b2c957a3b303e89bfea/actionpack/lib/action_dispatch/routing/inspector.rb#L105-L107
-      # Skips route paths like ["/rails/info/properties", "/rails/info", "/rails/mailers"]
+    def third_party_route? route, path, verb
       internal_rails_route?(route) ||
-
-        # Skips routes like "/sidekiq"
-        route.verb.blank? ||
-
-        # Exclude routes that are part of the rails frameworks that you would not write documentation for
-        path.include?("/active_storage/") ||
-        path.include?("/action_mailbox/") ||
+        mounted_route?(verb) ||
+        rails_framework_route?(path) ||
         turbo_rails_route?(route, path)
     end
 
     def internal_rails_route? route
+      # https://github.com/rails/rails/blob/48f3c3e201b57a4832314b2c957a3b303e89bfea/actionpack/lib/action_dispatch/routing/inspector.rb#L105-L107
+      # Skips route paths like ["/rails/info/properties", "/rails/info", "/rails/mailers"]
       if rails_version > "5"
         route.internal
       else
         ::ActionDispatch::Routing::RouteWrapper.new(route).internal?
       end
+    end
+
+    def mounted_route? verb
+      # Skips routes like "/sidekiq"
+      verb.blank?
+    end
+
+    def rails_framework_route? path
+      # Exclude routes that are part of the rails frameworks that you would not write documentation for
+      path.include?("/active_storage/") || path.include?("/action_mailbox/")
     end
 
     def turbo_rails_route? route, path

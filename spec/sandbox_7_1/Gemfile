@@ -10,6 +10,8 @@ gem "bootsnap", require: false
 gem "puma", ">= 5.0"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
+gem "sidekiq" # added to test skipping mounted applications
+
 group :development, :test do
   gem "pry-byebug"
   gem "rspec-rails"
