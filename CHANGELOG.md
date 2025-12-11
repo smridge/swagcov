@@ -1,10 +1,15 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Fix
+- Improve check for skipping mounted applications for Rails 4.2 applications ([#179](https://github.com/smridge/swagcov/pull/179))
+
+### Enhancement
+- Add support for Ruby 4.0 ([#176](https://github.com/smridge/swagcov/pull/176))
+- Add support for Rails 8.1 ([#167](https://github.com/smridge/swagcov/pull/167))
 
 ## 1.1.1 (2025-08-15)
 ### Fix
-- Better matching for non api and turbo related routes ([#161](https://github.com/smridge/swagcov/pull/161))
+- Improve matching for non api and turbo related routes ([#161](https://github.com/smridge/swagcov/pull/161))
 
 ## 1.1.0 (2025-08-08)
 ### Enhancement
