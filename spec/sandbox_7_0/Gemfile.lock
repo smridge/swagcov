@@ -93,7 +93,7 @@ GEM
     concurrent-ruby (1.3.5)
     connection_pool (2.5.5)
     crass (1.0.6)
-    date (3.5.0)
+    date (3.5.1)
     diff-lcs (1.6.2)
     docile (1.4.1)
     drb (2.2.3)
@@ -227,7 +227,7 @@ GEM
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
     thor (1.4.0)
-    timeout (0.4.4)
+    timeout (0.5.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     websocket-driver (0.8.0)
@@ -262,4 +262,4 @@ RUBY VERSION
   ruby 3.2.9p265
 
 BUNDLED WITH
-  4.0.0
+  4.0.1
