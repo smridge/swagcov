@@ -1,9 +1,14 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 1.2.0 (2025-12-20)
 ### Fix
 - Improve check for skipping mounted applications for Rails 4.2 applications ([#179](https://github.com/smridge/swagcov/pull/179))
+- Resolve constants for loading rake task ([#181](https://github.com/smridge/swagcov/pull/181))
 
 ### Enhancement
+- Update dotfile template generated for install with better suggestions for ignoring certain endpoints ([#184](https://github.com/smridge/swagcov/pull/184))
 - Add support for Ruby 4.0 ([#176](https://github.com/smridge/swagcov/pull/176))
 - Add support for Rails 8.1 ([#167](https://github.com/smridge/swagcov/pull/167))
 
