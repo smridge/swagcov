@@ -15,10 +15,8 @@ end
 if RUBY_VERSION >= "3.5"
   gem "irb" # Fix (cannot load such file -- irb)
   gem "logger" # Fix (cannot load such file -- logger)
-  gem "rb-readline" # Fix for pry-byebug
 end
 
 # development dependencies
-gem "pry-byebug"
 gem "rspec"
 gem "simplecov"
