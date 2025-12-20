@@ -90,7 +90,7 @@ GEM
     builder (3.3.0)
     byebug (12.0.0)
     coderay (1.1.3)
-    concurrent-ruby (1.3.5)
+    concurrent-ruby (1.3.6)
     connection_pool (2.5.5)
     crass (1.0.6)
     date (3.5.1)
@@ -106,7 +106,7 @@ GEM
       addressable (~> 2.8)
       bigdecimal (~> 3.1)
     logger (1.7.0)
-    loofah (2.24.1)
+    loofah (2.25.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     mail (2.9.0)
@@ -118,10 +118,11 @@ GEM
     marcel (1.1.0)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    minitest (5.26.2)
+    minitest (6.0.0)
+      prism (~> 1.5)
     msgpack (1.8.0)
     mutex_m (0.3.0)
-    net-imap (0.5.12)
+    net-imap (0.6.2)
       date
       net-protocol
     net-pop (0.1.2)
@@ -147,6 +148,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.18.10-x86_64-linux-musl)
       racc (~> 1.4)
+    prism (1.7.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -227,14 +229,14 @@ GEM
     simplecov-html (0.13.2)
     simplecov_json_formatter (0.1.4)
     thor (1.4.0)
-    timeout (0.5.0)
+    timeout (0.6.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     websocket-driver (0.8.0)
       base64
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.7.3)
+    zeitwerk (2.7.4)
 
 PLATFORMS
   aarch64-linux-gnu
@@ -262,4 +264,4 @@ RUBY VERSION
   ruby 3.2.9p265
 
 BUNDLED WITH
-  4.0.1
+  4.0.2
