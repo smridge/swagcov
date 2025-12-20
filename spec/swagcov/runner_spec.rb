@@ -53,9 +53,13 @@ RSpec.describe Swagcov::Runner do
             #     only:
             #       - ^/v2 # only track v2 endpoints
             #     ignore:
+            #       - /: # root
+            #         - GET
+            #       - /up: # health check
+            #         - GET
             #       - /v2/users # do not track certain endpoints
             #       - /v2/users/:id: # ignore only certain actions (verbs)
-            #         - GET
+            #         - PUT
           YAML
         )
       end
