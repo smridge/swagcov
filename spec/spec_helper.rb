@@ -8,7 +8,7 @@ end
 SimpleCov.command_name "unit"
 
 require "logger"
-require "pry-byebug"
+require "pry-byebug" unless ENV["CI"] == "true"
 require "swagcov"
 
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].sort.each { |f| require f }

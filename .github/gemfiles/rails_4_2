@@ -11,6 +11,5 @@ if RUBY_VERSION >= "2.7"
 end
 
 # development dependencies
-gem "pry-byebug"
 gem "rspec"
 gem "simplecov"
