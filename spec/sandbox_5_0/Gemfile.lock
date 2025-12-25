@@ -57,7 +57,7 @@ GEM
     erubis (2.7.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     io-wait (0.3.1)
     json-schema (3.0.0)
