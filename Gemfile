@@ -6,7 +6,7 @@ gemspec
 # development dependencies
 ## console
 gem "pry-byebug"
-gem "rb-readline" # for pry on ruby 3.5
+gem "rb-readline" # for pry on ruby >= 3.5
 
 ## testing
 gem "rspec"
