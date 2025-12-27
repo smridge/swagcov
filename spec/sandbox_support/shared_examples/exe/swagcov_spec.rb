@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "rails_helper"
+
 describe "[executable] swagcov" do
   context "without optional arguments" do
     subject(:swagcov) { system %(swagcov) }
@@ -110,25 +112,23 @@ describe "[executable] swagcov" do
     subject(:swagcov) { system %(swagcov --init) }
 
     context "when dotfile exists" do
-      it "does not overwrite existing file" do
-        swagcov
+      it "does not overwrite existing file and has message" do
+        aggregate_failures do
+          expect { swagcov }.to output(
+            <<~MESSAGE
+              #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
+            MESSAGE
+          ).to_stdout_from_any_process
 
-        expect(File.read(Swagcov::DOTFILE)).to eq(
-          <<~YAML
-            docs:
-              paths:
-                - swagger/openapi.yaml
-                - swagger/v2_openapi.json
-          YAML
-        )
-      end
-
-      it "has message" do
-        expect { swagcov }.to output(
-          <<~MESSAGE
-            #{Swagcov::DOTFILE} already exists at #{Swagcov.project_root}
-          MESSAGE
-        ).to_stdout_from_any_process
+          expect(File.read(Swagcov::DOTFILE)).to eq(
+            <<~YAML
+              docs:
+                paths:
+                  - swagger/openapi.yaml
+                  - swagger/v2_openapi.json
+            YAML
+          )
+        end
       end
     end
 
@@ -142,41 +142,39 @@ describe "[executable] swagcov" do
         FileUtils.rm_f(basename)
       end
 
-      it "creates a minimum configuration file" do
-        swagcov
+      it "creates a minimum configuration file and has message" do
+        aggregate_failures do
+          expect { swagcov }.to output(
+            <<~MESSAGE
+              created #{basename} at #{Swagcov.project_root}
+            MESSAGE
+          ).to_stdout_from_any_process
 
-        expect(File.read(basename)).to eq(
-          <<~YAML
-            ## Required field:
-            # List your OpenAPI documentation file(s) (accepts json or yaml)
-            docs:
-              paths:
-                - swagger.yaml
-                - swagger.json
+          expect(File.read(basename)).to eq(
+            <<~YAML
+              ## Required field:
+              # List your OpenAPI documentation file(s) (accepts json or yaml)
+              docs:
+                paths:
+                  - swagger.yaml
+                  - swagger.json
 
-            ## Optional fields:
-            # routes:
-            #   paths:
-            #     only:
-            #       - ^/v2 # only track v2 endpoints
-            #     ignore:
-            #       - /: # root
-            #         - GET
-            #       - /up: # health check
-            #         - GET
-            #       - /v2/users # do not track certain endpoints
-            #       - /v2/users/:id: # ignore only certain actions (verbs)
-            #         - PUT
-          YAML
-        )
-      end
-
-      it "has message" do
-        expect { swagcov }.to output(
-          <<~MESSAGE
-            created #{basename} at #{Swagcov.project_root}
-          MESSAGE
-        ).to_stdout_from_any_process
+              ## Optional fields:
+              # routes:
+              #   paths:
+              #     only:
+              #       - ^/v2 # only track v2 endpoints
+              #     ignore:
+              #       - /: # root
+              #         - GET
+              #       - /up: # health check
+              #         - GET
+              #       - /v2/users # do not track certain endpoints
+              #       - /v2/users/:id: # ignore only certain actions (verbs)
+              #         - PUT
+            YAML
+          )
+        end
       end
     end
   end
@@ -197,54 +195,50 @@ describe "[executable] swagcov" do
       before { ENV["SWAGCOV_DOTFILE"] = "../sandbox_fixtures/dotfiles/only_and_ignore_config.yml" }
       after { ENV["SWAGCOV_DOTFILE"] = nil }
 
-      it "generates a todo configuration file" do
-        swagcov
+      it "generates a todo configuration file and has message" do
+        aggregate_failures do
+          expect { swagcov }.to output(
+            <<~MESSAGE
+              created #{basename} at #{Swagcov.project_root}
+            MESSAGE
+          ).to_stdout_from_any_process
 
-        expect(File.read(basename)).to eq(
-          <<~YAML
-            # This configuration was auto generated
-            # The intent is to remove these route configurations as documentation is added
-            ---
-            routes:
-              paths:
-                ignore:
-                - "/v1/articles/:id":
-                  - GET
-                  - PATCH
-                  - PUT
-                  - DELETE
-          YAML
-        )
-      end
-
-      it "has message" do
-        expect { swagcov }.to output(
-          <<~MESSAGE
-            created #{basename} at #{Swagcov.project_root}
-          MESSAGE
-        ).to_stdout_from_any_process
+          expect(File.read(basename)).to eq(
+            <<~YAML
+              # This configuration was auto generated
+              # The intent is to remove these route configurations as documentation is added
+              ---
+              routes:
+                paths:
+                  ignore:
+                  - "/v1/articles/:id":
+                    - GET
+                    - PATCH
+                    - PUT
+                    - DELETE
+            YAML
+          )
+        end
       end
     end
 
     context "without uncovered routes" do
-      it "generates a todo configuration file" do
-        swagcov
+      it "generates a todo configuration file and has message" do
+        aggregate_failures do
+          expect { swagcov }.to output(
+            <<~MESSAGE
+              created #{basename} at #{Swagcov.project_root}
+            MESSAGE
+          ).to_stdout_from_any_process
 
-        expect(File.read(basename)).to eq(
-          <<~YAML
-            # This configuration was auto generated
-            # The intent is to remove these route configurations as documentation is added
+          expect(File.read(basename)).to eq(
+            <<~YAML
+              # This configuration was auto generated
+              # The intent is to remove these route configurations as documentation is added
 
-          YAML
-        )
-      end
-
-      it "has message" do
-        expect { swagcov }.to output(
-          <<~MESSAGE
-            created #{basename} at #{Swagcov.project_root}
-          MESSAGE
-        ).to_stdout_from_any_process
+            YAML
+          )
+        end
       end
     end
   end

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require "action_dispatch/routing/inspector" if Rails::VERSION::STRING < "5"
-
 RSpec.describe Swagcov::Runner do
   subject(:init) do
     described_class.new(args: args)
@@ -10,8 +8,8 @@ RSpec.describe Swagcov::Runner do
   context "with --help" do
     let(:args) { ["--help"] }
 
-    it "prints options" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits and prints options" do
+      expect { init.run }.to exit_with_code(0).and output(
         <<~MESSAGE
           Usage:
           * as executable: swagcov [options]
@@ -23,7 +21,6 @@ RSpec.describe Swagcov::Runner do
       ).to_stdout
     end
 
-    it { expect { init.run }.to exit_with_code(0) }
     it { expect { described_class.new(args: ["-h"]).run }.to exit_with_code(0) }
   end
 
@@ -64,15 +61,14 @@ RSpec.describe Swagcov::Runner do
         )
       end
 
-      it "outputs message" do
-        expect { init.run }.to raise_exception(SystemExit).and output(
+      it "exits with message" do
+        expect { init.run }.to exit_with_code(0).and output(
           <<~MESSAGE
             created #{dotfile_basename} at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout
       end
 
-      it { expect { init.run }.to exit_with_code(0) }
       it { expect { described_class.new(args: ["-i"]).run }.to exit_with_code(0) }
     end
 
@@ -90,15 +86,14 @@ RSpec.describe Swagcov::Runner do
         expect(File.read(dotfile_basename)).to eq("")
       end
 
-      it "has message" do
-        expect { init.run }.to raise_exception(SystemExit).and output(
+      it "exits with message" do
+        expect { init.run }.to exit_with_code(2).and output(
           <<~MESSAGE
             #{dotfile_basename} already exists at #{Swagcov.project_root}
           MESSAGE
         ).to_stdout
       end
 
-      it { expect { init.run }.to exit_with_code(2) }
       it { expect { described_class.new(args: ["-i"]).run }.to exit_with_code(2) }
     end
   end
@@ -130,31 +125,28 @@ RSpec.describe Swagcov::Runner do
       )
     end
 
-    it "prints message" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits with message" do
+      expect { init.run }.to exit_with_code(0).and output(
         <<~MESSAGE
           created #{todo_basename} at #{Swagcov.project_root}
         MESSAGE
       ).to_stdout
     end
 
-    it { expect { init.run }.to exit_with_code(0) }
     it { expect { described_class.new(args: ["-t"]).run }.to exit_with_code(0) }
   end
 
   context "with an invalid option" do
     let(:args) { ["--foobar"] }
 
-    it "prints message" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits with message" do
+      expect { init.run }.to exit_with_code(2).and output(
         <<~MESSAGE
           invalid option: --foobar
           For usage information, use --help
         MESSAGE
       ).to_stderr
     end
-
-    it { expect { init.run }.to exit_with_code(2) }
   end
 
   context "without options and with minimum required configuration" do
@@ -168,8 +160,8 @@ RSpec.describe Swagcov::Runner do
 
     after { FileUtils.rm_f(dotfile_basename) }
 
-    it "prints coverage" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits and outputs coverage" do
+      expect { init.run }.to exit_with_code(0).and output(
         <<~MESSAGE
 
           OpenAPI documentation coverage NaN% (0/0)
@@ -180,49 +172,41 @@ RSpec.describe Swagcov::Runner do
         MESSAGE
       ).to_stdout
     end
-
-    it { expect { init.run }.to exit_with_code(0) }
   end
 
   context "without options and without required configuration" do
     let(:args) { [] }
 
-    it "prints message" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits with message" do
+      expect { init.run }.to exit_with_code(2).and output(
         <<~MESSAGE
           Swagcov::Errors::BadConfiguration: Missing config file (.swagcov.yml)
         MESSAGE
       ).to_stderr
     end
-
-    it { expect { init.run }.to exit_with_code(2) }
   end
 
   context "with --version option" do
     let(:args) { ["--version"] }
 
-    it "prints message" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits with message" do
+      expect { init.run }.to exit_with_code(0).and output(
         <<~MESSAGE
           #{Swagcov::Version::STRING}
         MESSAGE
       ).to_stdout
     end
-
-    it { expect { init.run }.to exit_with_code(0) }
   end
 
   context "with -v option" do
     let(:args) { ["-v"] }
 
-    it "prints message" do
-      expect { init.run }.to raise_exception(SystemExit).and output(
+    it "exits with message" do
+      expect { init.run }.to exit_with_code(0).and output(
         <<~MESSAGE
           #{Swagcov::Version::STRING}
         MESSAGE
       ).to_stdout
     end
-
-    it { expect { init.run }.to exit_with_code(0) }
   end
 end
