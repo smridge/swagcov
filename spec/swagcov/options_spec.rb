@@ -16,22 +16,20 @@ RSpec.describe Swagcov::Options do
       let(:args) { ["--foobar"] }
 
       it "prints message" do
-        expect { init.define }.to raise_exception(SystemExit).and output(
+        expect { init.define }.to exit_with_code(2).and output(
           <<~MESSAGE
             invalid option: --foobar
             For usage information, use --help
           MESSAGE
         ).to_stderr
       end
-
-      it { expect { init.define }.to exit_with_code(2) }
     end
 
     context "with -h" do
       let(:args) { ["-h"] }
 
       it "prints options" do
-        expect { init.define }.to raise_exception(SystemExit).and output(
+        expect { init.define }.to exit_with_code(0).and output(
           <<~MESSAGE
             Usage:
             * as executable: swagcov [options]
@@ -42,15 +40,13 @@ RSpec.describe Swagcov::Options do
           MESSAGE
         ).to_stdout
       end
-
-      it { expect { init.define }.to exit_with_code(0) }
     end
 
     context "with --help" do
       let(:args) { ["--help"] }
 
       it "prints options" do
-        expect { init.define }.to raise_exception(SystemExit).and output(
+        expect { init.define }.to exit_with_code(0).and output(
           <<~MESSAGE
             Usage:
             * as executable: swagcov [options]
@@ -61,8 +57,6 @@ RSpec.describe Swagcov::Options do
           MESSAGE
         ).to_stdout
       end
-
-      it { expect { init.define }.to exit_with_code(0) }
     end
 
     context "with valid shorthand options" do
