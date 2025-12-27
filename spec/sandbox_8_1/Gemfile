@@ -15,7 +15,7 @@ gem "turbo-rails" # added to test skipping turbo related routes (system tests wi
 
 group :development, :test do
   gem "pry-byebug"
-  gem "rb-readline" # for pry on ruby 3.5
+  gem "rb-readline" # for pry on ruby 4.0
   gem "rspec-rails"
   gem "rswag-specs"
   gem "simplecov"

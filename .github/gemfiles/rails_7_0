@@ -12,7 +12,7 @@ if RUBY_VERSION >= "3.4"
   gem "mutex_m" # Fix (cannot load such file -- mutex_m)
 end
 
-if RUBY_VERSION >= "3.5"
+if RUBY_VERSION >= "4.0"
   gem "benchmark" # Fix (cannot load such file -- benchmark)
   gem "irb" # Fix (cannot load such file -- irb)
   gem "logger" # Fix (cannot load such file -- logger)
