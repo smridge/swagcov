@@ -2,6 +2,13 @@
 ## main (unreleased)
 -
 
+## 1.2.1 (2026-01-03)
+### Fix
+- Load ordering for executable (safely removed unnecessary `logger` requirement) ([#190](https://github.com/smridge/swagcov/pull/190))
+
+### Administrative
+- Update `LICENSE` copyright year range (2021-2026) ([#191](https://github.com/smridge/swagcov/pull/191))
+
 ## 1.2.0 (2025-12-20)
 ### Fix
 - Improve check for skipping mounted applications for Rails 4.2 applications ([#179](https://github.com/smridge/swagcov/pull/179))
