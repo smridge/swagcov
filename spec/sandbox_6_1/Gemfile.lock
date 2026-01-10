@@ -162,7 +162,7 @@ GEM
       rake (>= 12.2)
       thor (~> 1.0)
     rake (13.3.1)
-    redis-client (0.26.2)
+    redis-client (0.26.3)
       connection_pool
     rspec-core (3.13.6)
       rspec-support (~> 3.13.0)
@@ -206,7 +206,7 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    thor (1.4.0)
+    thor (1.5.0)
     timeout (0.6.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
