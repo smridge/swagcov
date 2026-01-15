@@ -85,7 +85,7 @@ GEM
     base64 (0.3.0)
     benchmark (0.5.0)
     bigdecimal (4.0.1)
-    bootsnap (1.20.1)
+    bootsnap (1.21.1)
       msgpack (~> 1.2)
     builder (3.3.0)
     byebug (12.0.0)
@@ -148,7 +148,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.19.0-x86_64-linux-musl)
       racc (~> 1.4)
-    prism (1.7.0)
+    prism (1.8.0)
     pry (0.15.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -261,7 +261,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-  ruby 3.2.9p265
+  ruby 3.2.10
 
 BUNDLED WITH
   4.0.3
