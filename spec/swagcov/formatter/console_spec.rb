@@ -108,7 +108,7 @@ RSpec.describe Swagcov::Formatter::Console do
         expect { result }.to output(
           <<~MESSAGE
 
-            OpenAPI documentation coverage NaN% (0/0)
+            OpenAPI documentation coverage 0.00% (0/0)
             #{0.to_s.yellow} ignored endpoints
             #{0.to_s.blue} total endpoints
             #{0.to_s.green} covered endpoints
@@ -142,7 +142,7 @@ RSpec.describe Swagcov::Formatter::Console do
         expect { result }.to output(
           <<~MESSAGE
 
-            OpenAPI documentation coverage NaN% (0/0)
+            OpenAPI documentation coverage 0.00% (0/0)
             #{0.to_s.yellow} ignored endpoints
             #{0.to_s.blue} total endpoints
             #{0.to_s.green} covered endpoints
