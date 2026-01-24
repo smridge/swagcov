@@ -3,11 +3,12 @@
 module Swagcov
   module Formatter
     class Console
-      attr_reader :data, :min_path_width
+      attr_reader :data, :min_path_width, :route_format
 
       def initialize data: ::Swagcov::Coverage.new.collect
         @data = data
         @min_path_width = calc_min_path_width
+        @route_format = format_route
       end
 
       def run
@@ -26,11 +27,15 @@ module Swagcov
         paths.max_by(&:length)&.size.to_i + 1
       end
 
+      def format_route
+        "%<verb>10s %<path>-#{min_path_width}s %<status>s"
+      end
+
       def routes_output routes, status_color
         routes.each do |route|
           $stdout.puts(
             format(
-              "%<verb>10s %<path>-#{min_path_width}s %<status>s",
+              route_format,
               { verb: route[:verb], path: route[:path], status: route[:status].send(status_color) }
             )
           )
