@@ -3,14 +3,14 @@
 module Swagcov
   module Formatter
     class Console
-      attr_reader :data
+      attr_reader :data, :min_path_width
 
       def initialize data: ::Swagcov::Coverage.new.collect
         @data = data
+        @min_path_width = calc_min_path_width
       end
 
       def run
-        min_path_width
         routes_output(data[:covered], "green")
         routes_output(data[:ignored], "yellow")
         routes_output(data[:uncovered], "red")
@@ -21,23 +21,20 @@ module Swagcov
 
       private
 
+      def calc_min_path_width
+        paths = data.values_at(:covered, :ignored, :uncovered).flat_map { |routes| routes.map { |route| route[:path] } }
+        paths.max_by(&:length)&.size.to_i + 1
+      end
+
       def routes_output routes, status_color
         routes.each do |route|
           $stdout.puts(
             format(
-              "%<verb>10s %<path>-#{@min_path_width}s %<status>s",
+              "%<verb>10s %<path>-#{min_path_width}s %<status>s",
               { verb: route[:verb], path: route[:path], status: route[:status].send(status_color) }
             )
           )
         end
-      end
-
-      def min_path_width
-        strings = []
-
-        %i[covered ignored uncovered].each { |key| data[key].each { |hash| strings << hash[:path] } }
-
-        @min_path_width ||= strings.max_by(&:length)&.size.to_i + 1
       end
 
       def final_output
