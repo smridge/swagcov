@@ -41,14 +41,17 @@ module Swagcov
       end
 
       def final_output
+        total_count = data[:total_count]
+        covered_count = data[:covered_count]
+
         $stdout.puts
         $stdout.puts(
           format(
             "OpenAPI documentation coverage %<percentage>.2f%% (%<covered>d/%<total>d)",
             {
-              percentage: 100.0 * data[:covered_count] / data[:total_count],
-              covered: data[:covered_count],
-              total: data[:total_count]
+              percentage: total_count.zero? ? 0.0 : 100.0 * covered_count / total_count,
+              covered: covered_count,
+              total: total_count
             }
           )
         )
