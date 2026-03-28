@@ -4,7 +4,7 @@ source "https://rubygems.org"
 
 gemspec path: "../.."
 
-gem "railties", "8.1.2"
+gem "railties", "8.1.3"
 
 # development dependencies
 gem "rspec"
