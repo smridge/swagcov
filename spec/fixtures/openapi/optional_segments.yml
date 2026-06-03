@@ -1,0 +1,29 @@
+openapi: 3.0.1
+info:
+  title: API with optional segments
+  version: v1
+paths:
+  "/health_check":
+    get:
+      summary: basic health check
+      tags:
+      - Health
+      responses:
+        '200':
+          description: healthy
+  "/health_check/{checks}":
+    parameters:
+    - name: checks
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: health check with specific checks
+      tags:
+      - Health
+      responses:
+        '200':
+          description: healthy
+        '404':
+          description: check not found

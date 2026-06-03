@@ -9,8 +9,11 @@ module Swagcov
     end
 
     def find_response_keys path:, route_verb:
-      # replace :id with {id}
-      regex = ::Regexp.new("^#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}?$")
+      # Strip Rails optional segment markers before building regex.
+      # Routes like /health_check(/:checks) contain parentheses that
+      # cause RegexpError when passed to Regexp.new unescaped.
+      clean_path = path.gsub(/[()]/, "")
+      regex = ::Regexp.new("^#{clean_path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}?$")
 
       matching_paths_key = @openapi_path_keys.grep(regex).first
       matching_request_method_key = @openapi_paths.dig(matching_paths_key, route_verb.downcase)
