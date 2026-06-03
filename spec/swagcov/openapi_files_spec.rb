@@ -85,6 +85,18 @@ RSpec.describe Swagcov::OpenapiFiles do
       it "still matches routes without optional segments" do
         expect(openapi_files.find_response_keys(path: "/health_check", route_verb: "GET")).to eq(["200"])
       end
+
+      it "handles nested optional segments without crashing" do
+        expect { openapi_files.find_response_keys(path: "/nested(/:bar(/:baz))", route_verb: "GET") }.not_to raise_error
+      end
+
+      it "matches nested optional segments against the expanded path" do
+        expect(openapi_files.find_response_keys(path: "/nested(/:bar(/:baz))", route_verb: "GET")).to eq(["200"])
+      end
+
+      it "returns nil when only the base path exists in the spec" do
+        expect(openapi_files.find_response_keys(path: "/health_check(/:checks)", route_verb: "POST")).to be_nil
+      end
     end
   end
 end

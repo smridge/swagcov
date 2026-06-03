@@ -27,3 +27,22 @@ paths:
           description: healthy
         '404':
           description: check not found
+  "/nested/{bar}/{baz}":
+    parameters:
+    - name: bar
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: baz
+      in: path
+      required: true
+      schema:
+        type: string
+    get:
+      summary: nested optional segments test
+      tags:
+      - Health
+      responses:
+        '200':
+          description: successful
