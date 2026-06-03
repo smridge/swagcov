@@ -15,6 +15,9 @@ on:
   push:
     paths-ignore:
       - '**/spec/**/*'
+  workflow_dispatch:
+    paths-ignore:
+      - '**/spec/**/*'
   schedule:
     - cron: '38 13 * * 2'
 
