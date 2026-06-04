@@ -15,9 +15,12 @@ on:
   push:
     paths-ignore:
       - '**/spec/**/*'
+    branches:
+      - 'main'
   workflow_dispatch:
     paths-ignore:
       - '**/spec/**/*'
+  pull_request:
   schedule:
     - cron: '38 13 * * 2'
 
