@@ -206,8 +206,8 @@ Configurations and output from running `swagcov` / `rake swagcov` from the root 
 ## Contributing
 See [CONTRIBUTING.md](CONTRIBUTING.md) for detail
 
-### Credit
-To [@lonelyelk](https://github.com/lonelyelk) for initial development!
+### Backstory
+We had a need to determine what our documentation coverage looked like. [@lonelyelk](https://github.com/lonelyelk) created an initial internal script and [@smridge](https://github.com/smridge) converted it to a configurable open source package.
 
 ### Contributors
 <a href="https://github.com/smridge/swagcov/graphs/contributors">
