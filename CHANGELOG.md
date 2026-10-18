@@ -1,16 +1,20 @@
 # CHANGELOG
 ## main (unreleased)
-### Fix
-- Coverage percentage when there are no routes (NaN) ([#195](https://github.com/smridge/swagcov/pull/195))
-- Improve path width calculation for output ([#196](https://github.com/smridge/swagcov/pull/196))
-- Improve route output performance ([#197](https://github.com/smridge/swagcov/pull/197))
-- Route processing with optional segements (`RegexpError` resolved) ([#202](https://github.com/smridge/swagcov/pull/202)) - _[@aaronlippold](https://github.com/aaronlippold)_ and _[@smridge](https://github.com/smridge)_
+### Fixes
+- Fix Coverage percentage when there are no routes (NaN) ([#195](https://github.com/smridge/swagcov/pull/195))
+- Fix Route processing with optional segements (`RegexpError` resolved) ([#202](https://github.com/smridge/swagcov/pull/202)) - _[@aaronlippold](https://github.com/aaronlippold)_ and _[@smridge](https://github.com/smridge)_
   - For example, the below `routes route` will now process as expected with `/health_check(/:checks)`
 
     ```
     Prefix  Verb      URI Pattern                        Controller#Action
             GET|POST  /health_check(/:checks)(.:format)  health_check/health_check#index {format: "txt"}
     ```
+
+### Enhancements
+- Add support for Ruby 4.1 ([#209](https://github.com/smridge/swagcov/pull/209))
+- Improve path width calculation for output ([#196](https://github.com/smridge/swagcov/pull/196))
+- Improve route output performance ([#197](https://github.com/smridge/swagcov/pull/197))
+
 ## 1.2.1 (2026-01-03)
 ### Fix
 - Load ordering for executable (safely removed unnecessary `logger` requirement) ([#190](https://github.com/smridge/swagcov/pull/190))
@@ -19,11 +23,11 @@
 - Update `LICENSE` copyright year range (2021-2026) ([#191](https://github.com/smridge/swagcov/pull/191))
 
 ## 1.2.0 (2025-12-20)
-### Fix
+### Fixes
 - Improve check for skipping mounted applications for Rails 4.2 applications ([#179](https://github.com/smridge/swagcov/pull/179))
 - Resolve constants for loading rake task ([#181](https://github.com/smridge/swagcov/pull/181))
 
-### Enhancement
+### Enhancements
 - Update dotfile template generated for install with better suggestions for ignoring certain endpoints ([#184](https://github.com/smridge/swagcov/pull/184))
 - Add support for Ruby 4.0 ([#176](https://github.com/smridge/swagcov/pull/176))
 - Add support for Rails 8.1 ([#167](https://github.com/smridge/swagcov/pull/167))
@@ -33,7 +37,7 @@
 - Improve matching for non api and turbo related routes ([#161](https://github.com/smridge/swagcov/pull/161))
 
 ## 1.1.0 (2025-08-08)
-### Enhancement
+### Enhancements
 - Exclude `new` and `edit` controller action routes that are non api routes by rails defaults/convention ([#155](https://github.com/smridge/swagcov/pull/155))
   - For example the below routes are now automatically skipped since these are _generally_ `html` formats.
     ```
@@ -60,7 +64,7 @@
 - Reduce `Metrics/AbcSize` for better maintainability ([#138](https://github.com/smridge/swagcov/pull/138), [#139](https://github.com/smridge/swagcov/pull/139), [#140](https://github.com/smridge/swagcov/pull/140))
 
 ## 0.10.0 (2025-05-08)
-### Enhancement
+### Enhancements
 - Add executable for streamlined command line usage ([#120](https://github.com/smridge/swagcov/pull/120))
   - The below options are now available:
     ```
@@ -83,7 +87,7 @@
     - `rake swagcov:install` is now `rake swagcov -- --init`
 
 ## 0.9.0 (2025-05-07)
-### Enhancement
+### Enhancements
 - Add support for `.json` OpenAPI file types ([#112](https://github.com/smridge/swagcov/pull/112), [#113](https://github.com/smridge/swagcov/pull/113))
 - Update rake task descriptions ([#114](https://github.com/smridge/swagcov/pull/114))
 - Improve performance of OpenAPI response key matching for route paths ([#115](https://github.com/smridge/swagcov/pull/115))
@@ -93,7 +97,7 @@
 - Performance of coverage output by memoizing path string length ([#108](https://github.com/smridge/swagcov/pull/108))
 
 ## 0.8.0 (2025-04-22)
-### Enhancement
+### Enhancements
 - Reduce gem dependencies by replacing `rails` with `railties` ([#101](https://github.com/smridge/swagcov/pull/101))
 - Remove unnecessary file from gem package ([#105](https://github.com/smridge/swagcov/pull/105))
 
@@ -105,7 +109,7 @@
   bundle exec rake swagcov:generate_todo
   ```
 
-### Refactor
+### Refactors
 - Add `Swagcov.project_root` method ([#86](https://github.com/smridge/swagcov/pull/86))
 - Separate coverage collection and output ([#83](https://github.com/smridge/swagcov/pull/83))
 - Replace ActiveSupport string method with ruby string method ([#85](https://github.com/smridge/swagcov/pull/85))
@@ -113,7 +117,7 @@
 - Rename `Swagcov::Install` to `Swagcov::Command::GenerateDotfile` ([#88](https://github.com/smridge/swagcov/pull/88))
 - Refactor `GenerateDotfile` to be consistent with `GenerateTodoFile` ([#97](https://github.com/smridge/swagcov/pull/97))
 
-### Fix
+### Fixes
 - Add exit code to install task + update messaging ([#87](https://github.com/smridge/swagcov/pull/87))
 - Ignored path verb matching when duplicate path keys are present ([#92](https://github.com/smridge/swagcov/pull/92))
 - Fix exit code error handling ([#95](https://github.com/smridge/swagcov/pull/95))
