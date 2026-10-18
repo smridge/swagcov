@@ -97,7 +97,7 @@ GEM
     date (3.6.0)
     diff-lcs (1.6.2)
     drb (2.2.3)
-    erb (6.0.7)
+    erb (6.1.0)
     erubi (1.13.1)
     globalid (1.4.0)
       activesupport (>= 6.1)
@@ -285,7 +285,7 @@ DEPENDENCIES
   tzinfo-data
 
 RUBY VERSION
-  ruby 4.0.7
+  ruby 4.1.0.preview1
 
 BUNDLED WITH
   4.0.23
