@@ -4,9 +4,15 @@ require "simplecov"
 
 SimpleCov.root(File.expand_path("../..", __dir__))
 SimpleCov.start do
-  add_filter "/spec/"
+  if SimpleCov.respond_to?(:skip)
+    skip "/spec/"
+  else
+    add_filter "/spec/"
+  end
+
   enable_coverage :branch
 end
+
 SimpleCov.command_name "e2e:#{Pathname.new(FileUtils.pwd).basename}"
 
 ENV["RAILS_ENV"] ||= "test"
