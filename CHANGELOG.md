@@ -1,5 +1,8 @@
 # CHANGELOG
 ## main (unreleased)
+-
+
+## 1.3.0 (2026-10-18)
 ### Fixes
 - Fix Coverage percentage when there are no routes (NaN) ([#195](https://github.com/smridge/swagcov/pull/195))
 - Fix Route processing with optional segements (`RegexpError` resolved) ([#202](https://github.com/smridge/swagcov/pull/202)) - _[@aaronlippold](https://github.com/aaronlippold)_ and _[@smridge](https://github.com/smridge)_
