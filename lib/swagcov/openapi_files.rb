@@ -10,7 +10,7 @@ module Swagcov
 
     def find_response_keys path:, route_verb:
       # replace :id with {id}
-      regex = ::Regexp.new("^#{path.gsub(%r{:[^/]+}, '\\{[^/]+\\}')}?$")
+      regex = ::Regexp.new("^#{path.gsub(%r{:([^/.?]+)}, '{\1}')}?$")
 
       matching_paths_key = @openapi_path_keys.grep(regex).first
       matching_request_method_key = @openapi_paths.dig(matching_paths_key, route_verb.downcase)
