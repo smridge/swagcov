@@ -1,7 +1,16 @@
 # CHANGELOG
 ## main (unreleased)
--
+### Fix
+- Coverage percentage when there are no routes (NaN) ([#195](https://github.com/smridge/swagcov/pull/195))
+- Improve path width calculation for output ([#196](https://github.com/smridge/swagcov/pull/196))
+- Improve route output performance ([#197](https://github.com/smridge/swagcov/pull/197))
+- Route processing with optional segements (`RegexpError` resolved) ([#202](https://github.com/smridge/swagcov/pull/202)) - _[@aaronlippold](https://github.com/aaronlippold)_ and _[@smridge](https://github.com/smridge)_
+  - For example, the below `routes route` will now process as expected with `/health_check(/:checks)`
 
+    ```
+    Prefix  Verb      URI Pattern                        Controller#Action
+            GET|POST  /health_check(/:checks)(.:format)  health_check/health_check#index {format: "txt"}
+    ```
 ## 1.2.1 (2026-01-03)
 ### Fix
 - Load ordering for executable (safely removed unnecessary `logger` requirement) ([#190](https://github.com/smridge/swagcov/pull/190))
